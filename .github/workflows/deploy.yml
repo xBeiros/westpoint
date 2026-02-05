@@ -1,5 +1,18 @@
-- name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.3 # Aktuellere Version
+name: Deploy to Server
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
@@ -7,22 +20,19 @@
           script: |
             cd /var/www/westpoint
             
-            # 1. Sicherstellen, dass Git die Verzeichnisrechte akzeptiert
+            # Git-Rechte fixen
             git config --global --add safe.directory /var/www/westpoint
             git pull origin main
             
-            # 2. PHP & Composer (Nutze den vollen Pfad, falls nötig)
+            # PHP & Composer
             composer install --no-interaction --prefer-dist --optimize-autoloader
             php artisan migrate --force
             
-            # 3. Frontend Assets
-            # Falls npm run build fehlschlägt, liegt es oft am RAM (siehe unten)
+            # Frontend Assets (NPM)
             npm install
             npm run build
             
-            # 4. Laravel Cache & Optimierung
+            # Laravel Cache & Permissions
             php artisan optimize
-            
-            # 5. Berechtigungen für den Webserver korrigieren
             chown -R www-data:www-data storage bootstrap/cache
             chmod -R 775 storage bootstrap/cache
