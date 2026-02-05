@@ -1,0 +1,51 @@
+<script setup lang="ts">
+import {
+    SidebarGroup,
+    SidebarGroupContent,
+    SidebarMenu,
+    SidebarMenuButton,
+    SidebarMenuItem,
+} from '@/components/ui/sidebar';
+import { toUrl } from '@/lib/utils';
+import { type NavItem } from '@/types';
+import { computed } from 'vue';
+
+interface Props {
+    items: NavItem[];
+    class?: string;
+}
+
+const props = defineProps<Props>();
+
+// Prüfe ob Link extern ist (beginnt mit http:// oder https://)
+const isExternalLink = (href: string | (() => string)): boolean => {
+    const url = typeof href === 'function' ? href() : href;
+    return typeof url === 'string' && (url.startsWith('http://') || url.startsWith('https://'));
+};
+</script>
+
+<template>
+    <SidebarGroup
+        :class="`group-data-[collapsible=icon]:p-0 ${$props.class || ''}`"
+    >
+        <SidebarGroupContent>
+            <SidebarMenu>
+                <SidebarMenuItem v-for="item in items" :key="item.title">
+                    <SidebarMenuButton
+                        class="text-neutral-600 hover:text-neutral-800 dark:text-neutral-300 dark:hover:text-neutral-100"
+                        as-child
+                    >
+                        <a
+                            :href="toUrl(item.href)"
+                            :target="isExternalLink(item.href) ? '_blank' : undefined"
+                            :rel="isExternalLink(item.href) ? 'noopener noreferrer' : undefined"
+                        >
+                            <component :is="item.icon" />
+                            <span>{{ item.title }}</span>
+                        </a>
+                    </SidebarMenuButton>
+                </SidebarMenuItem>
+            </SidebarMenu>
+        </SidebarGroupContent>
+    </SidebarGroup>
+</template>

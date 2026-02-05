@@ -1,0 +1,104 @@
+<script setup lang="ts">
+import NavFooter from '@/components/NavFooter.vue';
+import NavMain from '@/components/NavMain.vue';
+import NavAdmin from '@/components/NavAdmin.vue';
+import NavUser from '@/components/NavUser.vue';
+import {
+    Sidebar,
+    SidebarContent,
+    SidebarFooter,
+    SidebarHeader,
+    SidebarMenu,
+    SidebarMenuButton,
+    SidebarMenuItem,
+} from '@/components/ui/sidebar';
+import { dashboard } from '@/routes';
+import { type NavItem } from '@/types';
+import { Link, usePage } from '@inertiajs/vue3';
+import { BookOpen, Home, LayoutGrid, User, Car, Shield, Users } from 'lucide-vue-next';
+import { computed } from 'vue';
+import AppLogo from './AppLogo.vue';
+
+const page = usePage();
+const userGroup = computed(() => (page.props.auth as any)?.group || 'user');
+
+const mainNavItems = computed<NavItem[]>(() => {
+    return [
+        {
+            title: 'Dashboard',
+            href: dashboard(),
+            icon: LayoutGrid,
+        },
+        {
+            title: 'Spieler Information',
+            href: '/player-info',
+            icon: User,
+        },
+        {
+            title: 'Fahrzeuge',
+            href: '/vehicle-info',
+            icon: Car,
+        },
+    ];
+});
+
+const adminNavItems = computed<NavItem[]>(() => {
+    // Zeige Admin-Bereich nur, wenn Gruppe != "user"
+    if (userGroup.value === 'user') {
+        return [];
+    }
+
+    return [
+        {
+            title: 'Administrativ',
+            href: '/admin',
+            icon: Shield,
+        },
+        {
+            title: 'Rollen',
+            href: '/admin/roles',
+            icon: Users,
+        },
+    ];
+});
+
+const footerNavItems: NavItem[] = [
+    {
+        title: 'Startseite',
+        href: '/',
+        icon: Home,
+    },
+    {
+        title: 'Wiki',
+        href: '/wiki',
+        icon: BookOpen,
+    },
+];
+</script>
+
+<template>
+    <Sidebar collapsible="icon" variant="inset">
+        <SidebarHeader>
+            <SidebarMenu>
+                <SidebarMenuItem>
+                    <SidebarMenuButton size="lg" as-child>
+                        <Link :href="dashboard()">
+                            <AppLogo />
+                        </Link>
+                    </SidebarMenuButton>
+                </SidebarMenuItem>
+            </SidebarMenu>
+        </SidebarHeader>
+
+        <SidebarContent>
+            <NavMain :items="mainNavItems" />
+            <NavAdmin v-if="adminNavItems.length > 0" :items="adminNavItems" />
+        </SidebarContent>
+
+        <SidebarFooter>
+            <NavFooter :items="footerNavItems" />
+            <NavUser />
+        </SidebarFooter>
+    </Sidebar>
+    <slot />
+</template>
