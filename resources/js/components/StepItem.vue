@@ -2,7 +2,7 @@
     <section class="text-white py-20 relative overflow-hidden">
         <div class="">
             <h2 class="text-4xl font-bold text-center mb-16 flex justify-center items-center uppercase stevie-sans-bold">
-                So spielst du auf <img src="@/Assets/images/logo.png" alt="Berlin City" class="h-10 ml-2 inline" />
+                So spielst du auf <img src="@/Assets/images/logo.png" alt="Westpoint" class="h-10 ml-2 inline" />
             </h2>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10 relative z-10">
@@ -11,17 +11,17 @@
                     <h3 class="text-lg font-bold text-red-500 mb-4">SCHRITT 1</h3>
 
                     <p class="text-gray-300 mb-6">
-                        Kaufe und installiere GTA 5<br /> Spiel bereits vorhanden? – Nächster Schritt
+                        Installiere Red Dead Redemption 2<br /> Spiel bereits vorhanden? – Nächster Schritt
                     </p>
                     <div class="flex justify-center gap-3 flex-wrap">
-                        <a href="https://store.steampowered.com/app/271590/Grand_Theft_Auto_V_Legacy/" 
+                        <a href="https://store.steampowered.com/app/1174180/Red_Dead_Redemption_2/" 
                            target="_blank" 
                            rel="noopener noreferrer"
                            class="group relative bg-gradient-to-r from-red-950/80 to-red-900/80 px-6 py-2.5 text-sm rounded-lg font-semibold text-white overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(139,0,0,0.5)]">
                             <span class="relative z-10">STEAM</span>
                             <div class="absolute inset-0 bg-gradient-to-r from-red-800/90 to-red-700/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         </a>
-                        <a href="https://www.rockstargames.com/de/gta-v?info=order" 
+                        <a href="https://www.rockstargames.com/de/reddeadredemption2" 
                            target="_blank" 
                            rel="noopener noreferrer"
                            class="group relative bg-gradient-to-r from-red-950/80 to-red-900/80 px-6 py-2.5 text-sm rounded-lg font-semibold text-white overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(139,0,0,0.5)]">
@@ -31,7 +31,7 @@
                     </div>
                 </div>
 
-                <div class="absolute z-50 -bottom-4 w-10 h-20 ml-[27%]">
+                <div class="absolute z-50 -bottom-4 w-10 h-20 ml-[27%] arrow-grayscale">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="197.702" height="182.071" viewBox="0 0 697.702 182.071">
                         <defs>
                             <filter id="Pfad_308" x="0" y="6.991" width="681.358" height="175.08" filterUnits="userSpaceOnUse">
@@ -63,18 +63,18 @@
                     <h3 class="text-lg font-bold text-white mb-4">SCHRITT 2</h3>
                     <p class="text-gray-300 mb-6">
                         Lade herunter und installiere<br />
-                        FiveM Multiplayer
+                        REDM Multiplayer
                     </p>
-                    <a href="https://fivem.net/" 
+                    <a href="https://redm.gg/" 
                        target="_blank" 
                        rel="noopener noreferrer"
                        class="group relative inline-block bg-gradient-to-r from-red-950/80 to-red-900/80 px-6 py-2.5 text-sm rounded-lg font-semibold text-white overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(139,0,0,0.5)]">
-                        <span class="relative z-10">DOWNLOAD FIVEM</span>
+                        <span class="relative z-10">DOWNLOAD REDM</span>
                         <div class="absolute inset-0 bg-gradient-to-r from-red-800/90 to-red-700/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </a>
                 </div>
 
-                <div class="absolute z-50 -bottom-4 w-10 h-20 ml-[60%]">
+                <div class="absolute z-50 -bottom-4 w-10 h-20 ml-[60%] arrow-grayscale">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="197.702" height="182.071" viewBox="0 0 697.702 182.071">
                         <defs>
                             <filter id="Pfad_308" x="0" y="6.991" width="681.358" height="185.08" filterUnits="userSpaceOnUse">
@@ -105,10 +105,10 @@
                 <div class="bg-[#1a1a1a] p-6 rounded-xl text-center relative">
                     <h3 class="text-lg font-bold text-white mb-4">SCHRITT 3</h3>
                     <p class="text-gray-300 mb-6">
-                        Starte FiveM und<br />
-                        suche nach Berlin City und trete bei!
+                        Starte RedM und<br />
+                        suche nach Westpoint und trete bei!
                     </p>
-                    <a href="https://ilimix-vv6zrq.users.cfx.re/" 
+                    <a href="https://redm.gg/" 
                        target="_blank" 
                        rel="noopener noreferrer"
                        class="group relative inline-block bg-gradient-to-r from-red-950/80 to-red-900/80 px-6 py-2.5 text-sm rounded-lg font-semibold text-white overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(139,0,0,0.5)]">
@@ -127,16 +127,16 @@ import { ref } from 'vue'
 
 const steps = [
     {
-        text: 'Lade herunter und installiere<br />FiveM Multiplayer',
-        button: 'DOWNLOAD FIVEM',
+        text: 'Lade herunter und installiere<br />REDM Multiplayer',
+        button: 'DOWNLOAD REDM',
     },
     {
-        text: 'Lade herunter und installiere<br />FiveM Multiplayer',
-        button: 'DOWNLOAD FIVEM',
+        text: 'Lade herunter und installiere<br />REDM Multiplayer',
+        button: 'DOWNLOAD REDM',
     },
     {
-        text: 'Lade herunter und installiere<br />FiveM Multiplayer',
-        button: 'DOWNLOAD FIVEM',
+        text: 'Lade herunter und installiere<br />REDM Multiplayer',
+        button: 'DOWNLOAD REDM',
     },
 ]
 
@@ -173,5 +173,7 @@ function hideGlow(index) {
 </script>
 
 <style scoped>
-/* Kein zusätzlicher CSS nötig für den Glow, alles inline mit Vue */
+.arrow-grayscale {
+    filter: grayscale(100%);
+}
 </style>

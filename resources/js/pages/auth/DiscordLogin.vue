@@ -23,7 +23,7 @@
                         'w-full inline-flex items-center justify-center gap-3 px-6 py-3 rounded-lg font-semibold transition-colors duration-200',
                         error || discordAuthUrl === '#' 
                             ? 'bg-gray-400 cursor-not-allowed text-gray-200' 
-                            : 'bg-[#5865F2] hover:bg-[#4752C4] text-white cursor-pointer'
+                            : 'bg-gray-700/80 hover:bg-red-900/80 text-white cursor-pointer'
                     ]"
                     :onclick="error || discordAuthUrl === '#' ? 'return false' : null"
                 >

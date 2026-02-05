@@ -8,13 +8,29 @@
         <div class="relative py-20 sm:px-6 lg:px-8">
             <div class="max-w-6xl w-full mx-auto">
                 <!-- Title -->
-                <div class="text-center mb-16">
-                    <h1 class="text-4xl md:text-5xl font-bold text-white uppercase mb-4">
-                        Regelwerk
-                    </h1>
-                    <p class="text-gray-400 text-lg max-w-2xl mx-auto">
-                        Hier findest du alle wichtigen Regeln und Richtlinien für Berlin City
-                    </p>
+                <div class="mb-16 relative">
+                    <!-- Hintergrundbild absolut positioniert -->
+                    <img 
+                        src="@/Assets/images/richter.png" 
+                        alt="Sheriff Rules" 
+                        class="absolute left-64 top-1/2 -translate-y-1/2 h-32 md:h-48 lg:h-56 w-auto object-contain opacity-60 md:opacity-40 z-0 pointer-events-none"
+                    />
+
+                    <img 
+                        src="@/Assets/images/sheriff_rules.png" 
+                        alt="Sheriff Rules" 
+                        class="absolute right-72 top-1/2 -translate-y-1/2 h-32 md:h-48 lg:h-56 w-auto object-contain opacity-60 md:opacity-40 z-0 pointer-events-none"
+                    />
+                    
+                    <!-- Titel und Subtitle mit z-index darüber -->
+                    <div class="relative z-10">
+                        <h1 class="text-4xl md:text-5xl font-bold text-white uppercase mb-4 text-center">
+                            Regelwerk
+                        </h1>
+                        <p class="text-gray-400 text-lg max-w-2xl mx-auto text-center">
+                            Hier findest du alle wichtigen Regeln und Richtlinien für Westpoint
+                        </p>
+                    </div>
                 </div>
 
                 <!-- Rulebooks Grid -->
