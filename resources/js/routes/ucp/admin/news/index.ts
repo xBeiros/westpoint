@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\Admin\NewsController::index
 * @see app/Http/Controllers/Admin/NewsController.php:21
@@ -648,6 +648,16 @@ destroyForm.delete = (args: { news: number | { id: number } } | [news: number | 
 
 destroy.form = destroyForm
 
-const NewsController = { index, create, store, show, edit, update, destroy }
 
-export default NewsController
+
+const news = {
+    index: Object.assign(index, index),
+    create: Object.assign(create, create),
+    store: Object.assign(store, store),
+    show: Object.assign(show, show),
+    edit: Object.assign(edit, edit),
+    update: Object.assign(update, update),
+    destroy: Object.assign(destroy, destroy),
+}
+
+export default news

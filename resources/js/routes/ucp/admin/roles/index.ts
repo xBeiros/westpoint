@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\Admin\RoleController::index
 * @see app/Http/Controllers/Admin/RoleController.php:41
@@ -85,80 +85,80 @@ indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 index.form = indexForm
 
 /**
-* @see \App\Http\Controllers\Admin\RoleController::apiIndex
+* @see \App\Http\Controllers\Admin\RoleController::api
 * @see app/Http/Controllers/Admin/RoleController.php:18
 * @route '/ucp/admin/roles/api'
 */
-export const apiIndex = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: apiIndex.url(options),
+export const api = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: api.url(options),
     method: 'get',
 })
 
-apiIndex.definition = {
+api.definition = {
     methods: ["get","head"],
     url: '/ucp/admin/roles/api',
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\Admin\RoleController::apiIndex
+* @see \App\Http\Controllers\Admin\RoleController::api
 * @see app/Http/Controllers/Admin/RoleController.php:18
 * @route '/ucp/admin/roles/api'
 */
-apiIndex.url = (options?: RouteQueryOptions) => {
+api.url = (options?: RouteQueryOptions) => {
 
 
 
 
-    return apiIndex.definition.url + queryParams(options)
+    return api.definition.url + queryParams(options)
 }
 
 /**
-* @see \App\Http\Controllers\Admin\RoleController::apiIndex
+* @see \App\Http\Controllers\Admin\RoleController::api
 * @see app/Http/Controllers/Admin/RoleController.php:18
 * @route '/ucp/admin/roles/api'
 */
-apiIndex.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: apiIndex.url(options),
+api.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: api.url(options),
     method: 'get',
 })
 
 /**
-* @see \App\Http\Controllers\Admin\RoleController::apiIndex
+* @see \App\Http\Controllers\Admin\RoleController::api
 * @see app/Http/Controllers/Admin/RoleController.php:18
 * @route '/ucp/admin/roles/api'
 */
-apiIndex.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: apiIndex.url(options),
+api.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: api.url(options),
     method: 'head',
 })
 
 /**
-* @see \App\Http\Controllers\Admin\RoleController::apiIndex
+* @see \App\Http\Controllers\Admin\RoleController::api
 * @see app/Http/Controllers/Admin/RoleController.php:18
 * @route '/ucp/admin/roles/api'
 */
-const apiIndexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: apiIndex.url(options),
+const apiForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: api.url(options),
     method: 'get',
 })
 
 /**
-* @see \App\Http\Controllers\Admin\RoleController::apiIndex
+* @see \App\Http\Controllers\Admin\RoleController::api
 * @see app/Http/Controllers/Admin/RoleController.php:18
 * @route '/ucp/admin/roles/api'
 */
-apiIndexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: apiIndex.url(options),
+apiForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: api.url(options),
     method: 'get',
 })
 
 /**
-* @see \App\Http\Controllers\Admin\RoleController::apiIndex
+* @see \App\Http\Controllers\Admin\RoleController::api
 * @see app/Http/Controllers/Admin/RoleController.php:18
 * @route '/ucp/admin/roles/api'
 */
-apiIndexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: apiIndex.url({
+apiForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: api.url({
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',
             ...(options?.query ?? options?.mergeQuery ?? {}),
@@ -167,7 +167,7 @@ apiIndexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> =>
     method: 'get',
 })
 
-apiIndex.form = apiIndexForm
+api.form = apiForm
 
 /**
 * @see \App\Http\Controllers\Admin\RoleController::store
@@ -411,6 +411,14 @@ destroyForm.delete = (args: { role: number | { id: number } } | [role: number | 
 
 destroy.form = destroyForm
 
-const RoleController = { index, apiIndex, store, update, destroy }
 
-export default RoleController
+
+const roles = {
+    index: Object.assign(index, index),
+    api: Object.assign(api, api),
+    store: Object.assign(store, store),
+    update: Object.assign(update, update),
+    destroy: Object.assign(destroy, destroy),
+}
+
+export default roles

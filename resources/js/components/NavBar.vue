@@ -86,12 +86,13 @@ import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { computed } from 'vue'
 import { usePage } from '@inertiajs/vue3'
-import { welcome, dashboard } from '@/routes'
+import { welcome } from '@/routes'
+import { dashboard } from '@/routes/ucp'
 import { index as rulebookIndex } from '@/routes/rulebook'
 import { index as newsIndex } from '@/routes/news'
 import { index as presentationIndex } from '@/routes/presentation'
 import { faq } from '@/routes'
-import { index as adminNewsIndex } from '@/routes/admin/news'
+import { index as adminNewsIndex } from '@/routes/ucp/admin/news'
 
 const page = usePage()
 
