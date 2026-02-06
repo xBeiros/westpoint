@@ -78,7 +78,7 @@ class PlayerInfoController extends Controller
                 'lastname' => $playerData['lastname'],
             ]);
 
-            return Inertia::render('PlayerInfo/Index', [
+            return Inertia::render('UCP/PlayerInfo/Index', [
                 'player' => $playerData,
             ]);
         } catch (\Exception $e) {
@@ -87,7 +87,7 @@ class PlayerInfoController extends Controller
                 'user_id' => $user->id,
             ]);
 
-            return Inertia::render('PlayerInfo/Index', [
+            return Inertia::render('UCP/PlayerInfo/Index', [
                 'player' => null,
                 'error' => config('app.debug') 
                     ? $e->getMessage() 

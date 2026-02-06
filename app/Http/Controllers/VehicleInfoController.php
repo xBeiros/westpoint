@@ -139,7 +139,7 @@ class VehicleInfoController extends Controller
             }
             $vehicles = $uniqueVehicles;
 
-            return Inertia::render('VehicleInfo/Index', [
+            return Inertia::render('UCP/VehicleInfo/Index', [
                 'vehicles' => $vehicles,
                 'identifier' => $identifier,
             ]);
@@ -149,7 +149,7 @@ class VehicleInfoController extends Controller
                 'user_id' => $user->id,
             ]);
 
-            return Inertia::render('VehicleInfo/Index', [
+            return Inertia::render('UCP/VehicleInfo/Index', [
                 'vehicles' => [],
                 'error' => config('app.debug') 
                     ? $e->getMessage() 

@@ -418,7 +418,7 @@ const openBulkAssignDialog = async () => {
     
     // Lade verfügbare Items
     try {
-        const response = await fetch('/admin/items', {
+        const response = await fetch('/ucp/admin/items', {
             headers: {
                 'Accept': 'application/json',
             },

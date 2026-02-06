@@ -41,7 +41,9 @@ class HandleInertiaRequests extends Middleware
         $user = $request->user();
         $userGroup = 'user';
         
-        // Hole Benutzergruppe aus FiveM-Datenbank, falls vorhanden
+        $playerData = null;
+        
+        // Hole Benutzergruppe und Spielerdaten aus FiveM-Datenbank, falls vorhanden
         if ($user && $user->discord_identifier) {
             try {
                 $player = \Illuminate\Support\Facades\DB::connection('fivem')
@@ -51,6 +53,10 @@ class HandleInertiaRequests extends Middleware
                 
                 if ($player) {
                     $userGroup = $player->group ?? 'user';
+                    $playerData = [
+                        'firstname' => $player->firstname ?? null,
+                        'lastname' => $player->lastname ?? null,
+                    ];
                 }
             } catch (\Exception $e) {
                 // Fehler beim Abrufen der Gruppe ignorieren
@@ -64,6 +70,7 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $user,
                 'group' => $userGroup,
+                'player' => $playerData,
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
         ];

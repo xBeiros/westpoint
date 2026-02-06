@@ -4,12 +4,8 @@
             <div class="relative flex h-16 justify-between">
                 <div class="relative z-10 flex px-2 lg:px-0">
                     <div class="flex shrink-0 items-center">
-                        <a href="/">
-                            <img
-                                class="h-12 w-auto drop-shadow-[0px_0px_14px_rgba(255,255,255,0.5)]"
-                                src="/images/logo.png"
-                                alt="Your Company"
-                            />
+                        <a href="/" class="flex items-center justify-center h-12 w-12 rounded-lg bg-red-900/80 text-white font-bold text-lg drop-shadow-[0px_0px_14px_rgba(255,255,255,0.5)] transition-all duration-200 hover:bg-red-800/80 hover:scale-105">
+                            {{ userInitials }}
                         </a>
                     </div>
                 </div>
@@ -93,6 +89,7 @@ import { index as newsIndex } from '@/routes/news'
 import { index as presentationIndex } from '@/routes/presentation'
 import { faq } from '@/routes'
 import { index as adminNewsIndex } from '@/routes/ucp/admin/news'
+import { getInitials } from '@/composables/useInitials'
 
 const page = usePage()
 
@@ -100,6 +97,31 @@ const page = usePage()
 const isAuthenticated = computed(() => {
     const auth = page.props.auth
     return auth && auth.user !== null && auth.user !== undefined
+})
+
+// Initialen aus firstname und lastname generieren (wie im Footer)
+const userInitials = computed(() => {
+    const auth = page.props.auth
+    if (!auth || !auth.player) {
+        // Fallback: Versuche aus auth.user.name
+        if (auth && auth.user && auth.user.name) {
+            return getInitials(auth.user.name)
+        }
+        return 'WP' // Fallback zu "Westpoint"
+    }
+    
+    const firstname = auth.player.firstname || ''
+    const lastname = auth.player.lastname || ''
+    
+    if (firstname && lastname) {
+        return `${firstname.charAt(0)}${lastname.charAt(0)}`.toUpperCase()
+    } else if (firstname) {
+        return firstname.charAt(0).toUpperCase()
+    } else if (lastname) {
+        return lastname.charAt(0).toUpperCase()
+    }
+    
+    return 'WP' // Fallback
 })
 
 const navigation = [
