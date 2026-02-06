@@ -114,12 +114,12 @@ return [
         ],
 
         'fivem' => [
-            'driver' => 'mariadb',
-            'host' => env('FIVEM_DB_HOST', '162.19.242.122'),
+            'driver' => 'mysql',
+            'host' => env('FIVEM_DB_HOST', 'localhost'),
             'port' => env('FIVEM_DB_PORT', '3306'),
-            'database' => env('FIVEM_DB_DATABASE', 'berlincity'),
-            'username' => env('FIVEM_DB_USERNAME', 'laravel'),
-            'password' => env('FIVEM_DB_PASSWORD', 'DCinelBerlin9432!'),
+            'database' => env('FIVEM_DB_DATABASE', 'westpoint'),
+            'username' => env('FIVEM_DB_USERNAME', 'root'),
+            'password' => env('FIVEM_DB_PASSWORD', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
