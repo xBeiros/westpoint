@@ -19,7 +19,7 @@ class AdminController extends Controller
         $user = Auth::user();
         
         if (!$user || !$user->discord_identifier) {
-            return redirect('/dashboard')->withErrors([
+            return redirect('/ucp/dashboard')->withErrors([
                 'message' => 'Keine Discord-Verbindung gefunden. Bitte melde dich mit Discord an.',
             ]);
         }
@@ -32,7 +32,7 @@ class AdminController extends Controller
                 ->first();
 
             if (!$player) {
-                return redirect('/dashboard')->withErrors([
+                return redirect('/ucp/dashboard')->withErrors([
                     'message' => 'Keine Spielerdaten in der FiveM-Datenbank gefunden.',
                 ]);
             }
@@ -41,7 +41,7 @@ class AdminController extends Controller
             $userGroup = $player->group ?? 'user';
             
             if ($userGroup === 'user') {
-                return redirect('/dashboard')->withErrors([
+                return redirect('/ucp/dashboard')->withErrors([
                     'message' => 'Zugriff verweigert. Du hast keine Berechtigung für diesen Bereich.',
                 ]);
             }
@@ -49,7 +49,7 @@ class AdminController extends Controller
             // Hole online Spieler über die BerlinCity API
             $onlinePlayers = $this->getOnlinePlayers();
 
-            return Inertia::render('Admin/Index', [
+            return Inertia::render('UCP/Admin/Index', [
                 'userGroup' => $userGroup,
                 'onlinePlayers' => $onlinePlayers,
             ]);
@@ -59,7 +59,7 @@ class AdminController extends Controller
                 'user_id' => $user->id,
             ]);
 
-            return Inertia::render('Admin/Index', [
+            return Inertia::render('UCP/Admin/Index', [
                 'userGroup' => null,
                 'onlinePlayers' => [],
                 'error' => config('app.debug') 

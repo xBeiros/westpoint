@@ -18,7 +18,7 @@ class PlayerInfoController extends Controller
         $user = Auth::user();
         
         if (!$user || !$user->discord_identifier) {
-            return redirect('/dashboard')->withErrors([
+            return redirect('/ucp/dashboard')->withErrors([
                 'message' => 'Keine Discord-Verbindung gefunden. Bitte melde dich mit Discord an.',
             ]);
         }
@@ -31,7 +31,7 @@ class PlayerInfoController extends Controller
                 ->first();
 
             if (!$player) {
-                return Inertia::render('PlayerInfo/Index', [
+                return Inertia::render('UCP/PlayerInfo/Index', [
                     'player' => null,
                     'error' => 'Keine Spielerdaten in der FiveM-Datenbank gefunden.',
                 ]);

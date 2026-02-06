@@ -228,7 +228,7 @@ class DiscordLoginController extends Controller
             // Logge den Benutzer ein
             Auth::login($laravelUser, true); // true = remember me
 
-            return redirect()->intended('/dashboard');
+            return redirect()->intended('/ucp/dashboard');
         } catch (\Exception $e) {
             Log::error('Discord Login Fehler', [
                 'message' => $e->getMessage(),

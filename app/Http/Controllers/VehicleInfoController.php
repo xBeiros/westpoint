@@ -19,7 +19,7 @@ class VehicleInfoController extends Controller
         $user = Auth::user();
         
         if (!$user || !$user->discord_identifier) {
-            return redirect('/dashboard')->withErrors([
+            return redirect('/ucp/dashboard')->withErrors([
                 'message' => 'Keine Discord-Verbindung gefunden. Bitte melde dich mit Discord an.',
             ]);
         }
@@ -32,7 +32,7 @@ class VehicleInfoController extends Controller
                 ->first();
 
             if (!$player) {
-                return Inertia::render('VehicleInfo/Index', [
+                return Inertia::render('UCP/VehicleInfo/Index', [
                     'vehicles' => [],
                     'error' => 'Keine Spielerdaten in der FiveM-Datenbank gefunden.',
                 ]);

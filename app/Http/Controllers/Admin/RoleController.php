@@ -43,7 +43,7 @@ class RoleController extends Controller
         $user = Auth::user();
         
         if (!$user || !$user->discord_identifier) {
-            return redirect('/dashboard')->withErrors([
+            return redirect('/ucp/dashboard')->withErrors([
                 'message' => 'Keine Discord-Verbindung gefunden. Bitte melde dich mit Discord an.',
             ]);
         }
@@ -56,7 +56,7 @@ class RoleController extends Controller
                 ->first();
 
             if (!$player || ($player->group ?? 'user') === 'user') {
-                return redirect('/dashboard')->withErrors([
+                return redirect('/ucp/dashboard')->withErrors([
                     'message' => 'Zugriff verweigert. Du hast keine Berechtigung für diesen Bereich.',
                 ]);
             }
@@ -76,7 +76,7 @@ class RoleController extends Controller
                 $userPermissions = $userRole ? ($userRole->permissions ?? []) : [];
             }
 
-            return Inertia::render('Admin/Roles/Index', [
+            return Inertia::render('UCP/Admin/Roles/Index', [
                 'roles' => $roles,
                 'userPermissions' => $userPermissions,
             ]);
@@ -86,7 +86,7 @@ class RoleController extends Controller
                 'user_id' => $user->id,
             ]);
 
-            return Inertia::render('Admin/Roles/Index', [
+            return Inertia::render('UCP/Admin/Roles/Index', [
                 'roles' => [],
                 'error' => config('app.debug') 
                     ? $e->getMessage() 
