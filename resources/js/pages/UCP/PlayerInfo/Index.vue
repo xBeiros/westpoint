@@ -6,7 +6,7 @@ import { Head } from '@inertiajs/vue3';
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Spieler Information',
-        href: '/player-info',
+        href: '/ucp/player-info',
     },
 ];
 

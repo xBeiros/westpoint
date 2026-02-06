@@ -31,12 +31,12 @@ const mainNavItems = computed<NavItem[]>(() => {
         },
         {
             title: 'Spieler Information',
-            href: '/player-info',
+            href: '/ucp/player-info',
             icon: User,
         },
         {
             title: 'Fahrzeuge',
-            href: '/vehicle-info',
+            href: '/ucp/vehicle-info',
             icon: Car,
         },
     ];
@@ -51,12 +51,12 @@ const adminNavItems = computed<NavItem[]>(() => {
     return [
         {
             title: 'Administrativ',
-            href: '/admin',
+            href: '/ucp/admin',
             icon: Shield,
         },
         {
             title: 'Rollen',
-            href: '/admin/roles',
+            href: '/ucp/admin/roles',
             icon: Users,
         },
     ];

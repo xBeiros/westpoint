@@ -20,11 +20,11 @@ import { Checkbox } from '@/components/ui/checkbox';
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Administrativ',
-        href: '/admin',
+        href: '/ucp/admin',
     },
     {
         title: 'Rollen',
-        href: '/admin/roles',
+        href: '/ucp/admin/roles',
     },
 ];
 
@@ -247,8 +247,8 @@ const saveRole = async () => {
     try {
         const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
         const url = isEditMode.value && currentRole.value
-            ? `/admin/roles/${currentRole.value.id}`
-            : '/admin/roles';
+            ? `/ucp/admin/roles/${currentRole.value.id}`
+            : '/ucp/admin/roles';
         
         const method = isEditMode.value ? 'PUT' : 'POST';
         
@@ -331,7 +331,7 @@ const deleteRole = async (role: any) => {
     try {
         const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
         
-        const response = await fetch(`/admin/roles/${role.id}`, {
+        const response = await fetch(`/ucp/admin/roles/${role.id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

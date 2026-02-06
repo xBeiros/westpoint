@@ -6,7 +6,7 @@ import { Head } from '@inertiajs/vue3';
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Fahrzeuge',
-        href: '/vehicle-info',
+        href: '/ucp/vehicle-info',
     },
 ];
 

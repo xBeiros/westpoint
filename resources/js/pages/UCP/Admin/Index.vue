@@ -18,7 +18,7 @@ import { Label } from '@/components/ui/label';
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Administrativ',
-        href: '/admin',
+        href: '/ucp/admin',
     },
 ];
 
@@ -88,7 +88,7 @@ const refreshPlayers = async () => {
     try {
         const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
         
-        const response = await fetch('/admin/refresh', {
+        const response = await fetch('/ucp/admin/refresh', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -143,7 +143,7 @@ const openPlayerDialog = async (player: any) => {
     // Lade Items falls noch nicht geladen
     if (availableItems.value.length === 0) {
         try {
-            const response = await fetch('/admin/items', {
+            const response = await fetch('/ucp/admin/items', {
                 headers: {
                     'Accept': 'application/json',
                 },
@@ -171,7 +171,7 @@ const openPlayerDialog = async (player: any) => {
     // Hole Spielerdetails
     if (player.identifier) {
         try {
-            const response = await fetch('/admin/player/details', {
+            const response = await fetch('/ucp/admin/player/details', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -213,7 +213,7 @@ const performAction = async () => {
             payload.reason = actionReason.value;
         }
         
-        const response = await fetch('/admin/player/action', {
+        const response = await fetch('/ucp/admin/player/action', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -362,7 +362,7 @@ const performPlayerResource = async () => {
             payload.items = playerItems.value.filter(item => item.name && item.amount > 0);
         }
         
-        const response = await fetch('/admin/bulk-assign', {
+        const response = await fetch('/ucp/admin/bulk-assign', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -568,7 +568,7 @@ const performBulkAssign = async () => {
             payload.items = bulkItems.value.filter(item => item.name && item.amount > 0);
         }
         
-        const response = await fetch('/admin/bulk-assign', {
+        const response = await fetch('/ucp/admin/bulk-assign', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
