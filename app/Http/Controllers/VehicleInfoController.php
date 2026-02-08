@@ -25,28 +25,86 @@ class VehicleInfoController extends Controller
         }
 
         try {
-            // Hole Spieler-Identifier aus der FiveM-Datenbank
-            $player = DB::connection('fivem')
+            // Hole Spieler-Identifier aus der RedM-Datenbank
+            $redmUser = DB::connection('redm')
                 ->table('users')
-                ->where('discord_identifier', $user->discord_identifier)
+                ->where('identifier', 'like', '%' . $user->discord_identifier . '%')
                 ->first();
 
-            if (!$player) {
+            if (!$redmUser) {
                 return Inertia::render('UCP/VehicleInfo/Index', [
                     'vehicles' => [],
-                    'error' => 'Keine Spielerdaten in der FiveM-Datenbank gefunden.',
+                    'error' => 'Keine Spielerdaten in der RedM-Datenbank gefunden.',
                 ]);
             }
 
-            $identifier = $player->identifier;
+            $identifier = $redmUser->identifier;
 
             // Versuche verschiedene Tabellennamen für Fahrzeuge
             $vehicles = [];
             $seenPlates = []; // Verhindere Duplikate basierend auf Kennzeichen
             
-            // Prüfe owned_vehicles Tabelle (Standard ESX)
+            // Prüfe wagons Tabelle (RedM verwendet wagons statt vehicles)
             try {
-                $ownedVehicles = DB::connection('fivem')
+                $character = DB::connection('redm')
+                    ->table('characters')
+                    ->where('identifier', $identifier)
+                    ->where('discordid', $user->discord_identifier)
+                    ->first();
+                
+                if ($character) {
+                    $wagons = DB::connection('redm')
+                        ->table('wagons')
+                        ->where('identifier', $identifier)
+                        ->where('charid', $character->charidentifier)
+                        ->get();
+                    
+                    foreach ($wagons as $wagon) {
+                        $items = $this->decodeJson($wagon->items);
+                        
+                        $vehicles[] = [
+                            'id' => $wagon->id,
+                            'model' => $wagon->model,
+                            'name' => $wagon->name,
+                            'items' => $items,
+                            'selected' => $wagon->selected,
+                            'type' => 'wagon',
+                        ];
+                    }
+                }
+            } catch (\Exception $e) {
+                Log::info('wagons Tabelle nicht gefunden oder Fehler', ['error' => $e->getMessage()]);
+            }
+            
+            // Prüfe stagecoaches Tabelle (Alternative für RedM)
+            try {
+                if (isset($character)) {
+                    $stagecoaches = DB::connection('redm')
+                        ->table('stagecoaches')
+                        ->where('identifier', $identifier)
+                        ->where('charid', $character->charidentifier)
+                        ->get();
+                    
+                    foreach ($stagecoaches as $stagecoach) {
+                        $items = $this->decodeJson($stagecoach->items ?? '{}');
+                        
+                        $vehicles[] = [
+                            'id' => $stagecoach->id,
+                            'model' => $stagecoach->model,
+                            'name' => $stagecoach->name,
+                            'items' => $items,
+                            'selected' => $stagecoach->selected ?? 0,
+                            'type' => 'stagecoach',
+                        ];
+                    }
+                }
+            } catch (\Exception $e) {
+                Log::info('stagecoaches Tabelle nicht gefunden oder Fehler', ['error' => $e->getMessage()]);
+            }
+            
+            // Prüfe owned_vehicles Tabelle (Fallback für Kompatibilität)
+            try {
+                $ownedVehicles = DB::connection('redm')
                     ->table('owned_vehicles')
                     ->where('owner', $identifier)
                     ->get();
@@ -86,7 +144,7 @@ class VehicleInfoController extends Controller
             // Prüfe vehicles Tabelle (Alternative) - nur wenn owned_vehicles leer war
             if (empty($vehicles)) {
                 try {
-                    $vehiclesData = DB::connection('fivem')
+                    $vehiclesData = DB::connection('redm')
                         ->table('vehicles')
                         ->where('owner', $identifier)
                         ->orWhere('identifier', $identifier)

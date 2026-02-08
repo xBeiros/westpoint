@@ -10,50 +10,50 @@ const serverImages = ref([
     {
         id: 1,
         src: "/images/pres/1_1.png",
-        alt: "BerlinCity",
-        title: "BerlinCity",
+        alt: "Westpoint",
+        title: "Westpoint",
         description: ""
     },
     {
         id: 2,
         src: "/images/pres/1_2.png",
-        alt: "BerlinCity",
-        title: "BerlinCity",
+        alt: "Westpoint",
+        title: "Westpoint",
         description: ""
     },
     {
         id: 3,
         src: "/images/pres/1_3.png",
-        alt: "BerlinCity",
-        title: "BerlinCity",
+        alt: "Westpoint",
+        title: "Westpoint",
         description: ""
     },
     {
         id: 4,
         src: "/images/pres/1_4.png",
-        alt: "BerlinCity",
-        title: "BerlinCity",
+        alt: "Westpoint",
+        title: "Westpoint",
         description: ""
     },
     {
         id: 5,
         src: "/images/pres/1_5.png",
-        alt: "BerlinCity",
-        title: "BerlinCity",
+        alt: "Westpoint",
+        title: "Westpoint",
         description: ""
     },
     {
         id: 6,
         src: "/images/pres/begleit.png",
-        alt: "BerlinCity",
-        title: "BerlinCity",
+        alt: "Westpoint",
+        title: "Westpoint",
         description: ""
     },
     {
         id: 7,
         src: "/images/pres/1_6.png",
-        alt: "BerlinCity",
-        title: "BerlinCity",
+        alt: "Westpoint",
+        title: "Westpoint",
         description: ""
     }
 ]);

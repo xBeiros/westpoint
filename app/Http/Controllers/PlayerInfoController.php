@@ -24,62 +24,82 @@ class PlayerInfoController extends Controller
         }
 
         try {
-            // Hole Spielerdaten aus der FiveM-Datenbank
-            $player = DB::connection('fivem')
+            // Hole Spielerdaten aus der RedM-Datenbank
+            // Suche direkt in der users Tabelle nach discord_identifier
+            $redmUser = DB::connection('redm')
                 ->table('users')
                 ->where('discord_identifier', $user->discord_identifier)
                 ->first();
 
-            if (!$player) {
+            if (!$redmUser) {
                 return Inertia::render('UCP/PlayerInfo/Index', [
-                    'player' => null,
-                    'error' => 'Keine Spielerdaten in der FiveM-Datenbank gefunden.',
+                    'characters' => [],
+                    'selectedCharacter' => null,
+                    'error' => 'Keine Spielerdaten in der RedM-Datenbank gefunden.',
                 ]);
             }
 
-            // Dekodiere JSON-Felder
-            $playerData = [
-                'identifier' => $player->identifier ?? null,
-                'discord_identifier' => $player->discord_identifier ?? null,
-                'firstname' => $player->firstname ?? null,
-                'lastname' => $player->lastname ?? null,
-                'dateofbirth' => $player->dateofbirth ?? null,
-                'sex' => $player->sex ?? null,
-                'height' => $player->height ?? null,
-                'job' => $player->job ?? null,
-                'job_grade' => $player->job_grade ?? null,
-                'group' => $player->group ?? null,
-                'phone_number' => $player->phone_number ?? null,
-                'isOnline' => $player->isOnline ?? false,
-                'last_seen' => $player->last_seen ?? null,
-                'created_at' => $player->created_at ?? null,
-                'accounts' => $this->decodeJson($player->accounts),
-                'inventory' => $this->decodeJson($player->inventory),
-                'loadout' => $this->decodeJson($player->loadout),
-                'metadata' => $this->decodeJson($player->metadata),
-                'position' => $this->decodeJson($player->position),
-                'skin' => $this->decodeJson($player->skin),
-                'status' => $player->status ?? null,
-                'is_dead' => $player->is_dead ?? false,
-                'level_craft' => $player->level_craft ?? null,
-                'cryptocurrency' => $player->cryptocurrency ?? null,
-                'crypto_wallet' => $player->crypto_wallet ?? null,
-                'c_coins' => $player->c_coins ?? null,
-                'b_coins' => $player->b_coins ?? null,
-                'trucker_xp' => $player->trucker_xp ?? null,
-                'trucker_level' => $player->trucker_level ?? null,
-                'coins_spent' => $player->coins_spent ?? null,
-            ];
+            // Hole ALLE Character-Daten für diesen User
+            $characters = DB::connection('redm')
+                ->table('characters')
+                ->where('identifier', $redmUser->identifier)
+                ->orderBy('charidentifier', 'asc')
+                ->get();
 
-            // Debug: Log die Daten
-            Log::info('Player Data für Inertia', [
-                'player_data' => $playerData,
-                'firstname' => $playerData['firstname'],
-                'lastname' => $playerData['lastname'],
-            ]);
+            if ($characters->isEmpty()) {
+                return Inertia::render('UCP/PlayerInfo/Index', [
+                    'characters' => [],
+                    'selectedCharacter' => null,
+                    'error' => 'Keine Charakterdaten in der RedM-Datenbank gefunden.',
+                ]);
+            }
+
+            // Verarbeite alle Charaktere
+            $charactersData = $characters->map(function ($character) {
+                return [
+                    'charidentifier' => $character->charidentifier ?? null,
+                    'identifier' => $character->identifier ?? null,
+                    'discordid' => $character->discordid ?? null,
+                    'firstname' => $character->firstname ?? null,
+                    'lastname' => $character->lastname ?? null,
+                    'gender' => $character->gender ?? null,
+                    'age' => $character->age ?? null,
+                    'nickname' => $character->nickname ?? null,
+                    'job' => $character->job ?? null,
+                    'joblabel' => $character->joblabel ?? null,
+                    'jobgrade' => $character->jobgrade ?? null,
+                    'group' => $character->group ?? null,
+                    'money' => $character->money ?? 0,
+                    'gold' => $character->gold ?? 0,
+                    'rol' => $character->rol ?? 0,
+                    'xp' => $character->xp ?? 0,
+                    'hours' => $character->hours ?? 0,
+                    'LastLogin' => $character->LastLogin ?? null,
+                    'inventory' => $this->decodeJson($character->inventory),
+                    'slots' => $character->slots ?? null,
+                    'meta' => $this->decodeJson($character->meta),
+                    'character_desc' => $character->character_desc ?? null,
+                    'skinPlayer' => $this->decodeJson($character->skinPlayer),
+                    'compPlayer' => $this->decodeJson($character->compPlayer),
+                    'compTints' => $this->decodeJson($character->compTints),
+                    'coords' => $this->decodeJson($character->coords),
+                    'status' => $this->decodeJson($character->status),
+                    'isdead' => $character->isdead ?? false,
+                    'skills' => $this->decodeJson($character->skills),
+                    'walk' => $character->walk ?? null,
+                    'gunsmith' => $character->gunsmith ?? 0,
+                    'ammo' => $this->decodeJson($character->ammo),
+                    'lastjoined' => $this->decodeJson($character->lastjoined),
+                    'ranchid' => $character->ranchid ?? 0,
+                ];
+            })->toArray();
+
+            // Standardmäßig den ersten Charakter auswählen
+            $selectedCharacter = !empty($charactersData) ? $charactersData[0] : null;
 
             return Inertia::render('UCP/PlayerInfo/Index', [
-                'player' => $playerData,
+                'characters' => $charactersData,
+                'selectedCharacter' => $selectedCharacter,
             ]);
         } catch (\Exception $e) {
             Log::error('Fehler beim Abrufen der Spielerdaten', [
@@ -88,7 +108,8 @@ class PlayerInfoController extends Controller
             ]);
 
             return Inertia::render('UCP/PlayerInfo/Index', [
-                'player' => null,
+                'characters' => [],
+                'selectedCharacter' => null,
                 'error' => config('app.debug') 
                     ? $e->getMessage() 
                     : 'Fehler beim Abrufen der Spielerdaten.',

@@ -15,7 +15,7 @@ GENERATED_FILES=(
     "resources/js/routes/players/index.ts"
     "resources/js/routes/presentation/index.ts"
     "resources/js/routes/rulebook/index.ts"
-    "resources/js/routes/test/fivem/index.ts"
+    "resources/js/routes/test/redm/index.ts"
     "resources/js/routes/two-factor/index.ts"
     "resources/js/actions/App/Http/Controllers/Settings/index.ts"
 )

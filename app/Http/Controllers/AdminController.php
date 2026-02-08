@@ -25,15 +25,15 @@ class AdminController extends Controller
         }
 
         try {
-            // Hole Spielerdaten aus der FiveM-Datenbank
-            $player = DB::connection('fivem')
+            // Hole Spielerdaten aus der RedM-Datenbank
+            $player = DB::connection('redm')
                 ->table('users')
                 ->where('discord_identifier', $user->discord_identifier)
                 ->first();
 
             if (!$player) {
                 return redirect('/ucp/dashboard')->withErrors([
-                    'message' => 'Keine Spielerdaten in der FiveM-Datenbank gefunden.',
+                    'message' => 'Keine Spielerdaten in der RedM-Datenbank gefunden.',
                 ]);
             }
 
@@ -46,7 +46,7 @@ class AdminController extends Controller
                 ]);
             }
 
-            // Hole online Spieler über die BerlinCity API
+            // Hole online Spieler über die Westpoint API
             $onlinePlayers = $this->getOnlinePlayers();
 
             return Inertia::render('UCP/Admin/Index', [
@@ -85,7 +85,7 @@ class AdminController extends Controller
 
         try {
             // Prüfe Admin-Rechte
-            $player = DB::connection('fivem')
+            $player = DB::connection('redm')
                 ->table('users')
                 ->where('discord_identifier', $user->discord_identifier)
                 ->first();
@@ -116,7 +116,7 @@ class AdminController extends Controller
     }
 
     /**
-     * Hole Spielerdetails aus der FiveM-Datenbank
+     * Hole Spielerdetails aus der RedM-Datenbank
      */
     public function getPlayerDetails(Request $request)
     {
@@ -131,7 +131,7 @@ class AdminController extends Controller
 
         try {
             // Prüfe Admin-Rechte
-            $player = DB::connection('fivem')
+            $player = DB::connection('redm')
                 ->table('users')
                 ->where('discord_identifier', $user->discord_identifier)
                 ->first();
@@ -147,8 +147,8 @@ class AdminController extends Controller
                 'identifier' => 'required|string',
             ]);
 
-            // Hole Spielerdaten aus der FiveM-Datenbank
-            $targetPlayer = DB::connection('fivem')
+            // Hole Spielerdaten aus der RedM-Datenbank
+            $targetPlayer = DB::connection('redm')
                 ->table('users')
                 ->where('identifier', $request->identifier)
                 ->first();
@@ -213,7 +213,7 @@ class AdminController extends Controller
 
         try {
             // Prüfe Admin-Rechte
-            $player = DB::connection('fivem')
+            $player = DB::connection('redm')
                 ->table('users')
                 ->where('discord_identifier', $user->discord_identifier)
                 ->first();
@@ -233,8 +233,8 @@ class AdminController extends Controller
                 'duration' => 'nullable|integer',
             ]);
 
-            $serverUrl = config('fivem.server_url');
-            $apiKey = config('fivem.api_key');
+            $serverUrl = config('redm.server_url');
+            $apiKey = config('redm.api_key');
 
             if (!preg_match('/^https?:\/\//', $serverUrl)) {
                 $serverUrl = 'http://' . ltrim($serverUrl, '/');
@@ -242,11 +242,11 @@ class AdminController extends Controller
             $serverUrl = rtrim($serverUrl, '/');
 
             $endpoint = match($request->action) {
-                'kick' => '/berlincity_api/kick',
-                'ban' => '/berlincity_api/ban',
-                'warn' => '/berlincity_api/warn',
-                'dm' => '/berlincity_api/dm',
-                'revive' => '/berlincity_api/revive',
+                'kick' => '/westpoint_api/kick',
+                'ban' => '/westpoint_api/ban',
+                'warn' => '/westpoint_api/warn',
+                'dm' => '/westpoint_api/dm',
+                'revive' => '/westpoint_api/revive',
                 default => null,
             };
 
@@ -307,7 +307,7 @@ class AdminController extends Controller
 
         try {
             // Prüfe Admin-Rechte
-            $player = DB::connection('fivem')
+            $player = DB::connection('redm')
                 ->table('users')
                 ->where('discord_identifier', $user->discord_identifier)
                 ->first();
@@ -333,12 +333,12 @@ class AdminController extends Controller
             $request->validate([
                 'players_data' => 'required|array|min:1',
                 'players_data.*.id' => 'required',
-                'resource_type' => 'required|string|in:role,cash,bank,black_money,items,b_coins',
+                'resource_type' => 'required|string|in:role,money,gold,bank,items,b_coins',
             ]);
 
             $resourceType = $request->resource_type;
-            $serverUrl = config('fivem.server_url');
-            $apiKey = config('fivem.api_key');
+            $serverUrl = config('redm.server_url');
+            $apiKey = config('redm.api_key');
 
             if (!preg_match('/^https?:\/\//', $serverUrl)) {
                 $serverUrl = 'http://' . ltrim($serverUrl, '/');
@@ -369,9 +369,9 @@ class AdminController extends Controller
                             try {
                                 // Versuche identifier über verschiedene API-Endpoints zu holen
                                 $endpoints = [
-                                    $serverUrl . '/berlincity_api/player/' . $playerId,
-                                    $serverUrl . '/berlincity_api/players/' . $playerId,
-                                    $serverUrl . '/berlincity_api/getPlayer/' . $playerId,
+                                    $serverUrl . '/westpoint_api/player/' . $playerId,
+                                    $serverUrl . '/westpoint_api/players/' . $playerId,
+                                    $serverUrl . '/westpoint_api/getPlayer/' . $playerId,
                                 ];
                                 
                                 foreach ($endpoints as $endpoint) {
@@ -406,7 +406,7 @@ class AdminController extends Controller
                                     try {
                                         $playersResponse = Http::timeout(5)
                                             ->withHeaders(['x-api-key' => $apiKey ?? ''])
-                                            ->get($serverUrl . '/berlincity_api/players');
+                                            ->get($serverUrl . '/westpoint_api/players');
                                         
                                         if ($playersResponse->successful()) {
                                             $playersData = $playersResponse->json();
@@ -445,7 +445,7 @@ class AdminController extends Controller
                             try {
                                 // Versuche verschiedene Identifier-Formate
                                 // 1. Exakte Suche
-                                $targetPlayer = DB::connection('fivem')
+                                $targetPlayer = DB::connection('redm')
                                     ->table('users')
                                     ->where('identifier', $identifier)
                                     ->first();
@@ -453,7 +453,7 @@ class AdminController extends Controller
                                 // 2. Falls nicht gefunden, versuche ohne "license:" Präfix
                                 if (!$targetPlayer && strpos($identifier, 'license:') === 0) {
                                     $identifierWithoutPrefix = substr($identifier, 8); // Entferne "license:"
-                                    $targetPlayer = DB::connection('fivem')
+                                    $targetPlayer = DB::connection('redm')
                                         ->table('users')
                                         ->where('identifier', $identifierWithoutPrefix)
                                         ->orWhere('identifier', 'like', '%' . $identifierWithoutPrefix . '%')
@@ -463,7 +463,7 @@ class AdminController extends Controller
                                 // 3. Falls immer noch nicht gefunden, versuche mit "license:" Präfix
                                 if (!$targetPlayer && strpos($identifier, 'license:') !== 0) {
                                     $identifierWithPrefix = 'license:' . $identifier;
-                                    $targetPlayer = DB::connection('fivem')
+                                    $targetPlayer = DB::connection('redm')
                                         ->table('users')
                                         ->where('identifier', $identifierWithPrefix)
                                         ->orWhere('identifier', 'like', '%' . $identifier . '%')
@@ -484,7 +484,7 @@ class AdminController extends Controller
                                     
                                     // Debug: Prüfe, ob identifier-Spalte existiert und zeige Beispiel-Werte
                                     try {
-                                        $sampleIdentifiers = DB::connection('fivem')
+                                        $sampleIdentifiers = DB::connection('redm')
                                             ->table('users')
                                             ->select('identifier')
                                             ->whereNotNull('identifier')
@@ -512,7 +512,7 @@ class AdminController extends Controller
                         // Fallback: Suche über ID (falls identifier nicht verfügbar)
                         if (!$targetPlayer && is_numeric($playerId)) {
                             try {
-                                $targetPlayer = DB::connection('fivem')
+                                $targetPlayer = DB::connection('redm')
                                     ->table('users')
                                     ->where('id', (int)$playerId)
                                     ->first();
@@ -555,16 +555,16 @@ class AdminController extends Controller
                     // Verarbeite je nach Ressourcentyp
                     if ($resourceType === 'role') {
                         $request->validate(['role' => 'required|string|max:255']);
-                        DB::connection('fivem')
+                        DB::connection('redm')
                             ->table('users')
                             ->where('id', $targetPlayer->id)
                             ->update(['group' => $request->role]);
                         $updated++;
                     } 
-                    elseif (in_array($resourceType, ['cash', 'bank', 'black_money'])) {
+                    elseif (in_array($resourceType, ['money', 'gold', 'bank'])) {
                         $request->validate(['amount' => 'required|numeric|min:0']);
                         
-                        // Verwende die BerlinCity API für Geld
+                        // Verwende die Westpoint API für Geld
                         // Die API erwartet die Online-Spieler-ID (source/id), nicht die DB-ID
                         $apiPlayerId = is_numeric($playerId) ? (int)$playerId : $playerId;
                         
@@ -577,7 +577,7 @@ class AdminController extends Controller
                         
                         $response = Http::timeout(10)
                             ->withHeaders(['x-api-key' => $apiKey ?? ''])
-                            ->post($serverUrl . '/berlincity_api/money', [
+                            ->post($serverUrl . '/westpoint_api/money', [
                                 'player_id' => $apiPlayerId,
                                 'money_type' => $resourceType,
                                 'amount' => $request->amount,
@@ -607,7 +607,7 @@ class AdminController extends Controller
                     }
                     elseif ($resourceType === 'b_coins') {
                         $request->validate(['amount' => 'required|numeric|min:0']);
-                        DB::connection('fivem')
+                        DB::connection('redm')
                             ->table('users')
                             ->where('id', $targetPlayer->id)
                             ->update(['b_coins' => $request->amount]);
@@ -620,7 +620,7 @@ class AdminController extends Controller
                             'items.*.amount' => 'required|integer|min:1',
                         ]);
                         
-                        // Verwende die BerlinCity API für Items
+                        // Verwende die Westpoint API für Items
                         // Die API erwartet die Online-Spieler-ID (source/id), nicht die DB-ID
                         $apiPlayerId = is_numeric($playerId) ? (int)$playerId : $playerId;
                         
@@ -646,7 +646,7 @@ class AdminController extends Controller
                                 
                                 $response = Http::timeout(10)
                                     ->withHeaders(['x-api-key' => $apiKey ?? ''])
-                                    ->post($serverUrl . '/berlincity_api/giveitem', [
+                                    ->post($serverUrl . '/westpoint_api/giveitem', [
                                         'player_id' => $apiPlayerId,
                                         'item' => $itemName,
                                         'quantity' => $itemQuantity,
@@ -702,11 +702,11 @@ class AdminController extends Controller
                 }
             }
 
-            $resourceNames = [
+                $resourceNames = [
                 'role' => 'Rolle',
-                'cash' => 'Cash',
+                'money' => 'Geld',
+                'gold' => 'Gold',
                 'bank' => 'Bank',
-                'black_money' => 'Black Money',
                 'b_coins' => 'B Coins',
                 'items' => 'Items',
             ];
@@ -747,7 +747,7 @@ class AdminController extends Controller
 
         try {
             // Prüfe Admin-Rechte
-            $player = DB::connection('fivem')
+            $player = DB::connection('redm')
                 ->table('users')
                 ->where('discord_identifier', $user->discord_identifier)
                 ->first();
@@ -764,7 +764,7 @@ class AdminController extends Controller
             // Versuche Items aus der items-Tabelle zu holen
             try {
                 // Prüfe verschiedene mögliche Spaltennamen (name, item, item_name, label)
-                $itemsQuery = DB::connection('fivem')->table('items');
+                $itemsQuery = DB::connection('redm')->table('items');
                 
                 // Versuche verschiedene Spaltennamen
                 $nameColumn = null;
@@ -773,7 +773,7 @@ class AdminController extends Controller
                 // Prüfe name/item/item_name Spalte
                 foreach (['name', 'item', 'item_name'] as $column) {
                     try {
-                        $test = DB::connection('fivem')
+                        $test = DB::connection('redm')
                             ->table('items')
                             ->select($column)
                             ->limit(1)
@@ -789,7 +789,7 @@ class AdminController extends Controller
                 
                 // Prüfe label Spalte
                 try {
-                    $test = DB::connection('fivem')
+                    $test = DB::connection('redm')
                         ->table('items')
                         ->select('label')
                         ->limit(1)
@@ -804,7 +804,7 @@ class AdminController extends Controller
                 if ($nameColumn) {
                     if ($labelColumn) {
                         // Hole name und label
-                        $items = DB::connection('fivem')
+                        $items = DB::connection('redm')
                             ->table('items')
                             ->select($nameColumn . ' as name', 'label')
                             ->orderBy($nameColumn)
@@ -822,7 +822,7 @@ class AdminController extends Controller
                             ->toArray();
                     } else {
                         // Nur name verfügbar
-                        $items = DB::connection('fivem')
+                        $items = DB::connection('redm')
                             ->table('items')
                             ->select($nameColumn . ' as name')
                             ->orderBy($nameColumn)
@@ -841,7 +841,7 @@ class AdminController extends Controller
                     }
                 } else {
                     // Falls keine Spalte gefunden, versuche alle Spalten
-                    $items = DB::connection('fivem')
+                    $items = DB::connection('redm')
                         ->table('items')
                         ->get()
                         ->map(function ($item) {
@@ -867,7 +867,7 @@ class AdminController extends Controller
                 
                 // Fallback: Versuche aus Inventaren zu holen
                 try {
-                    $itemNames = DB::connection('fivem')
+                    $itemNames = DB::connection('redm')
                         ->table('users')
                         ->whereNotNull('inventory')
                         ->get()
@@ -943,13 +943,13 @@ class AdminController extends Controller
     }
 
     /**
-     * Hole online Spieler über die BerlinCity API
+     * Hole online Spieler über die Westpoint API
      */
     private function getOnlinePlayers()
     {
         try {
-            $serverUrl = config('fivem.server_url');
-            $apiKey = config('fivem.api_key');
+            $serverUrl = config('redm.server_url');
+            $apiKey = config('redm.api_key');
 
             if (!$serverUrl) {
                 return [];
@@ -964,8 +964,8 @@ class AdminController extends Controller
 
             // Versuche verschiedene Endpoints
             $endpoints = [
-                $serverUrl . '/berlincity_api/players',
-                $serverUrl . '/berlincity_api/berlincity/players',
+                $serverUrl . '/westpoint_api/players',
+                $serverUrl . '/westpoint_api/westpoint/players',
             ];
 
             foreach ($endpoints as $endpoint) {
@@ -981,7 +981,7 @@ class AdminController extends Controller
                         return $data['players'] ?? $data['data'] ?? $data ?? [];
                     }
                 } catch (\Exception $e) {
-                    Log::info('BerlinCity API Endpoint fehlgeschlagen', [
+                    Log::info('Westpoint API Endpoint fehlgeschlagen', [
                         'endpoint' => $endpoint,
                         'error' => $e->getMessage(),
                     ]);

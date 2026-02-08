@@ -1,19 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FiveMController;
+use App\Http\Controllers\RedMController;
 
 // ============================================
-// Berlincity FiveM API Routes
+// Westpoint RedM API Routes
 // ============================================
-Route::get('/berlincity/test', [FiveMController::class, 'testConnection']);
-Route::get('/berlincity/players', [FiveMController::class, 'getPlayers']);
-Route::post('/berlincity/kick', [FiveMController::class, 'kickPlayer']);
-Route::post('/berlincity/ban', [FiveMController::class, 'banPlayer']);
-Route::post('/berlincity/warn', [FiveMController::class, 'warnPlayer']);
-Route::post('/berlincity/dm', [FiveMController::class, 'sendDirectMessage']);
-Route::post('/berlincity/money', [FiveMController::class, 'manageMoney']);
-Route::post('/berlincity/revive', [FiveMController::class, 'revivePlayer']);
+Route::get('/westpoint/test', [RedMController::class, 'testConnection']);
+Route::get('/westpoint/players', [RedMController::class, 'getPlayers']);
+Route::post('/westpoint/kick', [RedMController::class, 'kickPlayer']);
+Route::post('/westpoint/ban', [RedMController::class, 'banPlayer']);
+Route::post('/westpoint/warn', [RedMController::class, 'warnPlayer']);
+Route::post('/westpoint/dm', [RedMController::class, 'sendDirectMessage']);
+Route::post('/westpoint/money', [RedMController::class, 'manageMoney']);
+Route::post('/westpoint/revive', [RedMController::class, 'revivePlayer']);
 
 // ============================================
 // Page Statistics API

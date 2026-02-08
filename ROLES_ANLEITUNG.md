@@ -34,9 +34,9 @@ Dies erstellt folgende Rollen:
 - **moderator**: Eingeschränkte Berechtigungen
 - **superadmin**: Alle Berechtigungen (*)
 
-### Schritt 2: Rolle in FiveM-Datenbank zuweisen
+### Schritt 2: Rolle in RedM-Datenbank zuweisen
 
-1. Öffne deine FiveM-Datenbank
+1. Öffne deine RedM-Datenbank
 2. Finde deinen Spieler in der `users` Tabelle
 3. Setze das `group` Feld auf eine der erstellten Rollen (z.B. `admin` oder `superadmin`)
 
@@ -47,7 +47,7 @@ UPDATE users SET `group` = 'admin' WHERE identifier = 'dein_identifier';
 
 ### Schritt 3: Im Dashboard verwenden
 
-Nachdem du die Rolle in der FiveM-Datenbank zugewiesen hast:
+Nachdem du die Rolle in der RedM-Datenbank zugewiesen hast:
 1. Logge dich im Dashboard ein (mit Discord)
 2. Gehe zu "Administrativ" > "Rollen"
 3. Du kannst jetzt Rollen verwalten, wenn deine Rolle die entsprechenden Berechtigungen hat
@@ -69,7 +69,7 @@ VALUES (
 
 ## Wichtige Hinweise
 
-1. **Die Rolle muss existieren**: Die `group` in der FiveM `users` Tabelle muss mit einem `name` in der Laravel `roles` Tabelle übereinstimmen.
+1. **Die Rolle muss existieren**: Die `group` in der RedM `users` Tabelle muss mit einem `name` in der Laravel `roles` Tabelle übereinstimmen.
 
 2. **Wildcard-Berechtigung**: Wenn eine Rolle `*` als Berechtigung hat, hat sie automatisch alle Berechtigungen.
 
@@ -82,7 +82,7 @@ VALUES (
 **Problem**: "Du hast keine Berechtigung, Rollen zu bearbeiten"
 
 **Lösung**: 
-1. Prüfe, ob deine `group` in der FiveM-Datenbank mit einer Rolle in der `roles` Tabelle übereinstimmt
+1. Prüfe, ob deine `group` in der RedM-Datenbank mit einer Rolle in der `roles` Tabelle übereinstimmt
 2. Prüfe, ob diese Rolle die benötigten Berechtigungen hat (`admin.roles.edit` oder `*`)
 3. Führe den Seeder aus, um die Standard-Rollen zu erstellen
 

@@ -42,7 +42,7 @@ const formatStored = (stored: any) => {
             <!-- Header -->
             <div class="mb-4">
                 <h1 class="text-3xl font-bold mb-2">Fahrzeuge</h1>
-                <p class="text-muted-foreground">Deine Fahrzeuge aus der FiveM-Datenbank</p>
+                <p class="text-muted-foreground">Deine Fahrzeuge aus der RedM-Datenbank</p>
             </div>
 
             <!-- Error State -->

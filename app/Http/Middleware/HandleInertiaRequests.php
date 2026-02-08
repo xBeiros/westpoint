@@ -43,20 +43,40 @@ class HandleInertiaRequests extends Middleware
         
         $playerData = null;
         
-        // Hole Benutzergruppe und Spielerdaten aus FiveM-Datenbank, falls vorhanden
+        // Hole Benutzergruppe und Spielerdaten aus RedM-Datenbank, falls vorhanden
         if ($user && $user->discord_identifier) {
             try {
-                $player = \Illuminate\Support\Facades\DB::connection('fivem')
+                // Suche direkt in der users Tabelle nach discord_identifier
+                $redmUser = \Illuminate\Support\Facades\DB::connection('redm')
                     ->table('users')
                     ->where('discord_identifier', $user->discord_identifier)
                     ->first();
                 
-                if ($player) {
-                    $userGroup = $player->group ?? 'user';
-                    $playerData = [
-                        'firstname' => $player->firstname ?? null,
-                        'lastname' => $player->lastname ?? null,
-                    ];
+                if ($redmUser) {
+                    $userGroup = $redmUser->group ?? 'user';
+                    
+                    // Suche dann in der characters Tabelle nach firstname/lastname
+                    // Nimm den ersten Charakter (oder den mit passendem discordid)
+                    $character = \Illuminate\Support\Facades\DB::connection('redm')
+                        ->table('characters')
+                        ->where('identifier', $redmUser->identifier)
+                        ->where('discordid', $user->discord_identifier)
+                        ->first();
+                    
+                    // Fallback: Falls kein Charakter mit passendem discordid gefunden, nimm den ersten
+                    if (!$character) {
+                        $character = \Illuminate\Support\Facades\DB::connection('redm')
+                            ->table('characters')
+                            ->where('identifier', $redmUser->identifier)
+                            ->first();
+                    }
+                    
+                    if ($character) {
+                        $playerData = [
+                            'firstname' => $character->firstname ?? null,
+                            'lastname' => $character->lastname ?? null,
+                        ];
+                    }
                 }
             } catch (\Exception $e) {
                 // Fehler beim Abrufen der Gruppe ignorieren

@@ -113,13 +113,13 @@ return [
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
 
-        'fivem' => [
+        'redm' => [
             'driver' => 'mysql',
-            'host' => env('FIVEM_DB_HOST', 'localhost'),
-            'port' => env('FIVEM_DB_PORT', '3306'),
-            'database' => env('FIVEM_DB_DATABASE', 'westpoint'),
-            'username' => env('FIVEM_DB_USERNAME', 'root'),
-            'password' => env('FIVEM_DB_PASSWORD', ''),
+            'host' => env('REDM_DB_HOST', '51.75.79.250'),
+            'port' => env('REDM_DB_PORT', '3306'),
+            'database' => env('REDM_DB_DATABASE', 'redm'),
+            'username' => env('REDM_DB_USERNAME', 'redm'),
+            'password' => env('REDM_DB_PASSWORD', 'Test123!'),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',

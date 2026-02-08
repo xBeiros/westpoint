@@ -72,73 +72,92 @@ class DiscordLoginController extends Controller
                 ]);
             }
 
-            // Prüfe, ob die Verbindung zur FiveM-Datenbank besteht
+            // Prüfe, ob die Verbindung zur RedM-Datenbank besteht
             try {
-                $fivemConnection = DB::connection('fivem');
-                $fivemPdo = $fivemConnection->getPdo();
+                $redmConnection = DB::connection('redm');
+                $redmPdo = $redmConnection->getPdo();
                 
-                Log::info('FiveM Datenbankverbindung erfolgreich', [
-                    'host' => config('database.connections.fivem.host'),
-                    'database' => config('database.connections.fivem.database'),
-                    'username' => config('database.connections.fivem.username'),
-                    'port' => config('database.connections.fivem.port'),
-                    'driver' => config('database.connections.fivem.driver'),
+                Log::info('RedM Datenbankverbindung erfolgreich', [
+                    'host' => config('database.connections.redm.host'),
+                    'database' => config('database.connections.redm.database'),
+                    'username' => config('database.connections.redm.username'),
+                    'port' => config('database.connections.redm.port'),
+                    'driver' => config('database.connections.redm.driver'),
                 ]);
             } catch (\Exception $connectionException) {
-                Log::error('FiveM Datenbankverbindung fehlgeschlagen', [
+                Log::error('RedM Datenbankverbindung fehlgeschlagen', [
                     'message' => $connectionException->getMessage(),
                     'code' => $connectionException->getCode(),
-                    'host' => config('database.connections.fivem.host'),
-                    'database' => config('database.connections.fivem.database'),
-                    'username' => config('database.connections.fivem.username'),
-                    'port' => config('database.connections.fivem.port'),
+                    'host' => config('database.connections.redm.host'),
+                    'database' => config('database.connections.redm.database'),
+                    'username' => config('database.connections.redm.username'),
+                    'port' => config('database.connections.redm.port'),
                     'trace' => $connectionException->getTraceAsString(),
                 ]);
                 
                 $errorMessage = config('app.debug') 
-                    ? 'FiveM-Datenbankverbindung fehlgeschlagen: ' . $connectionException->getMessage() 
-                    : 'Verbindung zur FiveM-Datenbank fehlgeschlagen. Bitte kontaktieren Sie einen Administrator.';
+                    ? 'RedM-Datenbankverbindung fehlgeschlagen: ' . $connectionException->getMessage() 
+                    : 'Verbindung zur RedM-Datenbank fehlgeschlagen. Bitte kontaktieren Sie einen Administrator.';
                 
                 return redirect('/auth/discord')->withErrors([
                     'discord_id' => $errorMessage,
                 ]);
             }
 
-            // Prüfe, ob die Discord ID in der FiveM-Datenbank existiert
+            // Prüfe, ob die Discord ID in der RedM-Datenbank existiert
+            // In RedM wird discord_identifier direkt in der users Tabelle gespeichert
             try {
-                $fivemUser = DB::connection('fivem')
+                $redmUser = null;
+                
+                // Suche direkt in der users Tabelle nach discord_identifier
+                $redmUser = DB::connection('redm')
                     ->table('users')
                     ->where('discord_identifier', $discordId)
                     ->first();
                 
-                Log::info('FiveM Benutzerabfrage durchgeführt', [
+                // Fallback: Falls nicht in users, suche über characters
+                if (!$redmUser) {
+                    $character = DB::connection('redm')
+                        ->table('characters')
+                        ->where('discordid', $discordId)
+                        ->first();
+                    
+                    if ($character) {
+                        $redmUser = DB::connection('redm')
+                            ->table('users')
+                            ->where('identifier', $character->identifier)
+                            ->first();
+                    }
+                }
+                
+                Log::info('RedM Benutzerabfrage durchgeführt', [
                     'discord_id' => $discordId,
-                    'user_found' => $fivemUser !== null,
+                    'user_found' => $redmUser !== null,
                 ]);
             } catch (\Exception $dbException) {
-                Log::error('FiveM Datenbankabfrage fehlgeschlagen', [
+                Log::error('RedM Datenbankabfrage fehlgeschlagen', [
                     'message' => $dbException->getMessage(),
                     'code' => $dbException->getCode(),
                     'discord_id' => $discordId,
-                    'host' => config('database.connections.fivem.host'),
-                    'database' => config('database.connections.fivem.database'),
-                    'username' => config('database.connections.fivem.username'),
+                    'host' => config('database.connections.redm.host'),
+                    'database' => config('database.connections.redm.database'),
+                    'username' => config('database.connections.redm.username'),
                     'trace' => $dbException->getTraceAsString(),
                 ]);
                 
                 // In Entwicklung: Detaillierte Fehlermeldung anzeigen
                 $errorMessage = config('app.debug') 
-                    ? 'FiveM-Datenbankfehler: ' . $dbException->getMessage() 
-                    : 'Verbindung zur FiveM-Datenbank fehlgeschlagen. Bitte kontaktieren Sie einen Administrator.';
+                    ? 'RedM-Datenbankfehler: ' . $dbException->getMessage() 
+                    : 'Verbindung zur RedM-Datenbank fehlgeschlagen. Bitte kontaktieren Sie einen Administrator.';
                 
                 return redirect('/auth/discord')->withErrors([
                     'discord_id' => $errorMessage,
                 ]);
             }
 
-            if (!$fivemUser) {
+            if (!$redmUser) {
                 return redirect('/auth/discord')->withErrors([
-                    'discord_id' => 'Diese Discord ID wurde nicht in der FiveM-Datenbank gefunden.',
+                    'discord_id' => 'Diese Discord ID wurde nicht in der RedM-Datenbank gefunden.',
                 ]);
             }
 
@@ -209,11 +228,23 @@ class DiscordLoginController extends Controller
             // Avatar-Funktionalität deaktiviert - verwende Standard Initialen
 
             if (!$laravelUser) {
-                // Erstelle einen neuen Laravel-User basierend auf FiveM-Daten
+                // Erstelle einen neuen Laravel-User basierend auf RedM-Daten
                 try {
+                    // Hole Character-Name falls vorhanden
+                    $character = DB::connection('redm')
+                        ->table('characters')
+                        ->where('identifier', $redmUser->identifier)
+                        ->where('discordid', $discordId)
+                        ->first();
+                    
+                    $userName = $discordUser['username'] ?? 'Discord User';
+                    if ($character && $character->firstname && $character->lastname) {
+                        $userName = $character->firstname . ' ' . $character->lastname;
+                    }
+                    
                     $laravelUser = \App\Models\User::create([
-                        'name' => $discordUser['username'] ?? ($fivemUser->name ?? 'Discord User'),
-                        'email' => $discordUser['email'] ?? ($fivemUser->email ?? "discord_{$discordId}@berlincity.local"),
+                        'name' => $userName,
+                        'email' => $discordUser['email'] ?? "discord_{$discordId}@westpoint.local",
                         'password' => bcrypt(str()->random(32)), // Zufälliges Passwort
                         'discord_identifier' => $discordId,
                     ]);

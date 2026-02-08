@@ -50,7 +50,7 @@ class RoleController extends Controller
 
         try {
             // Prüfe Admin-Rechte
-            $player = DB::connection('fivem')
+            $player = DB::connection('redm')
                 ->table('users')
                 ->where('discord_identifier', $user->discord_identifier)
                 ->first();
@@ -111,7 +111,7 @@ class RoleController extends Controller
 
         try {
             // Prüfe Admin-Rechte
-            $player = DB::connection('fivem')
+            $player = DB::connection('redm')
                 ->table('users')
                 ->where('discord_identifier', $user->discord_identifier)
                 ->first();
@@ -216,7 +216,7 @@ class RoleController extends Controller
 
         try {
             // Prüfe Admin-Rechte
-            $player = DB::connection('fivem')
+            $player = DB::connection('redm')
                 ->table('users')
                 ->where('discord_identifier', $user->discord_identifier)
                 ->first();
@@ -335,7 +335,7 @@ class RoleController extends Controller
 
         try {
             // Prüfe Admin-Rechte
-            $player = DB::connection('fivem')
+            $player = DB::connection('redm')
                 ->table('users')
                 ->where('discord_identifier', $user->discord_identifier)
                 ->first();
