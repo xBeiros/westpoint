@@ -5,16 +5,14 @@ import Admin from './Admin'
 import NewsController from './NewsController'
 import WikiController from './WikiController'
 import DiscordLoginController from './DiscordLoginController'
-
-
 const Controllers = {
     PlayerInfoController: Object.assign(PlayerInfoController, PlayerInfoController),
-    VehicleInfoController: Object.assign(VehicleInfoController, VehicleInfoController),
-    AdminController: Object.assign(AdminController, AdminController),
-    Admin: Object.assign(Admin, Admin),
-    NewsController: Object.assign(NewsController, NewsController),
-    WikiController: Object.assign(WikiController, WikiController),
-    DiscordLoginController: Object.assign(DiscordLoginController, DiscordLoginController),
+VehicleInfoController: Object.assign(VehicleInfoController, VehicleInfoController),
+AdminController: Object.assign(AdminController, AdminController),
+Admin: Object.assign(Admin, Admin),
+NewsController: Object.assign(NewsController, NewsController),
+WikiController: Object.assign(WikiController, WikiController),
+DiscordLoginController: Object.assign(DiscordLoginController, DiscordLoginController),
 }
 
 export default Controllers
