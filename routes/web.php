@@ -100,6 +100,34 @@ Route::get('/rulebook/{slug}', function ($slug) {
 Route::prefix('wiki')->group(function () {
     Route::get('/', [WikiController::class, 'index'])->name('wiki.index');
     Route::get('/search', [WikiController::class, 'search'])->name('wiki.search');
+    
+    // Wiki User Change Requests (für "wiki" Gruppe) - MUSS VOR /{slug} stehen
+    Route::middleware('auth')->group(function () {
+        Route::get('/change-request/create', [\App\Http\Controllers\Wiki\WikiChangeRequestUserController::class, 'create'])->name('wiki.change-request.create');
+        Route::get('/change-request/create/{slug}', [\App\Http\Controllers\Wiki\WikiChangeRequestUserController::class, 'create'])->name('wiki.change-request.create-edit');
+        Route::post('/change-request', [\App\Http\Controllers\Wiki\WikiChangeRequestUserController::class, 'store'])->name('wiki.change-request.store');
+    });
+    
+    // Wiki Admin Routes - MUSS VOR /{slug} stehen
+    Route::middleware(['auth', \App\Http\Middleware\EnsureWikiAdmin::class])->prefix('admin')->name('wiki.admin.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Wiki\Admin\WikiAdminController::class, 'index'])->name('index');
+        Route::get('/create', [\App\Http\Controllers\Wiki\Admin\WikiAdminController::class, 'create'])->name('create');
+        Route::post('/', [\App\Http\Controllers\Wiki\Admin\WikiAdminController::class, 'store'])->name('store');
+        Route::get('/{article}/edit', [\App\Http\Controllers\Wiki\Admin\WikiAdminController::class, 'edit'])->name('edit');
+        Route::put('/{article}', [\App\Http\Controllers\Wiki\Admin\WikiAdminController::class, 'update'])->name('update');
+        Route::delete('/{article}', [\App\Http\Controllers\Wiki\Admin\WikiAdminController::class, 'destroy'])->name('destroy');
+        Route::post('/{article}/toggle-publish', [\App\Http\Controllers\Wiki\Admin\WikiAdminController::class, 'togglePublish'])->name('toggle-publish');
+        
+        // Change Requests Management
+        Route::prefix('change-requests')->name('change-requests.')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::class, 'index'])->name('index');
+            Route::get('/{changeRequest}', [\App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::class, 'show'])->name('show');
+            Route::post('/{changeRequest}/approve', [\App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::class, 'approve'])->name('approve');
+            Route::post('/{changeRequest}/reject', [\App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::class, 'reject'])->name('reject');
+        });
+    });
+    
+    // Diese Route MUSS ZULETZT stehen, da sie alle anderen URLs abfängt
     Route::get('/{slug}', [WikiController::class, 'show'])->where('slug', '.*')->name('wiki.show');
 });
 

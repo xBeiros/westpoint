@@ -43,10 +43,9 @@ const actionDuration = ref(24);
 const isPerformingAction = ref(false);
 
 // Einzelne Spieler-Ressourcen states
-const playerResourceType = ref<'money' | 'gold' | 'bank' | 'items' | 'b_coins' | null>(null);
+const playerResourceType = ref<'money' | 'gold' | 'items' | 'b_coins' | null>(null);
 const playerMoneyAmount = ref<number>(0);
 const playerGoldAmount = ref<number>(0);
-const playerBankAmount = ref<number>(0);
 const playerBCoinsAmount = ref<number>(0);
 const playerItems = ref<Array<{name: string, amount: number}>>([{name: '', amount: 1}]);
 const playerItemSearchQuery = ref<Record<number, string>>({});
@@ -56,11 +55,10 @@ const isPerformingPlayerResource = ref(false);
 // Massenvergabe states
 const isBulkAssignDialogOpen = ref(false);
 const selectedPlayersForBulk = ref<Set<number>>(new Set());
-const bulkResourceType = ref<'money' | 'gold' | 'bank' | 'items' | 'b_coins'>('money');
+const bulkResourceType = ref<'money' | 'gold' | 'items' | 'b_coins'>('money');
 const bulkAssignRole = ref('');
 const bulkMoneyAmount = ref<number>(0);
 const bulkGoldAmount = ref<number>(0);
-const bulkBankAmount = ref<number>(0);
 const bulkBCoinsAmount = ref<number>(0);
 const bulkItems = ref<Array<{name: string, amount: number}>>([{name: '', amount: 1}]);
 const availableItems = ref<Array<{name: string, label: string}>>([]);
@@ -133,7 +131,6 @@ const openPlayerDialog = async (player: any) => {
     // Reset Ressourcen-States
     playerResourceType.value = null;
     playerMoneyAmount.value = 0;
-    playerBankAmount.value = 0;
     playerGoldAmount.value = 0;
     playerBCoinsAmount.value = 0;
     playerItems.value = [{name: '', amount: 1}];
@@ -253,7 +250,6 @@ const closeDialog = () => {
     actionDuration.value = 24;
     playerResourceType.value = null;
     playerMoneyAmount.value = 0;
-    playerBankAmount.value = 0;
     playerGoldAmount.value = 0;
     playerBCoinsAmount.value = 0;
     playerItems.value = [{name: '', amount: 1}];
@@ -316,10 +312,6 @@ const performPlayerResource = async () => {
         alert('Bitte gib einen gültigen Geld-Betrag ein.');
         return;
     }
-    if (playerResourceType.value === 'bank' && (!playerBankAmount.value || playerBankAmount.value <= 0)) {
-        alert('Bitte gib einen gültigen Bank-Betrag ein.');
-        return;
-    }
     if (playerResourceType.value === 'gold' && (!playerGoldAmount.value || playerGoldAmount.value <= 0)) {
         alert('Bitte gib einen gültigen Gold-Betrag ein.');
         return;
@@ -354,8 +346,6 @@ const performPlayerResource = async () => {
             payload.amount = playerMoneyAmount.value;
         } else if (playerResourceType.value === 'gold') {
             payload.amount = playerGoldAmount.value;
-        } else if (playerResourceType.value === 'bank') {
-            payload.amount = playerBankAmount.value;
         } else if (playerResourceType.value === 'b_coins') {
             payload.amount = playerBCoinsAmount.value;
         } else if (playerResourceType.value === 'items') {
@@ -376,14 +366,12 @@ const performPlayerResource = async () => {
             const resourceNames: Record<string, string> = {
                 'money': `${formatNumber(playerMoneyAmount.value)} $ Geld`,
                 'gold': `${formatNumber(playerGoldAmount.value)} Gold`,
-                'bank': `${formatNumber(playerBankAmount.value)} $ Bank`,
                 'b_coins': `${formatNumber(playerBCoinsAmount.value)} B Coins`,
                 'items': `${playerItems.value.filter(i => i.name && i.amount > 0).length} Item(s)`,
             };
             alert(`${resourceNames[playerResourceType.value!]} wurde erfolgreich vergeben.`);
             playerResourceType.value = null;
             playerMoneyAmount.value = 0;
-            playerBankAmount.value = 0;
             playerGoldAmount.value = 0;
             playerBCoinsAmount.value = 0;
             playerItems.value = [{name: '', amount: 1}];
@@ -411,7 +399,6 @@ const openBulkAssignDialog = async () => {
     }
     bulkResourceType.value = 'money';
     bulkMoneyAmount.value = 0;
-    bulkBankAmount.value = 0;
     bulkGoldAmount.value = 0;
     bulkBCoinsAmount.value = 0;
     bulkItems.value = [{name: '', amount: 1}];
@@ -501,10 +488,6 @@ const performBulkAssign = async () => {
         alert('Bitte gib einen gültigen Geld-Betrag ein.');
         return;
     }
-    if (bulkResourceType.value === 'bank' && (!bulkBankAmount.value || bulkBankAmount.value <= 0)) {
-        alert('Bitte gib einen gültigen Bank-Betrag ein.');
-        return;
-    }
     if (bulkResourceType.value === 'gold' && (!bulkGoldAmount.value || bulkGoldAmount.value <= 0)) {
         alert('Bitte gib einen gültigen Gold-Betrag ein.');
         return;
@@ -560,8 +543,6 @@ const performBulkAssign = async () => {
             payload.amount = bulkMoneyAmount.value;
         } else if (bulkResourceType.value === 'gold') {
             payload.amount = bulkGoldAmount.value;
-        } else if (bulkResourceType.value === 'bank') {
-            payload.amount = bulkBankAmount.value;
         } else if (bulkResourceType.value === 'b_coins') {
             payload.amount = bulkBCoinsAmount.value;
         } else if (bulkResourceType.value === 'items') {
@@ -578,19 +559,28 @@ const performBulkAssign = async () => {
         });
         
         const data = await response.json();
+        console.log('Bulk Assign Response:', data);
+        
         if (data.success) {
             const resourceNames: Record<string, string> = {
                 'money': `${formatNumber(bulkMoneyAmount.value)} $ Geld`,
                 'gold': `${formatNumber(bulkGoldAmount.value)} Gold`,
-                'bank': `${formatNumber(bulkBankAmount.value)} $ Bank`,
                 'b_coins': `${formatNumber(bulkBCoinsAmount.value)} B Coins`,
                 'items': `${bulkItems.value.filter(i => i.name && i.amount > 0).length} Item(s)`,
             };
-            alert(`${resourceNames[bulkResourceType.value]} wurde erfolgreich an ${selectedPlayersData.length} Spieler zugewiesen.`);
+            alert(`${resourceNames[bulkResourceType.value]} wurde erfolgreich an ${data.updated || selectedPlayersData.length} Spieler zugewiesen.`);
             closeBulkAssignDialog();
             await refreshPlayers();
         } else {
-            alert('Fehler: ' + (data.message || 'Unbekannter Fehler'));
+            let errorMessage = data.message || 'Unbekannter Fehler';
+            if (data.errors && Array.isArray(data.errors) && data.errors.length > 0) {
+                errorMessage += '\n\nDetails:\n' + data.errors.join('\n');
+            }
+            if (data.updated !== undefined) {
+                errorMessage += `\n\nAktualisiert: ${data.updated} von ${selectedPlayersData.length} Spielern`;
+            }
+            console.error('Bulk Assign Error:', data);
+            alert('Fehler: ' + errorMessage);
         }
     } catch (error) {
         console.error('Fehler bei der Massenvergabe:', error);
@@ -605,7 +595,6 @@ const closeBulkAssignDialog = () => {
     selectedPlayersForBulk.value = new Set();
     bulkResourceType.value = 'money';
     bulkMoneyAmount.value = 0;
-    bulkBankAmount.value = 0;
     bulkGoldAmount.value = 0;
     bulkBCoinsAmount.value = 0;
     bulkItems.value = [{name: '', amount: 1}];
@@ -843,13 +832,6 @@ const closeBulkAssignDialog = () => {
                                         Gold
                                     </Button>
                                     <Button 
-                                        @click="playerResourceType = 'bank'" 
-                                        :variant="playerResourceType === 'bank' ? 'default' : 'outline'"
-                                        size="sm"
-                                    >
-                                        Bank
-                                    </Button>
-                                    <Button 
                                         @click="playerResourceType = 'items'" 
                                         :variant="playerResourceType === 'items' ? 'default' : 'outline'"
                                         size="sm"
@@ -886,18 +868,6 @@ const closeBulkAssignDialog = () => {
                                     <Input
                                         id="player-gold"
                                         v-model.number="playerGoldAmount"
-                                        type="number"
-                                        min="0"
-                                        placeholder="0"
-                                    />
-                                </div>
-
-                                <!-- Bank -->
-                                <div v-if="playerResourceType === 'bank'">
-                                    <Label for="player-bank">Bank-Betrag *</Label>
-                                    <Input
-                                        id="player-bank"
-                                        v-model.number="playerBankAmount"
                                         type="number"
                                         min="0"
                                         placeholder="0"
@@ -1105,13 +1075,6 @@ const closeBulkAssignDialog = () => {
                                 Gold
                             </Button>
                             <Button 
-                                @click="bulkResourceType = 'bank'" 
-                                :variant="bulkResourceType === 'bank' ? 'default' : 'outline'"
-                                size="sm"
-                            >
-                                Bank
-                            </Button>
-                            <Button 
                                 @click="bulkResourceType = 'items'" 
                                 :variant="bulkResourceType === 'items' ? 'default' : 'outline'"
                                 size="sm"
@@ -1158,18 +1121,6 @@ const closeBulkAssignDialog = () => {
                             <Input
                                 id="bulk-gold"
                                 v-model.number="bulkGoldAmount"
-                                type="number"
-                                min="0"
-                                placeholder="0"
-                            />
-                        </div>
-
-                        <!-- Bank -->
-                        <div v-if="bulkResourceType === 'bank'">
-                            <Label for="bulk-bank">Bank-Betrag *</Label>
-                            <Input
-                                id="bulk-bank"
-                                v-model.number="bulkBankAmount"
                                 type="number"
                                 min="0"
                                 placeholder="0"

@@ -130,8 +130,8 @@ onUnmounted(() => {
 
         <!-- Modal für Galerie -->
         <Transition name="fade">
-            <div
-                v-if="isGalleryOpen"
+        <div
+            v-if="isGalleryOpen"
                 class="fixed inset-0 bg-black/95 backdrop-blur-sm flex flex-col z-50 px-4 md:px-6 py-4 md:py-6"
                 @click.self="isGalleryOpen = false"
             >
@@ -141,20 +141,20 @@ onUnmounted(() => {
                         <div class="text-white text-sm md:text-base font-semibold">
                             {{ currentImage + 1 }} / {{ images.length }}
                         </div>
-                        <button
-                            @click="isGalleryOpen = false"
+                <button
+                    @click="isGalleryOpen = false"
                             class="text-white hover:text-gray-300 transition-colors p-2 rounded-full hover:bg-white/10"
                             aria-label="Schließen"
-                        >
+                >
                             <svg class="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                             </svg>
-                        </button>
-                    </div>
+                </button>
+            </div>
 
                     <!-- Bild + Navigation Container mit fester Höhe -->
                     <div class="flex items-center gap-2 md:gap-6 gallery-image-container mb-4">
-                        <!-- Pfeil links -->
+                <!-- Pfeil links -->
                         <button 
                             @click="prevImage" 
                             class="text-white hover:text-gray-300 transition-all p-2 md:p-4 rounded-full hover:bg-white/10 flex-shrink-0 z-10"
@@ -167,15 +167,15 @@ onUnmounted(() => {
 
                         <!-- Großes Bild Container mit fester Höhe -->
                         <div class="flex-1 flex items-center justify-center h-full min-h-0">
-                            <img
-                                :src="images[currentImage]"
+                <img
+                    :src="images[currentImage]"
                                 class="max-w-full max-h-full w-auto h-auto object-contain rounded-lg shadow-2xl"
                                 alt="Gallery Image"
                                 :key="currentImage"
-                            />
+                />
                         </div>
 
-                        <!-- Pfeil rechts -->
+                <!-- Pfeil rechts -->
                         <button 
                             @click="nextImage" 
                             class="text-white hover:text-gray-300 transition-all p-2 md:p-4 rounded-full hover:bg-white/10 flex-shrink-0 z-10"

@@ -234,7 +234,7 @@ store.form = storeForm
 * @see app/Http/Controllers/Admin/RoleController.php:206
 * @route '/ucp/admin/roles/{role}'
 */
-export const update = (args: { role: string | number | { id: string | number } } | [role: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+export const update = (args: { role: number | { id: number } } | [role: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: update.url(args, options),
     method: 'put',
 })
@@ -249,7 +249,7 @@ update.definition = {
 * @see app/Http/Controllers/Admin/RoleController.php:206
 * @route '/ucp/admin/roles/{role}'
 */
-update.url = (args: { role: string | number | { id: string | number } } | [role: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+update.url = (args: { role: number | { id: number } } | [role: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { role: args }
     }
@@ -283,7 +283,7 @@ update.url = (args: { role: string | number | { id: string | number } } | [role:
 * @see app/Http/Controllers/Admin/RoleController.php:206
 * @route '/ucp/admin/roles/{role}'
 */
-update.put = (args: { role: string | number | { id: string | number } } | [role: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+update.put = (args: { role: number | { id: number } } | [role: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: update.url(args, options),
     method: 'put',
 })
@@ -293,7 +293,7 @@ update.put = (args: { role: string | number | { id: string | number } } | [role:
 * @see app/Http/Controllers/Admin/RoleController.php:206
 * @route '/ucp/admin/roles/{role}'
 */
-const updateForm = (args: { role: string | number | { id: string | number } } | [role: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const updateForm = (args: { role: number | { id: number } } | [role: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: update.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -308,7 +308,7 @@ const updateForm = (args: { role: string | number | { id: string | number } } | 
 * @see app/Http/Controllers/Admin/RoleController.php:206
 * @route '/ucp/admin/roles/{role}'
 */
-updateForm.put = (args: { role: string | number | { id: string | number } } | [role: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+updateForm.put = (args: { role: number | { id: number } } | [role: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: update.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -325,7 +325,7 @@ update.form = updateForm
 * @see app/Http/Controllers/Admin/RoleController.php:325
 * @route '/ucp/admin/roles/{role}'
 */
-export const destroy = (args: { role: string | number | { id: string | number } } | [role: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const destroy = (args: { role: number | { id: number } } | [role: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -340,7 +340,7 @@ destroy.definition = {
 * @see app/Http/Controllers/Admin/RoleController.php:325
 * @route '/ucp/admin/roles/{role}'
 */
-destroy.url = (args: { role: string | number | { id: string | number } } | [role: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+destroy.url = (args: { role: number | { id: number } } | [role: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { role: args }
     }
@@ -374,7 +374,7 @@ destroy.url = (args: { role: string | number | { id: string | number } } | [role
 * @see app/Http/Controllers/Admin/RoleController.php:325
 * @route '/ucp/admin/roles/{role}'
 */
-destroy.delete = (args: { role: string | number | { id: string | number } } | [role: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+destroy.delete = (args: { role: number | { id: number } } | [role: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -384,7 +384,7 @@ destroy.delete = (args: { role: string | number | { id: string | number } } | [r
 * @see app/Http/Controllers/Admin/RoleController.php:325
 * @route '/ucp/admin/roles/{role}'
 */
-const destroyForm = (args: { role: string | number | { id: string | number } } | [role: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const destroyForm = (args: { role: number | { id: number } } | [role: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -399,7 +399,7 @@ const destroyForm = (args: { role: string | number | { id: string | number } } |
 * @see app/Http/Controllers/Admin/RoleController.php:325
 * @route '/ucp/admin/roles/{role}'
 */
-destroyForm.delete = (args: { role: string | number | { id: string | number } } | [role: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+destroyForm.delete = (args: { role: number | { id: number } } | [role: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',

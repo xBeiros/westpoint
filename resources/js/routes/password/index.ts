@@ -171,7 +171,7 @@ confirmationForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'
 confirmation.form = confirmationForm
 
 /**
-* @see routes/web.php:127
+* @see routes/web.php:155
 * @route '/forgot-password'
 */
 export const request = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -185,7 +185,7 @@ request.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see routes/web.php:127
+* @see routes/web.php:155
 * @route '/forgot-password'
 */
 request.url = (options?: RouteQueryOptions) => {
@@ -197,7 +197,7 @@ request.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see routes/web.php:127
+* @see routes/web.php:155
 * @route '/forgot-password'
 */
 request.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -206,7 +206,7 @@ request.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see routes/web.php:127
+* @see routes/web.php:155
 * @route '/forgot-password'
 */
 request.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -215,7 +215,7 @@ request.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see routes/web.php:127
+* @see routes/web.php:155
 * @route '/forgot-password'
 */
 const requestForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -224,7 +224,7 @@ const requestForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> =>
 })
 
 /**
-* @see routes/web.php:127
+* @see routes/web.php:155
 * @route '/forgot-password'
 */
 requestForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -233,7 +233,7 @@ requestForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => (
 })
 
 /**
-* @see routes/web.php:127
+* @see routes/web.php:155
 * @route '/forgot-password'
 */
 requestForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -249,7 +249,7 @@ requestForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => 
 request.form = requestForm
 
 /**
-* @see routes/web.php:131
+* @see routes/web.php:159
 * @route '/forgot-password'
 */
 export const email = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -263,7 +263,7 @@ email.definition = {
 } satisfies RouteDefinition<["post"]>
 
 /**
-* @see routes/web.php:131
+* @see routes/web.php:159
 * @route '/forgot-password'
 */
 email.url = (options?: RouteQueryOptions) => {
@@ -275,7 +275,7 @@ email.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see routes/web.php:131
+* @see routes/web.php:159
 * @route '/forgot-password'
 */
 email.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -284,7 +284,7 @@ email.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 })
 
 /**
-* @see routes/web.php:131
+* @see routes/web.php:159
 * @route '/forgot-password'
 */
 const emailForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -293,7 +293,7 @@ const emailForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => 
 })
 
 /**
-* @see routes/web.php:131
+* @see routes/web.php:159
 * @route '/forgot-password'
 */
 emailForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -304,7 +304,7 @@ emailForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => (
 email.form = emailForm
 
 /**
-* @see routes/web.php:135
+* @see routes/web.php:163
 * @route '/reset-password/{token}'
 */
 export const reset = (args: { token: string | number } | [token: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -318,7 +318,7 @@ reset.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see routes/web.php:135
+* @see routes/web.php:163
 * @route '/reset-password/{token}'
 */
 reset.url = (args: { token: string | number } | [token: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -346,7 +346,7 @@ reset.url = (args: { token: string | number } | [token: string | number ] | stri
 }
 
 /**
-* @see routes/web.php:135
+* @see routes/web.php:163
 * @route '/reset-password/{token}'
 */
 reset.get = (args: { token: string | number } | [token: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -355,7 +355,7 @@ reset.get = (args: { token: string | number } | [token: string | number ] | stri
 })
 
 /**
-* @see routes/web.php:135
+* @see routes/web.php:163
 * @route '/reset-password/{token}'
 */
 reset.head = (args: { token: string | number } | [token: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -364,7 +364,7 @@ reset.head = (args: { token: string | number } | [token: string | number ] | str
 })
 
 /**
-* @see routes/web.php:135
+* @see routes/web.php:163
 * @route '/reset-password/{token}'
 */
 const resetForm = (args: { token: string | number } | [token: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -373,7 +373,7 @@ const resetForm = (args: { token: string | number } | [token: string | number ] 
 })
 
 /**
-* @see routes/web.php:135
+* @see routes/web.php:163
 * @route '/reset-password/{token}'
 */
 resetForm.get = (args: { token: string | number } | [token: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -382,7 +382,7 @@ resetForm.get = (args: { token: string | number } | [token: string | number ] | 
 })
 
 /**
-* @see routes/web.php:135
+* @see routes/web.php:163
 * @route '/reset-password/{token}'
 */
 resetForm.head = (args: { token: string | number } | [token: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -398,7 +398,7 @@ resetForm.head = (args: { token: string | number } | [token: string | number ] |
 reset.form = resetForm
 
 /**
-* @see routes/web.php:139
+* @see routes/web.php:167
 * @route '/reset-password'
 */
 export const update = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -412,7 +412,7 @@ update.definition = {
 } satisfies RouteDefinition<["post"]>
 
 /**
-* @see routes/web.php:139
+* @see routes/web.php:167
 * @route '/reset-password'
 */
 update.url = (options?: RouteQueryOptions) => {
@@ -424,7 +424,7 @@ update.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see routes/web.php:139
+* @see routes/web.php:167
 * @route '/reset-password'
 */
 update.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -433,7 +433,7 @@ update.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 })
 
 /**
-* @see routes/web.php:139
+* @see routes/web.php:167
 * @route '/reset-password'
 */
 const updateForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -442,7 +442,7 @@ const updateForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> =>
 })
 
 /**
-* @see routes/web.php:139
+* @see routes/web.php:167
 * @route '/reset-password'
 */
 updateForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

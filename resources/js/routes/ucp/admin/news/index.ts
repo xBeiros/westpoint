@@ -234,7 +234,7 @@ store.form = storeForm
 * @see app/Http/Controllers/Admin/NewsController.php:73
 * @route '/ucp/admin/news/{news}'
 */
-export const show = (args: { news: string | number | { id: string | number } } | [news: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const show = (args: { news: number | { id: number } } | [news: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: show.url(args, options),
     method: 'get',
 })
@@ -249,7 +249,7 @@ show.definition = {
 * @see app/Http/Controllers/Admin/NewsController.php:73
 * @route '/ucp/admin/news/{news}'
 */
-show.url = (args: { news: string | number | { id: string | number } } | [news: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+show.url = (args: { news: number | { id: number } } | [news: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { news: args }
     }
@@ -283,7 +283,7 @@ show.url = (args: { news: string | number | { id: string | number } } | [news: s
 * @see app/Http/Controllers/Admin/NewsController.php:73
 * @route '/ucp/admin/news/{news}'
 */
-show.get = (args: { news: string | number | { id: string | number } } | [news: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+show.get = (args: { news: number | { id: number } } | [news: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: show.url(args, options),
     method: 'get',
 })
@@ -293,7 +293,7 @@ show.get = (args: { news: string | number | { id: string | number } } | [news: s
 * @see app/Http/Controllers/Admin/NewsController.php:73
 * @route '/ucp/admin/news/{news}'
 */
-show.head = (args: { news: string | number | { id: string | number } } | [news: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+show.head = (args: { news: number | { id: number } } | [news: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: show.url(args, options),
     method: 'head',
 })
@@ -303,7 +303,7 @@ show.head = (args: { news: string | number | { id: string | number } } | [news: 
 * @see app/Http/Controllers/Admin/NewsController.php:73
 * @route '/ucp/admin/news/{news}'
 */
-const showForm = (args: { news: string | number | { id: string | number } } | [news: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+const showForm = (args: { news: number | { id: number } } | [news: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: show.url(args, options),
     method: 'get',
 })
@@ -313,7 +313,7 @@ const showForm = (args: { news: string | number | { id: string | number } } | [n
 * @see app/Http/Controllers/Admin/NewsController.php:73
 * @route '/ucp/admin/news/{news}'
 */
-showForm.get = (args: { news: string | number | { id: string | number } } | [news: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+showForm.get = (args: { news: number | { id: number } } | [news: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: show.url(args, options),
     method: 'get',
 })
@@ -323,7 +323,7 @@ showForm.get = (args: { news: string | number | { id: string | number } } | [new
 * @see app/Http/Controllers/Admin/NewsController.php:73
 * @route '/ucp/admin/news/{news}'
 */
-showForm.head = (args: { news: string | number | { id: string | number } } | [news: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+showForm.head = (args: { news: number | { id: number } } | [news: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: show.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',
@@ -340,7 +340,7 @@ show.form = showForm
 * @see app/Http/Controllers/Admin/NewsController.php:83
 * @route '/ucp/admin/news/{news}/edit'
 */
-export const edit = (args: { news: string | number | { id: string | number } } | [news: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const edit = (args: { news: number | { id: number } } | [news: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: edit.url(args, options),
     method: 'get',
 })
@@ -355,7 +355,7 @@ edit.definition = {
 * @see app/Http/Controllers/Admin/NewsController.php:83
 * @route '/ucp/admin/news/{news}/edit'
 */
-edit.url = (args: { news: string | number | { id: string | number } } | [news: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+edit.url = (args: { news: number | { id: number } } | [news: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { news: args }
     }
@@ -389,7 +389,7 @@ edit.url = (args: { news: string | number | { id: string | number } } | [news: s
 * @see app/Http/Controllers/Admin/NewsController.php:83
 * @route '/ucp/admin/news/{news}/edit'
 */
-edit.get = (args: { news: string | number | { id: string | number } } | [news: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+edit.get = (args: { news: number | { id: number } } | [news: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: edit.url(args, options),
     method: 'get',
 })
@@ -399,7 +399,7 @@ edit.get = (args: { news: string | number | { id: string | number } } | [news: s
 * @see app/Http/Controllers/Admin/NewsController.php:83
 * @route '/ucp/admin/news/{news}/edit'
 */
-edit.head = (args: { news: string | number | { id: string | number } } | [news: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+edit.head = (args: { news: number | { id: number } } | [news: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: edit.url(args, options),
     method: 'head',
 })
@@ -409,7 +409,7 @@ edit.head = (args: { news: string | number | { id: string | number } } | [news: 
 * @see app/Http/Controllers/Admin/NewsController.php:83
 * @route '/ucp/admin/news/{news}/edit'
 */
-const editForm = (args: { news: string | number | { id: string | number } } | [news: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+const editForm = (args: { news: number | { id: number } } | [news: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: edit.url(args, options),
     method: 'get',
 })
@@ -419,7 +419,7 @@ const editForm = (args: { news: string | number | { id: string | number } } | [n
 * @see app/Http/Controllers/Admin/NewsController.php:83
 * @route '/ucp/admin/news/{news}/edit'
 */
-editForm.get = (args: { news: string | number | { id: string | number } } | [news: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+editForm.get = (args: { news: number | { id: number } } | [news: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: edit.url(args, options),
     method: 'get',
 })
@@ -429,7 +429,7 @@ editForm.get = (args: { news: string | number | { id: string | number } } | [new
 * @see app/Http/Controllers/Admin/NewsController.php:83
 * @route '/ucp/admin/news/{news}/edit'
 */
-editForm.head = (args: { news: string | number | { id: string | number } } | [news: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+editForm.head = (args: { news: number | { id: number } } | [news: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: edit.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',
@@ -446,7 +446,7 @@ edit.form = editForm
 * @see app/Http/Controllers/Admin/NewsController.php:93
 * @route '/ucp/admin/news/{news}'
 */
-export const update = (args: { news: string | number | { id: string | number } } | [news: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+export const update = (args: { news: number | { id: number } } | [news: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: update.url(args, options),
     method: 'put',
 })
@@ -461,7 +461,7 @@ update.definition = {
 * @see app/Http/Controllers/Admin/NewsController.php:93
 * @route '/ucp/admin/news/{news}'
 */
-update.url = (args: { news: string | number | { id: string | number } } | [news: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+update.url = (args: { news: number | { id: number } } | [news: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { news: args }
     }
@@ -495,7 +495,7 @@ update.url = (args: { news: string | number | { id: string | number } } | [news:
 * @see app/Http/Controllers/Admin/NewsController.php:93
 * @route '/ucp/admin/news/{news}'
 */
-update.put = (args: { news: string | number | { id: string | number } } | [news: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+update.put = (args: { news: number | { id: number } } | [news: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: update.url(args, options),
     method: 'put',
 })
@@ -505,7 +505,7 @@ update.put = (args: { news: string | number | { id: string | number } } | [news:
 * @see app/Http/Controllers/Admin/NewsController.php:93
 * @route '/ucp/admin/news/{news}'
 */
-update.patch = (args: { news: string | number | { id: string | number } } | [news: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+update.patch = (args: { news: number | { id: number } } | [news: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: update.url(args, options),
     method: 'patch',
 })
@@ -515,7 +515,7 @@ update.patch = (args: { news: string | number | { id: string | number } } | [new
 * @see app/Http/Controllers/Admin/NewsController.php:93
 * @route '/ucp/admin/news/{news}'
 */
-const updateForm = (args: { news: string | number | { id: string | number } } | [news: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const updateForm = (args: { news: number | { id: number } } | [news: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: update.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -530,7 +530,7 @@ const updateForm = (args: { news: string | number | { id: string | number } } | 
 * @see app/Http/Controllers/Admin/NewsController.php:93
 * @route '/ucp/admin/news/{news}'
 */
-updateForm.put = (args: { news: string | number | { id: string | number } } | [news: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+updateForm.put = (args: { news: number | { id: number } } | [news: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: update.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -545,7 +545,7 @@ updateForm.put = (args: { news: string | number | { id: string | number } } | [n
 * @see app/Http/Controllers/Admin/NewsController.php:93
 * @route '/ucp/admin/news/{news}'
 */
-updateForm.patch = (args: { news: string | number | { id: string | number } } | [news: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+updateForm.patch = (args: { news: number | { id: number } } | [news: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: update.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PATCH',
@@ -562,7 +562,7 @@ update.form = updateForm
 * @see app/Http/Controllers/Admin/NewsController.php:125
 * @route '/ucp/admin/news/{news}'
 */
-export const destroy = (args: { news: string | number | { id: string | number } } | [news: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const destroy = (args: { news: number | { id: number } } | [news: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -577,7 +577,7 @@ destroy.definition = {
 * @see app/Http/Controllers/Admin/NewsController.php:125
 * @route '/ucp/admin/news/{news}'
 */
-destroy.url = (args: { news: string | number | { id: string | number } } | [news: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+destroy.url = (args: { news: number | { id: number } } | [news: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { news: args }
     }
@@ -611,7 +611,7 @@ destroy.url = (args: { news: string | number | { id: string | number } } | [news
 * @see app/Http/Controllers/Admin/NewsController.php:125
 * @route '/ucp/admin/news/{news}'
 */
-destroy.delete = (args: { news: string | number | { id: string | number } } | [news: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+destroy.delete = (args: { news: number | { id: number } } | [news: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -621,7 +621,7 @@ destroy.delete = (args: { news: string | number | { id: string | number } } | [n
 * @see app/Http/Controllers/Admin/NewsController.php:125
 * @route '/ucp/admin/news/{news}'
 */
-const destroyForm = (args: { news: string | number | { id: string | number } } | [news: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const destroyForm = (args: { news: number | { id: number } } | [news: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -636,7 +636,7 @@ const destroyForm = (args: { news: string | number | { id: string | number } } |
 * @see app/Http/Controllers/Admin/NewsController.php:125
 * @route '/ucp/admin/news/{news}'
 */
-destroyForm.delete = (args: { news: string | number | { id: string | number } } | [news: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+destroyForm.delete = (args: { news: number | { id: number } } | [news: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',

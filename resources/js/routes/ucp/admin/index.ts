@@ -150,7 +150,7 @@ refresh.form = refreshForm
 
 /**
 * @see \App\Http\Controllers\AdminController::items
-* @see app/Http/Controllers/AdminController.php:737
+* @see app/Http/Controllers/AdminController.php:777
 * @route '/ucp/admin/items'
 */
 export const items = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -165,7 +165,7 @@ items.definition = {
 
 /**
 * @see \App\Http\Controllers\AdminController::items
-* @see app/Http/Controllers/AdminController.php:737
+* @see app/Http/Controllers/AdminController.php:777
 * @route '/ucp/admin/items'
 */
 items.url = (options?: RouteQueryOptions) => {
@@ -178,7 +178,7 @@ items.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\AdminController::items
-* @see app/Http/Controllers/AdminController.php:737
+* @see app/Http/Controllers/AdminController.php:777
 * @route '/ucp/admin/items'
 */
 items.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -188,7 +188,7 @@ items.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\AdminController::items
-* @see app/Http/Controllers/AdminController.php:737
+* @see app/Http/Controllers/AdminController.php:777
 * @route '/ucp/admin/items'
 */
 items.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -198,7 +198,7 @@ items.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \App\Http\Controllers\AdminController::items
-* @see app/Http/Controllers/AdminController.php:737
+* @see app/Http/Controllers/AdminController.php:777
 * @route '/ucp/admin/items'
 */
 const itemsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -208,7 +208,7 @@ const itemsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => (
 
 /**
 * @see \App\Http\Controllers\AdminController::items
-* @see app/Http/Controllers/AdminController.php:737
+* @see app/Http/Controllers/AdminController.php:777
 * @route '/ucp/admin/items'
 */
 itemsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -218,7 +218,7 @@ itemsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\AdminController::items
-* @see app/Http/Controllers/AdminController.php:737
+* @see app/Http/Controllers/AdminController.php:777
 * @route '/ucp/admin/items'
 */
 itemsForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({

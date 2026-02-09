@@ -333,7 +333,7 @@ class AdminController extends Controller
             $request->validate([
                 'players_data' => 'required|array|min:1',
                 'players_data.*.id' => 'required',
-                'resource_type' => 'required|string|in:role,money,gold,bank,items,b_coins',
+                'resource_type' => 'required|string|in:role,money,gold,items,b_coins',
             ]);
 
             $resourceType = $request->resource_type;
@@ -561,7 +561,7 @@ class AdminController extends Controller
                             ->update(['group' => $request->role]);
                         $updated++;
                     } 
-                    elseif (in_array($resourceType, ['money', 'gold', 'bank'])) {
+                    elseif (in_array($resourceType, ['money', 'gold'])) {
                         $request->validate(['amount' => 'required|numeric|min:0']);
                         
                         // Verwende die Westpoint API für Geld
@@ -585,23 +585,45 @@ class AdminController extends Controller
                             ]);
                         
                         if ($response->successful()) {
-                            $updated++;
-                            Log::info('Geld erfolgreich hinzugefügt', [
-                                'player_id' => $playerId,
-                                'api_player_id' => $apiPlayerId,
-                                'money_type' => $resourceType,
-                                'amount' => $request->amount,
-                            ]);
+                            $responseData = $response->json();
+                            // Prüfe auch, ob die API selbst success: false zurückgibt
+                            if (isset($responseData['success']) && $responseData['success'] === false) {
+                                $errorMsg = $responseData['error'] ?? $responseData['message'] ?? 'API-Fehler';
+                                $errors[] = "Fehler bei Spieler ID {$playerId}: {$errorMsg}";
+                                Log::error('API gab success: false zurück', [
+                                    'player_id' => $playerId,
+                                    'api_player_id' => $apiPlayerId,
+                                    'money_type' => $resourceType,
+                                    'response' => $responseData,
+                                ]);
+                            } else {
+                                $updated++;
+                                Log::info('Geld erfolgreich hinzugefügt', [
+                                    'player_id' => $playerId,
+                                    'api_player_id' => $apiPlayerId,
+                                    'money_type' => $resourceType,
+                                    'amount' => $request->amount,
+                                    'response' => $responseData,
+                                ]);
+                            }
                         } else {
                             $errorData = $response->json();
-                            $errorMsg = $errorData['message'] ?? 'API-Fehler';
+                            $errorMsg = $errorData['error'] ?? $errorData['message'] ?? 'API-Fehler (HTTP ' . $response->status() . ')';
                             $errors[] = "Fehler bei Spieler ID {$playerId}: {$errorMsg}";
                             Log::error('Fehler beim Hinzufügen von Geld', [
                                 'player_id' => $playerId,
                                 'api_player_id' => $apiPlayerId,
                                 'money_type' => $resourceType,
+                                'url' => $serverUrl . '/westpoint_api/money',
+                                'payload' => [
+                                    'player_id' => $apiPlayerId,
+                                    'money_type' => $resourceType,
+                                    'amount' => $request->amount,
+                                    'operation' => 'add',
+                                ],
                                 'response' => $errorData,
                                 'status' => $response->status(),
+                                'body' => $response->body(),
                             ]);
                         }
                     }
@@ -706,17 +728,35 @@ class AdminController extends Controller
                 'role' => 'Rolle',
                 'money' => 'Geld',
                 'gold' => 'Gold',
-                'bank' => 'Bank',
                 'b_coins' => 'B Coins',
                 'items' => 'Items',
             ];
 
+            $message = $updated > 0 
+                ? "{$resourceNames[$resourceType]} wurde an {$updated} Spieler zugewiesen." 
+                : 'Keine Spieler konnten aktualisiert werden.';
+            
+            // Füge Fehlerdetails zur Nachricht hinzu, falls vorhanden
+            if (!empty($errors)) {
+                $message .= ' Fehler: ' . implode('; ', array_slice($errors, 0, 3));
+                if (count($errors) > 3) {
+                    $message .= ' (und ' . (count($errors) - 3) . ' weitere)';
+                }
+            }
+
+            Log::info('Bulk Assign abgeschlossen', [
+                'resource_type' => $resourceType,
+                'updated' => $updated,
+                'total_players' => count($playersData),
+                'errors_count' => count($errors),
+                'errors' => $errors,
+            ]);
+
             return response()->json([
                 'success' => $updated > 0,
-                'message' => $updated > 0 
-                    ? "{$resourceNames[$resourceType]} wurde an {$updated} Spieler zugewiesen." 
-                    : 'Keine Spieler konnten aktualisiert werden.',
+                'message' => $message,
                 'updated' => $updated,
+                'total' => count($playersData),
                 'errors' => $errors,
             ]);
         } catch (\Exception $e) {

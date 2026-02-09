@@ -24,4 +24,7 @@ export default defineConfig({
             },
         }),
     ],
+    optimizeDeps: {
+        include: ['@tiptap/vue-3', '@tiptap/starter-kit'],
+    },
 });

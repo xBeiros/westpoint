@@ -4,6 +4,7 @@ import AdminController from './AdminController'
 import Admin from './Admin'
 import NewsController from './NewsController'
 import WikiController from './WikiController'
+import Wiki from './Wiki'
 import DiscordLoginController from './DiscordLoginController'
 
 
@@ -14,6 +15,7 @@ const Controllers = {
     Admin: Object.assign(Admin, Admin),
     NewsController: Object.assign(NewsController, NewsController),
     WikiController: Object.assign(WikiController, WikiController),
+    Wiki: Object.assign(Wiki, Wiki),
     DiscordLoginController: Object.assign(DiscordLoginController, DiscordLoginController),
 }
 

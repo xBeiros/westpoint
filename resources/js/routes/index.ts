@@ -1,6 +1,6 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../wayfinder'
 /**
-* @see routes/web.php:107
+* @see routes/web.php:135
 * @route '/login'
 */
 export const login = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -14,7 +14,7 @@ login.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see routes/web.php:107
+* @see routes/web.php:135
 * @route '/login'
 */
 login.url = (options?: RouteQueryOptions) => {
@@ -26,7 +26,7 @@ login.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see routes/web.php:107
+* @see routes/web.php:135
 * @route '/login'
 */
 login.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -35,7 +35,7 @@ login.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see routes/web.php:107
+* @see routes/web.php:135
 * @route '/login'
 */
 login.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -44,7 +44,7 @@ login.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see routes/web.php:107
+* @see routes/web.php:135
 * @route '/login'
 */
 const loginForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -53,7 +53,7 @@ const loginForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => (
 })
 
 /**
-* @see routes/web.php:107
+* @see routes/web.php:135
 * @route '/login'
 */
 loginForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -62,7 +62,7 @@ loginForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 })
 
 /**
-* @see routes/web.php:107
+* @see routes/web.php:135
 * @route '/login'
 */
 loginForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -294,7 +294,7 @@ faqForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 faq.form = faqForm
 
 /**
-* @see routes/web.php:116
+* @see routes/web.php:144
 * @route '/register'
 */
 export const register = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -308,7 +308,7 @@ register.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see routes/web.php:116
+* @see routes/web.php:144
 * @route '/register'
 */
 register.url = (options?: RouteQueryOptions) => {
@@ -320,7 +320,7 @@ register.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see routes/web.php:116
+* @see routes/web.php:144
 * @route '/register'
 */
 register.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -329,7 +329,7 @@ register.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see routes/web.php:116
+* @see routes/web.php:144
 * @route '/register'
 */
 register.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -338,7 +338,7 @@ register.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see routes/web.php:116
+* @see routes/web.php:144
 * @route '/register'
 */
 const registerForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -347,7 +347,7 @@ const registerForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> =
 })
 
 /**
-* @see routes/web.php:116
+* @see routes/web.php:144
 * @route '/register'
 */
 registerForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -356,7 +356,7 @@ registerForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => 
 })
 
 /**
-* @see routes/web.php:116
+* @see routes/web.php:144
 * @route '/register'
 */
 registerForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({

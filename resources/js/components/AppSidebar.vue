@@ -15,7 +15,7 @@ import {
 import { dashboard } from '@/routes/ucp';
 import { type NavItem } from '@/types';
 import { Link, usePage } from '@inertiajs/vue3';
-import { BookOpen, Home, LayoutGrid, User, Car, Shield, Users } from 'lucide-vue-next';
+import { BookOpen, Home, LayoutGrid, User, Car, Shield, Users, FileText } from 'lucide-vue-next';
 import { computed } from 'vue';
 import AppLogo from './AppLogo.vue';
 
@@ -48,7 +48,7 @@ const adminNavItems = computed<NavItem[]>(() => {
         return [];
     }
 
-    return [
+    const items: NavItem[] = [
         {
             title: 'Administrativ',
             href: '/ucp/admin',
@@ -60,6 +60,17 @@ const adminNavItems = computed<NavItem[]>(() => {
             icon: Users,
         },
     ];
+
+    // Wiki Admin Link nur für wikiadmin oder admin
+    if (userGroup.value === 'wikiadmin' || userGroup.value === 'admin') {
+        items.push({
+            title: 'Wiki Verwaltung',
+            href: '/wiki/admin',
+            icon: FileText,
+        });
+    }
+
+    return items;
 });
 
 const footerNavItems: NavItem[] = [
