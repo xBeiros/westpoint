@@ -63,16 +63,16 @@
                 <!-- Left Sidebar - Navigation -->
                 <aside class="w-64 flex-shrink-0">
                     <div class="sticky top-24">
-                        <h3 class="text-lg font-bold text-white mb-4 stevie-sans-bold">Kategorien</h3>
+                        <h3 class="text-xs font-bold mb-5 stevie-sans-bold text-[#747474]">Kategorien</h3>
                         <nav class="space-y-1">
                             <div v-for="category in categories" :key="category.name" class="mb-4">
                                 <button
                                     @click="toggleCategory(category.name)"
-                                    class="w-full flex items-center justify-between text-left text-gray-300 hover:text-white transition-colors py-2 px-3 rounded-lg hover:bg-[#2d2d2d]"
+                                    class="w-full flex items-center justify-between text-left text-white hover:text-white transition-colors py-2 px-3 rounded-lg hover:bg-[#2d2d2d]"
                                 >
                                     <div class="flex items-center gap-2">
                                         <span class="text-lg">{{ getCategoryIcon(category.name) }}</span>
-                                        <span class="text-sm font-medium">{{ category.display_name }}</span>
+                                        <span class="text-sm font-bold">{{ category.display_name }}</span>
                                     </div>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -93,8 +93,8 @@
                                         v-for="article in category.articles"
                                         :key="article.slug"
                                         :href="`/wiki/${article.slug}`"
-                                        class="block text-sm text-gray-400 hover:text-red-800 transition-colors py-1.5 px-3 rounded"
-                                        :class="{ 'text-red-800 font-semibold': article.slug === currentSlug }"
+                                        class="block text-sm text-gray-400 hover:text-gray-300 transition-colors py-1.5 px-3 rounded"
+                                        :class="{ 'text-pink-500 font-semibold': article.slug === currentSlug }"
                                     >
                                         {{ article.title }}
                                     </Link>
@@ -140,30 +140,30 @@
                 <!-- Right Sidebar - Article Info -->
                 <aside class="w-64 flex-shrink-0">
                     <div class="sticky top-24">
-                        <div class="bg-[#2d2d2d] rounded-lg border border-gray-700 p-6 space-y-6">
+                        <div class="bg-[#2d2d2d] rounded-lg border border-gray-700 p-6">
                             <!-- Category -->
-                            <div>
-                                <h4 class="text-sm font-semibold text-gray-400 mb-2 uppercase">Kategorie</h4>
+                            <div class="mb-6">
+                                <h4 class="text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">Kategorie</h4>
                                 <div class="flex items-center gap-2">
                                     <span class="text-lg">{{ getCategoryIcon(article.category || 'general') }}</span>
-                                    <span class="text-white font-medium">{{ getCategoryDisplayName(article.category || 'general') }}</span>
+                                    <span class="text-white font-bold text-base">{{ getCategoryDisplayName(article.category || 'general') }}</span>
                                 </div>
                             </div>
 
                             <!-- Reading Time -->
-                            <div>
-                                <h4 class="text-sm font-semibold text-gray-400 mb-2 uppercase">Lesezeit</h4>
-                                <p class="text-white">{{ calculateReadingTime(article.content) }} Minuten</p>
+                            <div class="mb-6">
+                                <h4 class="text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">Lesezeit</h4>
+                                <p class="text-white font-bold text-base">{{ calculateReadingTime(article.content) }} Minuten</p>
                             </div>
 
                             <!-- Share Button -->
-                            <div>
+                            <div class="mb-6">
                                 <button
                                     @click="shareArticle"
-                                    class="w-full flex items-center justify-center gap-2 bg-red-800 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors"
+                                    class="w-full flex items-center justify-center gap-2 bg-[#2d2d2d] hover:bg-[#3d3d3d] text-white px-4 py-3 rounded-lg transition-colors border border-gray-600"
                                 >
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
                                     </svg>
                                     <span>Teilen</span>
                                 </button>
@@ -173,7 +173,7 @@
                             <div>
                                 <Link
                                     :href="`/wiki/change-request/create/${article.slug}`"
-                                    class="text-sm text-blue-400 hover:text-blue-300 underline"
+                                    class="text-sm text-gray-400 hover:text-gray-300 transition-colors text-center block"
                                 >
                                     Hast du einen Fehler in dem Artikel gefunden?
                                 </Link>

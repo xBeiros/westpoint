@@ -24,7 +24,7 @@
                             <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 stevie-sans-bold">
                                 Allgemeine Kategorien
                             </h1>
-                            <p class="text-lg text-gray-400 stevie-sans-book mb-6">
+                            <p class="text-lg text-gray-300 stevie-sans-book mb-6">
                                 Hier findest du alle Informationen über den Westpoint Server, seine Spielsysteme und Features.
                             </p>
                             
@@ -67,7 +67,7 @@
                                                 class="p-4 block text-left text-white hover:bg-[#3d3d3d] transition-colors border-b border-gray-700 last:border-b-0"
                                             >
                                                 <div class="font-semibold">{{ article.title }}</div>
-                                                <div v-if="article.description" class="text-sm text-gray-400 mt-1">
+                                                <div v-if="article.description" class="text-sm text-gray-300 mt-1">
                                                     {{ article.description }}
                                                 </div>
                                             </Link>
@@ -86,7 +86,7 @@
                 <div v-if="selectedCategory" class="mb-8">
                     <button
                         @click="router.visit('/wiki')"
-                        class="text-gray-400 hover:text-white mb-4 flex items-center gap-2 transition-colors"
+                        class="text-gray-300 hover:text-white mb-4 flex items-center gap-2 transition-colors"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -96,7 +96,7 @@
                     <h2 class="text-3xl font-bold text-white mb-2">
                         {{ getCategoryDisplayName(selectedCategory) }}
                     </h2>
-                    <p class="text-gray-400">
+                    <p class="text-gray-300">
                         {{ getCategoryDescription(selectedCategory) }}
                     </p>
                 </div>
@@ -134,7 +134,7 @@
                         </h3>
 
                         <!-- Category Description -->
-                        <p class="text-sm text-gray-400 mb-4 stevie-sans-book">
+                        <p class="text-sm text-gray-300 mb-4 stevie-sans-book">
                             {{ getCategoryDescription(category.name) }}
                         </p>
 
@@ -164,7 +164,7 @@
                         </div>
 
                         <!-- Article Count Badge -->
-                        <div class="absolute bottom-4 right-4 text-xs text-gray-500">
+                        <div class="absolute bottom-4 right-4 text-xs text-gray-400">
                             {{ category.count }} {{ category.count === 1 ? 'Artikel' : 'Artikel' }}
                         </div>
                     </div>
@@ -180,7 +180,7 @@
                             class="block bg-[#2d2d2d] rounded-lg border border-gray-700 p-6 hover:border-red-800 transition-all duration-300 hover:shadow-lg hover:shadow-red-800/20"
                         >
                             <h3 class="text-lg font-bold text-white mb-2">{{ article.title }}</h3>
-                            <p v-if="article.description" class="text-sm text-gray-400">
+                            <p v-if="article.description" class="text-sm text-gray-300">
                                 {{ article.description }}
                             </p>
                         </Link>
