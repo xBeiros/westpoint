@@ -17,6 +17,8 @@ class WikiAdminController extends Controller
             ->orderBy('created_at', 'desc')
             ->get()
             ->map(function ($article) {
+                $likesCount = \App\Models\WikiArticleLike::where('wiki_article_id', $article->id)->count();
+                
                 return [
                     'id' => $article->id,
                     'slug' => $article->slug,
@@ -26,6 +28,7 @@ class WikiAdminController extends Controller
                     'author_name' => $article->author_name,
                     'published' => $article->published,
                     'views' => $article->views,
+                    'likes_count' => $likesCount,
                     'order' => $article->order,
                     'created_at' => $article->created_at,
                     'updated_at' => $article->updated_at,
@@ -35,9 +38,79 @@ class WikiAdminController extends Controller
 
         $pendingCount = \App\Models\WikiChangeRequest::pending()->count();
 
+        // Hole alle existierenden Kategorien
+        $categories = WikiArticle::whereNotNull('category')
+            ->where('category', '!=', '')
+            ->distinct()
+            ->pluck('category')
+            ->sort()
+            ->values();
+
         return Inertia::render('Wiki/Admin/Index', [
             'articles' => $articles,
             'pendingCount' => $pendingCount,
+            'categories' => $categories,
+        ]);
+    }
+
+    public function getLikes(WikiArticle $article)
+    {
+        $likes = \App\Models\WikiArticleLike::where('wiki_article_id', $article->id)
+            ->with('user')
+            ->get()
+            ->map(function ($like) {
+                $user = $like->user;
+                $discordId = $user->discord_identifier ?? null;
+                
+                // Hole Discord-Name und Character-Informationen
+                $discordName = null;
+                $firstName = null;
+                $lastName = null;
+                $avatar = $user->avatar ?? null;
+                
+                if ($discordId) {
+                    try {
+                        // Hole Discord-Name aus Laravel User
+                        $discordName = $user->name ?? null;
+                        
+                        // Hole Character-Informationen aus RedM
+                        $redmUser = DB::connection('redm')
+                            ->table('users')
+                            ->where('discord_identifier', $discordId)
+                            ->first();
+                        
+                        if ($redmUser) {
+                            $character = DB::connection('redm')
+                                ->table('characters')
+                                ->where('identifier', $redmUser->identifier)
+                                ->where('discordid', $discordId)
+                                ->first();
+                            
+                            if ($character) {
+                                $firstName = $character->firstname ?? null;
+                                $lastName = $character->lastname ?? null;
+                            }
+                        }
+                    } catch (\Exception $e) {
+                        // Ignoriere Fehler
+                    }
+                }
+                
+                return [
+                    'id' => $like->id,
+                    'user_id' => $user->id,
+                    'discord_identifier' => $discordId,
+                    'discord_name' => $discordName,
+                    'firstname' => $firstName,
+                    'lastname' => $lastName,
+                    'avatar' => $avatar,
+                    'created_at' => $like->created_at,
+                ];
+            })
+            ->values();
+
+        return response()->json([
+            'likes' => $likes,
         ]);
     }
 

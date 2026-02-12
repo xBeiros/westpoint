@@ -176,7 +176,7 @@ export const index = {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::show
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:53
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:61
 * @route '/ucp/wiki/change-requests/{changeRequest}'
 */
 const show1c94e820fe69f7a5ff4b9074a245088b = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -191,7 +191,7 @@ show1c94e820fe69f7a5ff4b9074a245088b.definition = {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::show
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:53
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:61
 * @route '/ucp/wiki/change-requests/{changeRequest}'
 */
 show1c94e820fe69f7a5ff4b9074a245088b.url = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -225,7 +225,7 @@ show1c94e820fe69f7a5ff4b9074a245088b.url = (args: { changeRequest: number | { id
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::show
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:53
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:61
 * @route '/ucp/wiki/change-requests/{changeRequest}'
 */
 show1c94e820fe69f7a5ff4b9074a245088b.get = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -235,7 +235,7 @@ show1c94e820fe69f7a5ff4b9074a245088b.get = (args: { changeRequest: number | { id
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::show
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:53
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:61
 * @route '/ucp/wiki/change-requests/{changeRequest}'
 */
 show1c94e820fe69f7a5ff4b9074a245088b.head = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -245,7 +245,7 @@ show1c94e820fe69f7a5ff4b9074a245088b.head = (args: { changeRequest: number | { i
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::show
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:53
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:61
 * @route '/ucp/wiki/change-requests/{changeRequest}'
 */
 const show1c94e820fe69f7a5ff4b9074a245088bForm = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -255,7 +255,7 @@ const show1c94e820fe69f7a5ff4b9074a245088bForm = (args: { changeRequest: number 
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::show
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:53
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:61
 * @route '/ucp/wiki/change-requests/{changeRequest}'
 */
 show1c94e820fe69f7a5ff4b9074a245088bForm.get = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -265,7 +265,7 @@ show1c94e820fe69f7a5ff4b9074a245088bForm.get = (args: { changeRequest: number | 
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::show
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:53
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:61
 * @route '/ucp/wiki/change-requests/{changeRequest}'
 */
 show1c94e820fe69f7a5ff4b9074a245088bForm.head = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -281,7 +281,7 @@ show1c94e820fe69f7a5ff4b9074a245088bForm.head = (args: { changeRequest: number |
 show1c94e820fe69f7a5ff4b9074a245088b.form = show1c94e820fe69f7a5ff4b9074a245088bForm
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::show
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:53
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:61
 * @route '/wiki/admin/change-requests/{changeRequest}'
 */
 const show8e5a5f6ced5ce6aed68b3900d868d95f = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -296,7 +296,7 @@ show8e5a5f6ced5ce6aed68b3900d868d95f.definition = {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::show
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:53
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:61
 * @route '/wiki/admin/change-requests/{changeRequest}'
 */
 show8e5a5f6ced5ce6aed68b3900d868d95f.url = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -330,7 +330,7 @@ show8e5a5f6ced5ce6aed68b3900d868d95f.url = (args: { changeRequest: number | { id
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::show
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:53
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:61
 * @route '/wiki/admin/change-requests/{changeRequest}'
 */
 show8e5a5f6ced5ce6aed68b3900d868d95f.get = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -340,7 +340,7 @@ show8e5a5f6ced5ce6aed68b3900d868d95f.get = (args: { changeRequest: number | { id
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::show
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:53
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:61
 * @route '/wiki/admin/change-requests/{changeRequest}'
 */
 show8e5a5f6ced5ce6aed68b3900d868d95f.head = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -350,7 +350,7 @@ show8e5a5f6ced5ce6aed68b3900d868d95f.head = (args: { changeRequest: number | { i
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::show
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:53
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:61
 * @route '/wiki/admin/change-requests/{changeRequest}'
 */
 const show8e5a5f6ced5ce6aed68b3900d868d95fForm = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -360,7 +360,7 @@ const show8e5a5f6ced5ce6aed68b3900d868d95fForm = (args: { changeRequest: number 
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::show
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:53
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:61
 * @route '/wiki/admin/change-requests/{changeRequest}'
 */
 show8e5a5f6ced5ce6aed68b3900d868d95fForm.get = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -370,7 +370,7 @@ show8e5a5f6ced5ce6aed68b3900d868d95fForm.get = (args: { changeRequest: number | 
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::show
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:53
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:61
 * @route '/wiki/admin/change-requests/{changeRequest}'
 */
 show8e5a5f6ced5ce6aed68b3900d868d95fForm.head = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -393,7 +393,7 @@ export const show = {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::approve
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:88
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:109
 * @route '/ucp/wiki/change-requests/{changeRequest}/approve'
 */
 const approvefc02928a77ba4db78b752ac55f0fa1af = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -408,7 +408,7 @@ approvefc02928a77ba4db78b752ac55f0fa1af.definition = {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::approve
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:88
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:109
 * @route '/ucp/wiki/change-requests/{changeRequest}/approve'
 */
 approvefc02928a77ba4db78b752ac55f0fa1af.url = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -442,7 +442,7 @@ approvefc02928a77ba4db78b752ac55f0fa1af.url = (args: { changeRequest: number | {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::approve
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:88
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:109
 * @route '/ucp/wiki/change-requests/{changeRequest}/approve'
 */
 approvefc02928a77ba4db78b752ac55f0fa1af.post = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -452,7 +452,7 @@ approvefc02928a77ba4db78b752ac55f0fa1af.post = (args: { changeRequest: number | 
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::approve
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:88
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:109
 * @route '/ucp/wiki/change-requests/{changeRequest}/approve'
 */
 const approvefc02928a77ba4db78b752ac55f0fa1afForm = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -462,7 +462,7 @@ const approvefc02928a77ba4db78b752ac55f0fa1afForm = (args: { changeRequest: numb
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::approve
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:88
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:109
 * @route '/ucp/wiki/change-requests/{changeRequest}/approve'
 */
 approvefc02928a77ba4db78b752ac55f0fa1afForm.post = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -473,7 +473,7 @@ approvefc02928a77ba4db78b752ac55f0fa1afForm.post = (args: { changeRequest: numbe
 approvefc02928a77ba4db78b752ac55f0fa1af.form = approvefc02928a77ba4db78b752ac55f0fa1afForm
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::approve
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:88
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:109
 * @route '/wiki/admin/change-requests/{changeRequest}/approve'
 */
 const approve061b9913861897591deefdb521012980 = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -488,7 +488,7 @@ approve061b9913861897591deefdb521012980.definition = {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::approve
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:88
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:109
 * @route '/wiki/admin/change-requests/{changeRequest}/approve'
 */
 approve061b9913861897591deefdb521012980.url = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -522,7 +522,7 @@ approve061b9913861897591deefdb521012980.url = (args: { changeRequest: number | {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::approve
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:88
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:109
 * @route '/wiki/admin/change-requests/{changeRequest}/approve'
 */
 approve061b9913861897591deefdb521012980.post = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -532,7 +532,7 @@ approve061b9913861897591deefdb521012980.post = (args: { changeRequest: number | 
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::approve
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:88
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:109
 * @route '/wiki/admin/change-requests/{changeRequest}/approve'
 */
 const approve061b9913861897591deefdb521012980Form = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -542,7 +542,7 @@ const approve061b9913861897591deefdb521012980Form = (args: { changeRequest: numb
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::approve
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:88
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:109
 * @route '/wiki/admin/change-requests/{changeRequest}/approve'
 */
 approve061b9913861897591deefdb521012980Form.post = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -560,7 +560,7 @@ export const approve = {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::reject
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:170
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:191
 * @route '/ucp/wiki/change-requests/{changeRequest}/reject'
 */
 const reject4534abb9366a604b8fd87c1d586d5b0c = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -575,7 +575,7 @@ reject4534abb9366a604b8fd87c1d586d5b0c.definition = {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::reject
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:170
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:191
 * @route '/ucp/wiki/change-requests/{changeRequest}/reject'
 */
 reject4534abb9366a604b8fd87c1d586d5b0c.url = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -609,7 +609,7 @@ reject4534abb9366a604b8fd87c1d586d5b0c.url = (args: { changeRequest: number | { 
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::reject
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:170
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:191
 * @route '/ucp/wiki/change-requests/{changeRequest}/reject'
 */
 reject4534abb9366a604b8fd87c1d586d5b0c.post = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -619,7 +619,7 @@ reject4534abb9366a604b8fd87c1d586d5b0c.post = (args: { changeRequest: number | {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::reject
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:170
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:191
 * @route '/ucp/wiki/change-requests/{changeRequest}/reject'
 */
 const reject4534abb9366a604b8fd87c1d586d5b0cForm = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -629,7 +629,7 @@ const reject4534abb9366a604b8fd87c1d586d5b0cForm = (args: { changeRequest: numbe
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::reject
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:170
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:191
 * @route '/ucp/wiki/change-requests/{changeRequest}/reject'
 */
 reject4534abb9366a604b8fd87c1d586d5b0cForm.post = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -640,7 +640,7 @@ reject4534abb9366a604b8fd87c1d586d5b0cForm.post = (args: { changeRequest: number
 reject4534abb9366a604b8fd87c1d586d5b0c.form = reject4534abb9366a604b8fd87c1d586d5b0cForm
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::reject
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:170
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:191
 * @route '/wiki/admin/change-requests/{changeRequest}/reject'
 */
 const reject4abba023fd320974fe2bf11680a77051 = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -655,7 +655,7 @@ reject4abba023fd320974fe2bf11680a77051.definition = {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::reject
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:170
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:191
 * @route '/wiki/admin/change-requests/{changeRequest}/reject'
 */
 reject4abba023fd320974fe2bf11680a77051.url = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -689,7 +689,7 @@ reject4abba023fd320974fe2bf11680a77051.url = (args: { changeRequest: number | { 
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::reject
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:170
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:191
 * @route '/wiki/admin/change-requests/{changeRequest}/reject'
 */
 reject4abba023fd320974fe2bf11680a77051.post = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -699,7 +699,7 @@ reject4abba023fd320974fe2bf11680a77051.post = (args: { changeRequest: number | {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::reject
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:170
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:191
 * @route '/wiki/admin/change-requests/{changeRequest}/reject'
 */
 const reject4abba023fd320974fe2bf11680a77051Form = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -709,7 +709,7 @@ const reject4abba023fd320974fe2bf11680a77051Form = (args: { changeRequest: numbe
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::reject
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:170
+* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:191
 * @route '/wiki/admin/change-requests/{changeRequest}/reject'
 */
 reject4abba023fd320974fe2bf11680a77051Form.post = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

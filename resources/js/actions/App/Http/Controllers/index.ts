@@ -1,5 +1,6 @@
 import PlayerInfoController from './PlayerInfoController'
 import VehicleInfoController from './VehicleInfoController'
+import ProfileController from './ProfileController'
 import AdminController from './AdminController'
 import Wiki from './Wiki'
 import Admin from './Admin'
@@ -11,6 +12,7 @@ import DiscordLoginController from './DiscordLoginController'
 const Controllers = {
     PlayerInfoController: Object.assign(PlayerInfoController, PlayerInfoController),
     VehicleInfoController: Object.assign(VehicleInfoController, VehicleInfoController),
+    ProfileController: Object.assign(ProfileController, ProfileController),
     AdminController: Object.assign(AdminController, AdminController),
     Wiki: Object.assign(Wiki, Wiki),
     Admin: Object.assign(Admin, Admin),

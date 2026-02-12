@@ -44,6 +44,14 @@ class WikiChangeRequestController extends Controller
 
         $pendingCount = WikiChangeRequest::pending()->count();
 
+        // Wenn es eine JSON-Anfrage ist (für Modal), gebe JSON zurück
+        if (request()->wantsJson() || request()->expectsJson()) {
+            return response()->json([
+                'requests' => $requests,
+                'pendingCount' => $pendingCount,
+            ]);
+        }
+
         return Inertia::render('Wiki/Admin/ChangeRequests/Index', [
             'requests' => $requests,
             'pendingCount' => $pendingCount,
@@ -54,34 +62,47 @@ class WikiChangeRequestController extends Controller
     {
         $changeRequest->load('article');
 
+        $changeRequestData = [
+            'id' => $changeRequest->id,
+            'wiki_article_id' => $changeRequest->wiki_article_id,
+            'request_type' => $changeRequest->request_type,
+            'title' => $changeRequest->title,
+            'slug' => $changeRequest->slug,
+            'description' => $changeRequest->description,
+            'content' => $changeRequest->content,
+            'raw_content' => $changeRequest->raw_content,
+            'tags' => $changeRequest->tags,
+            'category' => $changeRequest->category,
+            'requester_name' => $changeRequest->requester_name,
+            'requester_discord_id' => $changeRequest->requester_discord_id,
+            'status' => $changeRequest->status,
+            'reviewer_name' => $changeRequest->reviewer_name,
+            'reviewer_discord_id' => $changeRequest->reviewer_discord_id,
+            'review_notes' => $changeRequest->review_notes,
+            'reviewed_at' => $changeRequest->reviewed_at,
+            'created_at' => $changeRequest->created_at,
+            'updated_at' => $changeRequest->updated_at,
+            'article' => $changeRequest->article ? [
+                'id' => $changeRequest->article->id,
+                'slug' => $changeRequest->article->slug,
+                'title' => $changeRequest->article->title,
+                'description' => $changeRequest->article->description,
+                'content' => $changeRequest->article->content,
+                'raw_content' => $changeRequest->article->raw_content,
+                'tags' => $changeRequest->article->tags,
+                'category' => $changeRequest->article->category,
+            ] : null,
+        ];
+
+        // Wenn es eine JSON-Anfrage ist (für Modal), gebe JSON zurück
+        if (request()->wantsJson() || request()->expectsJson()) {
+            return response()->json([
+                'changeRequest' => $changeRequestData,
+            ]);
+        }
+
         return Inertia::render('Wiki/Admin/ChangeRequests/Show', [
-            'changeRequest' => [
-                'id' => $changeRequest->id,
-                'wiki_article_id' => $changeRequest->wiki_article_id,
-                'request_type' => $changeRequest->request_type,
-                'title' => $changeRequest->title,
-                'slug' => $changeRequest->slug,
-                'description' => $changeRequest->description,
-                'content' => $changeRequest->content,
-                'raw_content' => $changeRequest->raw_content,
-                'tags' => $changeRequest->tags,
-                'category' => $changeRequest->category,
-                'requester_name' => $changeRequest->requester_name,
-                'requester_discord_id' => $changeRequest->requester_discord_id,
-                'status' => $changeRequest->status,
-                'reviewer_name' => $changeRequest->reviewer_name,
-                'reviewer_discord_id' => $changeRequest->reviewer_discord_id,
-                'review_notes' => $changeRequest->review_notes,
-                'reviewed_at' => $changeRequest->reviewed_at,
-                'created_at' => $changeRequest->created_at,
-                'updated_at' => $changeRequest->updated_at,
-                'article' => $changeRequest->article ? [
-                    'id' => $changeRequest->article->id,
-                    'slug' => $changeRequest->article->slug,
-                    'title' => $changeRequest->article->title,
-                    'content' => $changeRequest->article->content,
-                ] : null,
-            ],
+            'changeRequest' => $changeRequestData,
         ]);
     }
 
@@ -159,7 +180,7 @@ class WikiChangeRequestController extends Controller
 
             DB::commit();
 
-            return redirect()->route('wiki.admin.change-requests.index')
+            return redirect('/ucp/wiki')
                 ->with('success', 'Änderungsantrag erfolgreich genehmigt.');
         } catch (\Exception $e) {
             DB::rollBack();
@@ -206,7 +227,7 @@ class WikiChangeRequestController extends Controller
             'reviewed_at' => now(),
         ]);
 
-        return redirect()->route('wiki.admin.change-requests.index')
+        return redirect('/ucp/wiki')
             ->with('success', 'Änderungsantrag abgelehnt.');
     }
 }

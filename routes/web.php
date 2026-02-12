@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WikiController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -100,6 +101,10 @@ Route::middleware(['auth', 'verified'])->prefix('ucp')->name('ucp.')->group(func
     Route::get('/player-info', [\App\Http\Controllers\PlayerInfoController::class, 'index'])->name('player.info');
     Route::get('/vehicle-info', [\App\Http\Controllers\VehicleInfoController::class, 'index'])->name('vehicle.info');
     
+    // Profil bearbeiten
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    
     // Admin Routes
     Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
     Route::post('/admin/refresh', [\App\Http\Controllers\AdminController::class, 'refresh'])->name('admin.refresh');
@@ -115,6 +120,7 @@ Route::middleware(['auth', 'verified'])->prefix('ucp')->name('ucp.')->group(func
         Route::put('/{article}', [\App\Http\Controllers\Wiki\Admin\WikiAdminController::class, 'update'])->name('update');
         Route::delete('/{article}', [\App\Http\Controllers\Wiki\Admin\WikiAdminController::class, 'destroy'])->name('destroy');
         Route::post('/{article}/toggle-publish', [\App\Http\Controllers\Wiki\Admin\WikiAdminController::class, 'togglePublish'])->name('toggle-publish');
+        Route::get('/{article}/likes', [\App\Http\Controllers\Wiki\Admin\WikiAdminController::class, 'getLikes'])->name('likes');
         
         // Change Requests Management
         Route::prefix('change-requests')->name('change-requests.')->group(function () {

@@ -176,7 +176,7 @@ export const index = {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::create
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:44
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:117
 * @route '/ucp/wiki/create'
 */
 const create091f1b051e591318f53a8e08fc55e33c = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -191,7 +191,7 @@ create091f1b051e591318f53a8e08fc55e33c.definition = {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::create
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:44
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:117
 * @route '/ucp/wiki/create'
 */
 create091f1b051e591318f53a8e08fc55e33c.url = (options?: RouteQueryOptions) => {
@@ -204,7 +204,7 @@ create091f1b051e591318f53a8e08fc55e33c.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::create
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:44
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:117
 * @route '/ucp/wiki/create'
 */
 create091f1b051e591318f53a8e08fc55e33c.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -214,7 +214,7 @@ create091f1b051e591318f53a8e08fc55e33c.get = (options?: RouteQueryOptions): Rout
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::create
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:44
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:117
 * @route '/ucp/wiki/create'
 */
 create091f1b051e591318f53a8e08fc55e33c.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -224,7 +224,7 @@ create091f1b051e591318f53a8e08fc55e33c.head = (options?: RouteQueryOptions): Rou
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::create
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:44
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:117
 * @route '/ucp/wiki/create'
 */
 const create091f1b051e591318f53a8e08fc55e33cForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -234,7 +234,7 @@ const create091f1b051e591318f53a8e08fc55e33cForm = (options?: RouteQueryOptions)
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::create
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:44
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:117
 * @route '/ucp/wiki/create'
 */
 create091f1b051e591318f53a8e08fc55e33cForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -244,7 +244,7 @@ create091f1b051e591318f53a8e08fc55e33cForm.get = (options?: RouteQueryOptions): 
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::create
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:44
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:117
 * @route '/ucp/wiki/create'
 */
 create091f1b051e591318f53a8e08fc55e33cForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -260,7 +260,7 @@ create091f1b051e591318f53a8e08fc55e33cForm.head = (options?: RouteQueryOptions):
 create091f1b051e591318f53a8e08fc55e33c.form = create091f1b051e591318f53a8e08fc55e33cForm
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::create
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:44
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:117
 * @route '/wiki/admin/create'
 */
 const create7c8460235944f19fb9e37d29dd63ee93 = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -275,7 +275,7 @@ create7c8460235944f19fb9e37d29dd63ee93.definition = {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::create
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:44
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:117
 * @route '/wiki/admin/create'
 */
 create7c8460235944f19fb9e37d29dd63ee93.url = (options?: RouteQueryOptions) => {
@@ -288,7 +288,7 @@ create7c8460235944f19fb9e37d29dd63ee93.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::create
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:44
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:117
 * @route '/wiki/admin/create'
 */
 create7c8460235944f19fb9e37d29dd63ee93.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -298,7 +298,7 @@ create7c8460235944f19fb9e37d29dd63ee93.get = (options?: RouteQueryOptions): Rout
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::create
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:44
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:117
 * @route '/wiki/admin/create'
 */
 create7c8460235944f19fb9e37d29dd63ee93.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -308,7 +308,7 @@ create7c8460235944f19fb9e37d29dd63ee93.head = (options?: RouteQueryOptions): Rou
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::create
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:44
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:117
 * @route '/wiki/admin/create'
 */
 const create7c8460235944f19fb9e37d29dd63ee93Form = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -318,7 +318,7 @@ const create7c8460235944f19fb9e37d29dd63ee93Form = (options?: RouteQueryOptions)
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::create
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:44
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:117
 * @route '/wiki/admin/create'
 */
 create7c8460235944f19fb9e37d29dd63ee93Form.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -328,7 +328,7 @@ create7c8460235944f19fb9e37d29dd63ee93Form.get = (options?: RouteQueryOptions): 
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::create
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:44
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:117
 * @route '/wiki/admin/create'
 */
 create7c8460235944f19fb9e37d29dd63ee93Form.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -351,7 +351,7 @@ export const create = {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::store
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:51
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:124
 * @route '/ucp/wiki'
 */
 const store585e55b967c0b7aad1e18c8f6e147493 = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -366,7 +366,7 @@ store585e55b967c0b7aad1e18c8f6e147493.definition = {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::store
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:51
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:124
 * @route '/ucp/wiki'
 */
 store585e55b967c0b7aad1e18c8f6e147493.url = (options?: RouteQueryOptions) => {
@@ -379,7 +379,7 @@ store585e55b967c0b7aad1e18c8f6e147493.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::store
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:51
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:124
 * @route '/ucp/wiki'
 */
 store585e55b967c0b7aad1e18c8f6e147493.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -389,7 +389,7 @@ store585e55b967c0b7aad1e18c8f6e147493.post = (options?: RouteQueryOptions): Rout
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::store
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:51
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:124
 * @route '/ucp/wiki'
 */
 const store585e55b967c0b7aad1e18c8f6e147493Form = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -399,7 +399,7 @@ const store585e55b967c0b7aad1e18c8f6e147493Form = (options?: RouteQueryOptions):
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::store
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:51
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:124
 * @route '/ucp/wiki'
 */
 store585e55b967c0b7aad1e18c8f6e147493Form.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -410,7 +410,7 @@ store585e55b967c0b7aad1e18c8f6e147493Form.post = (options?: RouteQueryOptions): 
 store585e55b967c0b7aad1e18c8f6e147493.form = store585e55b967c0b7aad1e18c8f6e147493Form
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::store
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:51
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:124
 * @route '/wiki/admin'
 */
 const storec4b777b2a269177226608838d2c5c54b = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -425,7 +425,7 @@ storec4b777b2a269177226608838d2c5c54b.definition = {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::store
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:51
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:124
 * @route '/wiki/admin'
 */
 storec4b777b2a269177226608838d2c5c54b.url = (options?: RouteQueryOptions) => {
@@ -438,7 +438,7 @@ storec4b777b2a269177226608838d2c5c54b.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::store
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:51
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:124
 * @route '/wiki/admin'
 */
 storec4b777b2a269177226608838d2c5c54b.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -448,7 +448,7 @@ storec4b777b2a269177226608838d2c5c54b.post = (options?: RouteQueryOptions): Rout
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::store
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:51
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:124
 * @route '/wiki/admin'
 */
 const storec4b777b2a269177226608838d2c5c54bForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -458,7 +458,7 @@ const storec4b777b2a269177226608838d2c5c54bForm = (options?: RouteQueryOptions):
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::store
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:51
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:124
 * @route '/wiki/admin'
 */
 storec4b777b2a269177226608838d2c5c54bForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -476,7 +476,7 @@ export const store = {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::edit
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:121
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:194
 * @route '/ucp/wiki/{article}/edit'
 */
 const editf6e1de58ffbcea11e2da98bb0dfaed65 = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -491,7 +491,7 @@ editf6e1de58ffbcea11e2da98bb0dfaed65.definition = {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::edit
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:121
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:194
 * @route '/ucp/wiki/{article}/edit'
 */
 editf6e1de58ffbcea11e2da98bb0dfaed65.url = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -525,7 +525,7 @@ editf6e1de58ffbcea11e2da98bb0dfaed65.url = (args: { article: number | { id: numb
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::edit
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:121
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:194
 * @route '/ucp/wiki/{article}/edit'
 */
 editf6e1de58ffbcea11e2da98bb0dfaed65.get = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -535,7 +535,7 @@ editf6e1de58ffbcea11e2da98bb0dfaed65.get = (args: { article: number | { id: numb
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::edit
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:121
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:194
 * @route '/ucp/wiki/{article}/edit'
 */
 editf6e1de58ffbcea11e2da98bb0dfaed65.head = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -545,7 +545,7 @@ editf6e1de58ffbcea11e2da98bb0dfaed65.head = (args: { article: number | { id: num
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::edit
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:121
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:194
 * @route '/ucp/wiki/{article}/edit'
 */
 const editf6e1de58ffbcea11e2da98bb0dfaed65Form = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -555,7 +555,7 @@ const editf6e1de58ffbcea11e2da98bb0dfaed65Form = (args: { article: number | { id
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::edit
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:121
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:194
 * @route '/ucp/wiki/{article}/edit'
 */
 editf6e1de58ffbcea11e2da98bb0dfaed65Form.get = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -565,7 +565,7 @@ editf6e1de58ffbcea11e2da98bb0dfaed65Form.get = (args: { article: number | { id: 
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::edit
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:121
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:194
 * @route '/ucp/wiki/{article}/edit'
 */
 editf6e1de58ffbcea11e2da98bb0dfaed65Form.head = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -581,7 +581,7 @@ editf6e1de58ffbcea11e2da98bb0dfaed65Form.head = (args: { article: number | { id:
 editf6e1de58ffbcea11e2da98bb0dfaed65.form = editf6e1de58ffbcea11e2da98bb0dfaed65Form
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::edit
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:121
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:194
 * @route '/wiki/admin/{article}/edit'
 */
 const editfe8f19a1c8493064b8ae61c0b391ff21 = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -596,7 +596,7 @@ editfe8f19a1c8493064b8ae61c0b391ff21.definition = {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::edit
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:121
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:194
 * @route '/wiki/admin/{article}/edit'
 */
 editfe8f19a1c8493064b8ae61c0b391ff21.url = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -630,7 +630,7 @@ editfe8f19a1c8493064b8ae61c0b391ff21.url = (args: { article: number | { id: numb
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::edit
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:121
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:194
 * @route '/wiki/admin/{article}/edit'
 */
 editfe8f19a1c8493064b8ae61c0b391ff21.get = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -640,7 +640,7 @@ editfe8f19a1c8493064b8ae61c0b391ff21.get = (args: { article: number | { id: numb
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::edit
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:121
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:194
 * @route '/wiki/admin/{article}/edit'
 */
 editfe8f19a1c8493064b8ae61c0b391ff21.head = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -650,7 +650,7 @@ editfe8f19a1c8493064b8ae61c0b391ff21.head = (args: { article: number | { id: num
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::edit
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:121
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:194
 * @route '/wiki/admin/{article}/edit'
 */
 const editfe8f19a1c8493064b8ae61c0b391ff21Form = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -660,7 +660,7 @@ const editfe8f19a1c8493064b8ae61c0b391ff21Form = (args: { article: number | { id
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::edit
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:121
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:194
 * @route '/wiki/admin/{article}/edit'
 */
 editfe8f19a1c8493064b8ae61c0b391ff21Form.get = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -670,7 +670,7 @@ editfe8f19a1c8493064b8ae61c0b391ff21Form.get = (args: { article: number | { id: 
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::edit
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:121
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:194
 * @route '/wiki/admin/{article}/edit'
 */
 editfe8f19a1c8493064b8ae61c0b391ff21Form.head = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -693,7 +693,7 @@ export const edit = {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::update
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:139
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:212
 * @route '/ucp/wiki/{article}'
 */
 const update4b79dd0ffbf8928938952545e9f6d946 = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -708,7 +708,7 @@ update4b79dd0ffbf8928938952545e9f6d946.definition = {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::update
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:139
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:212
 * @route '/ucp/wiki/{article}'
 */
 update4b79dd0ffbf8928938952545e9f6d946.url = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -742,7 +742,7 @@ update4b79dd0ffbf8928938952545e9f6d946.url = (args: { article: number | { id: nu
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::update
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:139
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:212
 * @route '/ucp/wiki/{article}'
 */
 update4b79dd0ffbf8928938952545e9f6d946.put = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -752,7 +752,7 @@ update4b79dd0ffbf8928938952545e9f6d946.put = (args: { article: number | { id: nu
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::update
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:139
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:212
 * @route '/ucp/wiki/{article}'
 */
 const update4b79dd0ffbf8928938952545e9f6d946Form = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -767,7 +767,7 @@ const update4b79dd0ffbf8928938952545e9f6d946Form = (args: { article: number | { 
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::update
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:139
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:212
 * @route '/ucp/wiki/{article}'
 */
 update4b79dd0ffbf8928938952545e9f6d946Form.put = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -783,7 +783,7 @@ update4b79dd0ffbf8928938952545e9f6d946Form.put = (args: { article: number | { id
 update4b79dd0ffbf8928938952545e9f6d946.form = update4b79dd0ffbf8928938952545e9f6d946Form
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::update
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:139
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:212
 * @route '/wiki/admin/{article}'
 */
 const update78a205b59ce4b261c486ee7804db7730 = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -798,7 +798,7 @@ update78a205b59ce4b261c486ee7804db7730.definition = {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::update
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:139
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:212
 * @route '/wiki/admin/{article}'
 */
 update78a205b59ce4b261c486ee7804db7730.url = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -832,7 +832,7 @@ update78a205b59ce4b261c486ee7804db7730.url = (args: { article: number | { id: nu
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::update
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:139
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:212
 * @route '/wiki/admin/{article}'
 */
 update78a205b59ce4b261c486ee7804db7730.put = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -842,7 +842,7 @@ update78a205b59ce4b261c486ee7804db7730.put = (args: { article: number | { id: nu
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::update
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:139
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:212
 * @route '/wiki/admin/{article}'
 */
 const update78a205b59ce4b261c486ee7804db7730Form = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -857,7 +857,7 @@ const update78a205b59ce4b261c486ee7804db7730Form = (args: { article: number | { 
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::update
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:139
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:212
 * @route '/wiki/admin/{article}'
 */
 update78a205b59ce4b261c486ee7804db7730Form.put = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -880,7 +880,7 @@ export const update = {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::destroy
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:184
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:257
 * @route '/ucp/wiki/{article}'
 */
 const destroy4b79dd0ffbf8928938952545e9f6d946 = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -895,7 +895,7 @@ destroy4b79dd0ffbf8928938952545e9f6d946.definition = {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::destroy
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:184
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:257
 * @route '/ucp/wiki/{article}'
 */
 destroy4b79dd0ffbf8928938952545e9f6d946.url = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -929,7 +929,7 @@ destroy4b79dd0ffbf8928938952545e9f6d946.url = (args: { article: number | { id: n
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::destroy
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:184
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:257
 * @route '/ucp/wiki/{article}'
 */
 destroy4b79dd0ffbf8928938952545e9f6d946.delete = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -939,7 +939,7 @@ destroy4b79dd0ffbf8928938952545e9f6d946.delete = (args: { article: number | { id
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::destroy
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:184
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:257
 * @route '/ucp/wiki/{article}'
 */
 const destroy4b79dd0ffbf8928938952545e9f6d946Form = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -954,7 +954,7 @@ const destroy4b79dd0ffbf8928938952545e9f6d946Form = (args: { article: number | {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::destroy
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:184
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:257
 * @route '/ucp/wiki/{article}'
 */
 destroy4b79dd0ffbf8928938952545e9f6d946Form.delete = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -970,7 +970,7 @@ destroy4b79dd0ffbf8928938952545e9f6d946Form.delete = (args: { article: number | 
 destroy4b79dd0ffbf8928938952545e9f6d946.form = destroy4b79dd0ffbf8928938952545e9f6d946Form
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::destroy
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:184
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:257
 * @route '/wiki/admin/{article}'
 */
 const destroy78a205b59ce4b261c486ee7804db7730 = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -985,7 +985,7 @@ destroy78a205b59ce4b261c486ee7804db7730.definition = {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::destroy
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:184
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:257
 * @route '/wiki/admin/{article}'
 */
 destroy78a205b59ce4b261c486ee7804db7730.url = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -1019,7 +1019,7 @@ destroy78a205b59ce4b261c486ee7804db7730.url = (args: { article: number | { id: n
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::destroy
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:184
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:257
 * @route '/wiki/admin/{article}'
 */
 destroy78a205b59ce4b261c486ee7804db7730.delete = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -1029,7 +1029,7 @@ destroy78a205b59ce4b261c486ee7804db7730.delete = (args: { article: number | { id
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::destroy
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:184
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:257
 * @route '/wiki/admin/{article}'
 */
 const destroy78a205b59ce4b261c486ee7804db7730Form = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -1044,7 +1044,7 @@ const destroy78a205b59ce4b261c486ee7804db7730Form = (args: { article: number | {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::destroy
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:184
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:257
 * @route '/wiki/admin/{article}'
 */
 destroy78a205b59ce4b261c486ee7804db7730Form.delete = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -1067,7 +1067,7 @@ export const destroy = {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::togglePublish
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:192
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:265
 * @route '/ucp/wiki/{article}/toggle-publish'
 */
 const togglePublish132d8e7dec2777267ec5eb412da99ae1 = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -1082,7 +1082,7 @@ togglePublish132d8e7dec2777267ec5eb412da99ae1.definition = {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::togglePublish
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:192
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:265
 * @route '/ucp/wiki/{article}/toggle-publish'
 */
 togglePublish132d8e7dec2777267ec5eb412da99ae1.url = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -1116,7 +1116,7 @@ togglePublish132d8e7dec2777267ec5eb412da99ae1.url = (args: { article: number | {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::togglePublish
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:192
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:265
 * @route '/ucp/wiki/{article}/toggle-publish'
 */
 togglePublish132d8e7dec2777267ec5eb412da99ae1.post = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -1126,7 +1126,7 @@ togglePublish132d8e7dec2777267ec5eb412da99ae1.post = (args: { article: number | 
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::togglePublish
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:192
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:265
 * @route '/ucp/wiki/{article}/toggle-publish'
 */
 const togglePublish132d8e7dec2777267ec5eb412da99ae1Form = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -1136,7 +1136,7 @@ const togglePublish132d8e7dec2777267ec5eb412da99ae1Form = (args: { article: numb
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::togglePublish
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:192
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:265
 * @route '/ucp/wiki/{article}/toggle-publish'
 */
 togglePublish132d8e7dec2777267ec5eb412da99ae1Form.post = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -1147,7 +1147,7 @@ togglePublish132d8e7dec2777267ec5eb412da99ae1Form.post = (args: { article: numbe
 togglePublish132d8e7dec2777267ec5eb412da99ae1.form = togglePublish132d8e7dec2777267ec5eb412da99ae1Form
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::togglePublish
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:192
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:265
 * @route '/wiki/admin/{article}/toggle-publish'
 */
 const togglePublish86c47a83f0c16c6bdb368e522166c29b = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -1162,7 +1162,7 @@ togglePublish86c47a83f0c16c6bdb368e522166c29b.definition = {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::togglePublish
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:192
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:265
 * @route '/wiki/admin/{article}/toggle-publish'
 */
 togglePublish86c47a83f0c16c6bdb368e522166c29b.url = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -1196,7 +1196,7 @@ togglePublish86c47a83f0c16c6bdb368e522166c29b.url = (args: { article: number | {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::togglePublish
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:192
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:265
 * @route '/wiki/admin/{article}/toggle-publish'
 */
 togglePublish86c47a83f0c16c6bdb368e522166c29b.post = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -1206,7 +1206,7 @@ togglePublish86c47a83f0c16c6bdb368e522166c29b.post = (args: { article: number | 
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::togglePublish
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:192
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:265
 * @route '/wiki/admin/{article}/toggle-publish'
 */
 const togglePublish86c47a83f0c16c6bdb368e522166c29bForm = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -1216,7 +1216,7 @@ const togglePublish86c47a83f0c16c6bdb368e522166c29bForm = (args: { article: numb
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::togglePublish
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:192
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:265
 * @route '/wiki/admin/{article}/toggle-publish'
 */
 togglePublish86c47a83f0c16c6bdb368e522166c29bForm.post = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -1232,6 +1232,112 @@ export const togglePublish = {
 }
 
 
-const WikiAdminController = { index, create, store, edit, update, destroy, togglePublish }
+/**
+* @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::getLikes
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:56
+* @route '/ucp/wiki/{article}/likes'
+*/
+export const getLikes = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: getLikes.url(args, options),
+    method: 'get',
+})
+
+getLikes.definition = {
+    methods: ["get","head"],
+    url: '/ucp/wiki/{article}/likes',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::getLikes
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:56
+* @route '/ucp/wiki/{article}/likes'
+*/
+getLikes.url = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+    if (typeof args === 'string' || typeof args === 'number') {
+        args = { article: args }
+    }
+
+    if (typeof args === 'object' && !Array.isArray(args) && 'id' in args) {
+        args = { article: args.id }
+    }
+
+    if (Array.isArray(args)) {
+        args = {
+            article: args[0],
+        }
+    }
+
+    args = applyUrlDefaults(args)
+
+
+    const parsedArgs = {
+        article: typeof args.article === 'object'
+        ? args.article.id
+        : args.article,
+    }
+
+    return getLikes.definition.url
+            .replace('{article}', parsedArgs.article.toString())
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::getLikes
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:56
+* @route '/ucp/wiki/{article}/likes'
+*/
+getLikes.get = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: getLikes.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::getLikes
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:56
+* @route '/ucp/wiki/{article}/likes'
+*/
+getLikes.head = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: getLikes.url(args, options),
+    method: 'head',
+})
+
+/**
+* @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::getLikes
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:56
+* @route '/ucp/wiki/{article}/likes'
+*/
+const getLikesForm = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: getLikes.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::getLikes
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:56
+* @route '/ucp/wiki/{article}/likes'
+*/
+getLikesForm.get = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: getLikes.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::getLikes
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:56
+* @route '/ucp/wiki/{article}/likes'
+*/
+getLikesForm.head = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: getLikes.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+getLikes.form = getLikesForm
+
+const WikiAdminController = { index, create, store, edit, update, destroy, togglePublish, getLikes }
 
 export default WikiAdminController

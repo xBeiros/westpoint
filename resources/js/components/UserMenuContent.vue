@@ -9,7 +9,7 @@ import { logout } from '@/routes';
 import { dashboard } from '@/routes/ucp';
 import type { User } from '@/types';
 import { Link, router, useForm } from '@inertiajs/vue3';
-import { LayoutGrid, LogOut } from 'lucide-vue-next';
+import { LayoutGrid, LogOut, User as UserIcon } from 'lucide-vue-next';
 
 interface Props {
     user: User;
@@ -41,6 +41,15 @@ defineProps<Props>();
         >
             <LayoutGrid class="mr-2 h-4 w-4" />
             Dashboard
+        </Link>
+    </DropdownMenuItem>
+    <DropdownMenuItem as-child>
+        <Link
+            href="/ucp/profile"
+            class="flex w-full items-center text-left"
+        >
+            <UserIcon class="mr-2 h-4 w-4" />
+            Profil bearbeiten
         </Link>
     </DropdownMenuItem>
     <DropdownMenuItem as-child>

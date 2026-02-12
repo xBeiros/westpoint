@@ -272,20 +272,18 @@ show.url = (args: { slug: string | number } | [slug: string | number ] | string 
         args = { slug: args }
     }
 
+
     if (Array.isArray(args)) {
         args = {
             slug: args[0],
         }
     }
 
-    // Apply URL defaults if function is available
-    let finalArgs = args;
-    if (typeof applyUrlDefaults !== 'undefined' && typeof applyUrlDefaults === 'function') {
-        finalArgs = applyUrlDefaults(args)
-    }
+    args = applyUrlDefaults(args)
+
 
     const parsedArgs = {
-        slug: finalArgs.slug,
+        slug: args.slug,
     }
 
     return show.definition.url
