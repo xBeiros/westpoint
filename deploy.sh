@@ -1,79 +1,40 @@
 #!/bin/bash
 
-# Deployment Script für Forge
-# Setzt generierte wayfinder-Dateien zurück, bevor der Merge durchgeführt wird
+set -e
 
-set -e  # Beende bei Fehlern
+echo "=== DEPLOY START ==="
 
-echo "Resetting wayfinder-generated files before merge..."
+BRANCH="main"
 
-# Liste der generierten Dateien
-GENERATED_FILES=(
-    "resources/js/routes/index.ts"
-    "resources/js/routes/news/index.ts"
-    "resources/js/routes/password/index.ts"
-    "resources/js/routes/players/index.ts"
-    "resources/js/routes/presentation/index.ts"
-    "resources/js/routes/rulebook/index.ts"
-    "resources/js/routes/test/redm/index.ts"
-    "resources/js/routes/two-factor/index.ts"
-    "resources/js/actions/App/Http/Controllers/Settings/index.ts"
-)
-
-# Liste der zu entfernenden Dateien (ProfileController, etc.)
-REMOVE_FILES=(
-    "resources/js/actions/App/Http/Controllers/Settings/ProfileController.ts"
-    "resources/js/routes/profile/index.ts"
-)
-
-# Hole die neuesten Änderungen vom Remote
-echo "Fetching latest changes from remote..."
+echo "Fetching latest code..."
 git fetch origin
 
-# Entferne spezifisch die generierten Dateien aus dem Git-Index (falls sie getrackt sind)
-echo "Removing generated files from Git index..."
-for file in "${GENERATED_FILES[@]}"; do
-    git rm --cached -f "$file" 2>/dev/null || true
-done
-
-# Entferne ProfileController und andere zu löschende Dateien aus dem Git-Index
-echo "Removing ProfileController files from Git index..."
-for file in "${REMOVE_FILES[@]}"; do
-    git rm --cached -f "$file" 2>/dev/null || true
-done
-
-# Entferne alle lokalen Änderungen und nicht getrackte Dateien
-echo "Resetting local changes..."
-git reset --hard HEAD
+echo "Resetting to origin/$BRANCH ..."
+git reset --hard origin/$BRANCH
 git clean -fd
 
-# Entferne spezifisch die generierten Dateien lokal, falls sie existieren
-echo "Removing generated files locally..."
-for file in "${GENERATED_FILES[@]}"; do
-    rm -f "$file"
-done
+echo "Installing PHP dependencies..."
+composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
 
-# Entferne ProfileController und andere zu löschende Dateien lokal
-echo "Removing ProfileController files locally..."
-for file in "${REMOVE_FILES[@]}"; do
-    rm -f "$file"
-done
+echo "Installing Node dependencies..."
+npm ci
 
-# Stashe alle verbleibenden Änderungen, falls vorhanden
-echo "Stashing any remaining changes..."
-git stash || true
+echo "Building frontend..."
+npm run build
 
-# Führe Pull durch mit Strategie, die Konflikte vermeidet
-echo "Pulling latest changes..."
-BRANCH=$(git rev-parse --abbrev-ref HEAD)
-git pull origin "$BRANCH" --no-edit || {
-    echo "Pull failed, attempting to resolve conflicts..."
-    # Falls Pull fehlschlägt, versuche mit Merge-Strategie
-    git merge origin/"$BRANCH" --strategy-option=theirs || {
-        echo "Merge failed, resetting to remote state..."
-        git reset --hard origin/"$BRANCH"
-    }
-}
+echo "Running migrations..."
+php artisan migrate --force
 
-echo "Deployment preparation complete. Files reset and repository updated."
+echo "Clearing and caching..."
+php artisan config:clear
+php artisan route:clear
+php artisan view:clear
 
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+
+echo "Restarting queue..."
+php artisan queue:restart || true
+
+echo "=== DEPLOY DONE ==="

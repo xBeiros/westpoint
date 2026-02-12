@@ -121,10 +121,11 @@
 
 <script setup>
 import { Head, Link, useForm } from '@inertiajs/vue3'
-import { index as wikiIndex, show as wikiShow } from '@/routes/wiki'
-import { store } from '@/routes/wiki/change-request'
+import { index as wikiIndex, show as wikiShow, changeRequest } from '@/routes/wiki'
 import { ref, computed, onMounted } from 'vue'
 import RichTextEditor from '@/components/Wiki/RichTextEditor.vue'
+
+const { store } = changeRequest
 
 const props = defineProps({
     article: Object
