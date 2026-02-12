@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import wpLogo from '@/assets/images/wp.png'
+import wpLogo from '@/Assets/images/wp.png'
 </script>
 
 <template>
