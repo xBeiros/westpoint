@@ -2,8 +2,15 @@
 import AppLayout from '@/layouts/AppLayout.vue'
 import { dashboard } from '@/routes/ucp'
 import { Head } from '@inertiajs/vue3'
+import WikiAdminSection from '@/components/WikiAdminSection.vue'
 
 const breadcrumbs = [{ title: 'Dashboard', href: dashboard().url }]
+
+const props = defineProps<{
+    wikiArticles?: any[]
+    wikiPendingCount?: number
+    canManageWiki?: boolean
+}>()
 
 const sections = [
     {

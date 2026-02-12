@@ -1,12 +1,57 @@
 <template>
-    <div class="min-w-screen min-h-screen bg-[#1d1d1d]">
+    <div class="min-w-screen min-h-screen bg-[#f5f3f0] dark:bg-[#1d1d1d] transition-colors">
         <div class="w-full max-w-7xl mx-auto p-4 relative pt-14">
             <!-- Logo & Wiki-Label -->
-            <div class="flex flex-col items-center sm:flex-row sm:items-center sm:justify-center mb-8">
+            <div class="flex flex-col items-center sm:flex-row sm:items-center sm:justify-center mb-8 relative">
                 <img src="@/Assets/images/logo.png" class="w-32 sm:w-40 drop-shadow-[0px_0px_15px_rgba(255,255,255,0.4)]" alt="Westpoint Logo" />
                 <div class="stevie-sans-book-italic flex items-center bg-red-800/60 drop-shadow-[0px_0px_10px_rgba(255,255,255,0.4)] rounded-md mt-2 sm:mt-0 sm:ml-3 px-4 h-7">
                     <div class="-ml-1 drop-shadow-[0px_0px_10px_rgba(255,255,255,1)]">
                         WIKI
+                    </div>
+                </div>
+                <!-- Dark Mode Toggle & User Profile -->
+                <div class="absolute top-0 right-0 flex items-center gap-4">
+                    <!-- Dark Mode Toggle -->
+                    <button 
+                        @click="toggleDarkMode"
+                        class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+                        :title="isDarkMode ? 'Light Mode aktivieren' : 'Dark Mode aktivieren'"
+                    >
+                        <svg v-if="isDarkMode" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                        <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                        </svg>
+                    </button>
+                    <!-- User Profile Dropdown / Login Button -->
+                    <div class="relative">
+                        <template v-if="auth?.user">
+                            <DropdownMenu>
+                                <DropdownMenuTrigger as-child>
+                                    <button class="relative h-9 w-9 rounded-full focus-within:ring-2 focus-within:ring-red-800 transition-colors flex items-center justify-center text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">
+                                        <Avatar class="h-8 w-8 overflow-hidden rounded-full">
+                                            <AvatarImage
+                                                v-if="auth.user.avatar"
+                                                :src="auth.user.avatar"
+                                                :alt="auth.user.name"
+                                            />
+                                            <AvatarFallback class="rounded-full bg-gray-200 dark:bg-gray-700 font-semibold text-gray-900 dark:text-white text-sm">
+                                                {{ getInitials(auth.user?.name) }}
+                                            </AvatarFallback>
+                                        </Avatar>
+                                    </button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent align="end" class="w-56">
+                                    <UserMenuContent :user="auth.user" />
+                                </DropdownMenuContent>
+                            </DropdownMenu>
+                        </template>
+                        <template v-else>
+                            <Link :href="login.url()" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+                                Login
+                            </Link>
+                        </template>
                     </div>
                 </div>
             </div>
@@ -21,17 +66,17 @@
 
                         <!-- Center Content -->
                         <div class="text-center md:text-left flex-1">
-                            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 stevie-sans-bold">
+                            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 stevie-sans-bold">
                                 Allgemeine Kategorien
                             </h1>
-                            <p class="text-lg text-gray-300 stevie-sans-book mb-6">
+                            <p class="text-lg text-gray-700 dark:text-gray-300 stevie-sans-book mb-6">
                                 Hier findest du alle Informationen über den Westpoint Server, seine Spielsysteme und Features.
                             </p>
                             
                             <!-- Search Bar -->
                             <div class="relative w-full max-w-2xl mx-auto md:mx-0" ref="searchContainer">
                                 <div class="relative">
-                                    <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400">
+                                    <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z" />
                                         </svg>
@@ -42,12 +87,12 @@
                                         @keyup.enter="search"
                                         @focus="isFocused = true"
                                         placeholder="Suche nach Informationen auf der Website..."
-                                        class="w-full pl-12 pr-12 py-4 rounded-lg bg-[#2d2d2d] text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-red-800 focus:border-red-800 transition-all"
+                                        class="w-full pl-12 pr-12 py-4 rounded-lg bg-[#ebe8e3] dark:bg-[#2d2d2d] text-gray-900 dark:text-white border border-[#d4cfc8] dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-red-800 focus:border-red-800 transition-all"
                                     />
                                     <button
                                         v-if="query.length > 0"
                                         @click="clearSearch"
-                                        class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-red-700 transition-colors"
+                                        class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400 hover:text-red-700 transition-colors"
                                     >
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -58,16 +103,16 @@
                                 <!-- Search Results Dropdown -->
                                 <div
                                     v-if="query.length > 0 && isFocused && filteredArticles.length > 0"
-                                    class="absolute w-full mt-2 bg-[#2d2d2d] rounded-lg border border-gray-700 shadow-xl z-50 max-h-96 overflow-y-auto"
+                                    class="absolute w-full mt-2 bg-[#f5f3f0] dark:bg-[#2d2d2d] rounded-lg border border-[#e8e4df] dark:border-gray-700 shadow-xl z-50 max-h-96 overflow-y-auto transition-colors"
                                 >
                                     <ul>
                                         <li v-for="article in filteredArticles.slice(0, 10)" :key="article.slug">
                                             <Link
                                                 :href="`/wiki/${article.slug}`"
-                                                class="p-4 block text-left text-white hover:bg-[#3d3d3d] transition-colors border-b border-gray-700 last:border-b-0"
+                                                class="p-4 block text-left text-gray-900 dark:text-white hover:bg-[#ebe8e3] dark:hover:bg-[#3d3d3d] transition-colors border-b border-[#e8e4df] dark:border-gray-700 last:border-b-0"
                                             >
                                                 <div class="font-semibold">{{ article.title }}</div>
-                                                <div v-if="article.description" class="text-sm text-gray-300 mt-1">
+                                                <div v-if="article.description" class="text-sm text-gray-600 dark:text-gray-300 mt-1">
                                                     {{ article.description }}
                                                 </div>
                                             </Link>
@@ -86,17 +131,17 @@
                 <div v-if="selectedCategory" class="mb-8">
                     <button
                         @click="router.visit('/wiki')"
-                        class="text-gray-300 hover:text-white mb-4 flex items-center gap-2 transition-colors"
+                        class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white mb-4 flex items-center gap-2 transition-colors"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                         </svg>
                         Zurück zu allen Kategorien
                     </button>
-                    <h2 class="text-3xl font-bold text-white mb-2">
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
                         {{ getCategoryDisplayName(selectedCategory) }}
                     </h2>
-                    <p class="text-gray-300">
+                    <p class="text-gray-700 dark:text-gray-300">
                         {{ getCategoryDescription(selectedCategory) }}
                     </p>
                 </div>
@@ -106,13 +151,13 @@
                     <div
                         v-for="category in categories"
                         :key="category.name"
-                        class="group relative bg-[#2d2d2d] rounded-lg border border-gray-700 p-6 hover:border-red-800 transition-all duration-300 hover:shadow-lg hover:shadow-red-800/20"
+                        class="group relative bg-[#f0ede8] dark:bg-[#2d2d2d] rounded-lg border border-[#e8e4df] dark:border-gray-700 p-6 hover:border-red-800 transition-all duration-300 hover:shadow-lg hover:shadow-red-800/20"
                     >
                         <!-- External Link Icon -->
                         <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
                             <Link
                                 :href="`/wiki?category=${category.name}`"
-                                class="text-gray-400 hover:text-white"
+                                class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
                                 @click.stop
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -129,12 +174,12 @@
                         </div>
 
                         <!-- Category Title -->
-                        <h3 class="text-xl font-bold text-white mb-2 stevie-sans-bold">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 stevie-sans-bold">
                             {{ category.display_name }}
                         </h3>
 
                         <!-- Category Description -->
-                        <p class="text-sm text-gray-300 mb-4 stevie-sans-book">
+                        <p class="text-sm text-gray-700 dark:text-gray-300 mb-4 stevie-sans-book">
                             {{ getCategoryDescription(category.name) }}
                         </p>
 
@@ -144,7 +189,7 @@
                                 v-for="(article, index) in category.articles.slice(0, 3)"
                                 :key="article.slug"
                                 :href="`/wiki/${article.slug}`"
-                                class="block text-sm text-gray-300 hover:text-red-800 transition-colors py-1.5 px-2 rounded hover:bg-[#3d3d3d] flex items-center"
+                                class="block text-sm text-gray-700 dark:text-gray-300 hover:text-red-800 transition-colors py-1.5 px-2 rounded hover:bg-[#ebe8e3] dark:hover:bg-[#3d3d3d] flex items-center"
                                 @click.stop
                             >
                                 <span class="w-1.5 h-1.5 bg-red-800 rounded-full mr-2 flex-shrink-0"></span>
@@ -164,7 +209,7 @@
                         </div>
 
                         <!-- Article Count Badge -->
-                        <div class="absolute bottom-4 right-4 text-xs text-gray-400">
+                        <div class="absolute bottom-4 right-4 text-xs text-gray-500 dark:text-gray-400">
                             {{ category.count }} {{ category.count === 1 ? 'Artikel' : 'Artikel' }}
                         </div>
                     </div>
@@ -177,10 +222,10 @@
                             v-for="article in getCategoryArticles(selectedCategory)"
                             :key="article.slug"
                             :href="`/wiki/${article.slug}`"
-                            class="block bg-[#2d2d2d] rounded-lg border border-gray-700 p-6 hover:border-red-800 transition-all duration-300 hover:shadow-lg hover:shadow-red-800/20"
+                            class="block bg-[#f0ede8] dark:bg-[#2d2d2d] rounded-lg border border-[#e8e4df] dark:border-gray-700 p-6 hover:border-red-800 transition-all duration-300 hover:shadow-lg hover:shadow-red-800/20"
                         >
-                            <h3 class="text-lg font-bold text-white mb-2">{{ article.title }}</h3>
-                            <p v-if="article.description" class="text-sm text-gray-300">
+                            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">{{ article.title }}</h3>
+                            <p v-if="article.description" class="text-sm text-gray-700 dark:text-gray-300">
                                 {{ article.description }}
                             </p>
                         </Link>
@@ -189,7 +234,7 @@
 
                 <!-- Search Results -->
                 <div v-else-if="query && query.length > 0" class="mb-12">
-                    <h2 class="text-2xl font-bold text-white mb-6">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
                         Suchergebnisse für "{{ query }}"
                     </h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -197,10 +242,10 @@
                             v-for="article in filteredArticles"
                             :key="article.slug"
                             :href="`/wiki/${article.slug}`"
-                            class="block bg-[#2d2d2d] rounded-lg border border-gray-700 p-6 hover:border-red-800 transition-all duration-300"
+                            class="block bg-[#f0ede8] dark:bg-[#2d2d2d] rounded-lg border border-[#e8e4df] dark:border-gray-700 p-6 hover:border-red-800 transition-all duration-300"
                         >
-                            <h3 class="text-lg font-bold text-white mb-2">{{ article.title }}</h3>
-                            <p v-if="article.description" class="text-sm text-gray-400 mb-2">
+                            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">{{ article.title }}</h3>
+                            <p v-if="article.description" class="text-sm text-gray-600 dark:text-gray-400 mb-2">
                                 {{ article.description }}
                             </p>
                             <div v-if="article.category" class="text-xs text-red-800">
@@ -216,7 +261,16 @@
 
 <script setup>
 import { ref, onMounted, onBeforeUnmount, computed } from 'vue'
-import { Link, router } from '@inertiajs/vue3'
+import { Link, router, usePage } from '@inertiajs/vue3'
+import { login } from '@/routes'
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import UserMenuContent from '@/components/UserMenuContent.vue'
+import { getInitials } from '@/composables/useInitials'
 
 const props = defineProps({
     articles: {
@@ -236,6 +290,41 @@ const props = defineProps({
 const query = ref('')
 const searchContainer = ref(null)
 const isFocused = ref(false)
+
+// User Authentication
+const page = usePage()
+const auth = computed(() => {
+    return page.props?.auth || { user: null }
+})
+
+// Dark Mode Management
+const isDarkMode = ref(false)
+
+const initDarkMode = () => {
+    // Prüfe localStorage oder System-Präferenz
+    const stored = localStorage.getItem('wiki-dark-mode')
+    if (stored !== null) {
+        isDarkMode.value = stored === 'true'
+    } else {
+        // Fallback auf System-Präferenz
+        isDarkMode.value = window.matchMedia('(prefers-color-scheme: dark)').matches
+    }
+    updateDarkMode()
+}
+
+const toggleDarkMode = () => {
+    isDarkMode.value = !isDarkMode.value
+    localStorage.setItem('wiki-dark-mode', isDarkMode.value.toString())
+    updateDarkMode()
+}
+
+const updateDarkMode = () => {
+    if (isDarkMode.value) {
+        document.documentElement.classList.add('dark')
+    } else {
+        document.documentElement.classList.remove('dark')
+    }
+}
 
 const filteredArticles = computed(() => {
     if (!query.value) return []
@@ -376,6 +465,7 @@ const handleClickOutside = (e) => {
 }
 
 onMounted(() => {
+    initDarkMode()
     document.addEventListener('click', handleClickOutside)
 })
 
@@ -385,7 +475,5 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
-body {
-    background-color: #1d1d1d;
-}
+/* Dark mode wird über Tailwind-Klassen gehandhabt */
 </style>

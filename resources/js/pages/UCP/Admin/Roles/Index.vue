@@ -59,6 +59,7 @@ const availablePermissions = [
     { id: 'admin.roles.create', label: 'Rollen erstellen' },
     { id: 'admin.roles.edit', label: 'Rollen bearbeiten' },
     { id: 'admin.roles.delete', label: 'Rollen löschen' },
+    { id: 'wiki.admin', label: 'Wiki Verwaltung' },
 ];
 
 // Prüfe ob der Benutzer eine bestimmte Berechtigung hat
@@ -67,6 +68,7 @@ const hasPermission = (permissionId: string): boolean => {
     // Prüfe ob der Benutzer die spezifische Berechtigung hat oder alle Berechtigungen (*)
     return userPerms.includes(permissionId) || userPerms.includes('*');
 };
+
 
 const openCreateDialog = () => {
     if (!hasPermission('admin.roles.create')) {
@@ -323,6 +325,11 @@ const saveRole = async () => {
 };
 
 const deleteRole = async (role: any) => {
+    if (!hasPermission('admin.roles.delete')) {
+        alert('Du hast keine Berechtigung, Rollen zu löschen.');
+        return;
+    }
+    
     if (!confirm(`Möchtest du die Rolle "${role.name}" wirklich löschen?`)) {
         return;
     }
@@ -376,7 +383,11 @@ const deleteRole = async (role: any) => {
                     <h1 class="text-3xl font-bold mb-2">Rollen-Verwaltung</h1>
                     <p class="text-muted-foreground">Verwalte Rollen und deren Berechtigungen</p>
                 </div>
-                <Button @click="openCreateDialog" variant="default">
+                <Button 
+                    v-if="hasPermission('admin.roles.create')"
+                    @click="openCreateDialog" 
+                    variant="default"
+                >
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                     </svg>
@@ -408,6 +419,7 @@ const deleteRole = async (role: any) => {
                         </div>
                         <div class="flex gap-2">
                             <Button
+                                v-if="hasPermission('admin.roles.edit')"
                                 @click="openEditDialog(role)"
                                 variant="ghost"
                                 size="sm"
@@ -417,6 +429,7 @@ const deleteRole = async (role: any) => {
                                 </svg>
                             </Button>
                             <Button
+                                v-if="hasPermission('admin.roles.delete')"
                                 @click="deleteRole(role)"
                                 variant="ghost"
                                 size="sm"

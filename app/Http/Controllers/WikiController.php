@@ -75,7 +75,7 @@ class WikiController extends Controller
         ]);
     }
 
-    public function show(string $slug)
+    public function show(Request $request, string $slug)
     {
         // Hole alle Artikel für Sidebar-Navigation
         $dbArticles = WikiArticle::where('published', true)
@@ -122,6 +122,18 @@ class WikiController extends Controller
 
         if ($article) {
             $article->increment('views');
+            
+            // Hole Like-Informationen
+            $user = $request->user();
+            $likesCount = \App\Models\WikiArticleLike::where('wiki_article_id', $article->id)->count();
+            $isLiked = false;
+            
+            if ($user) {
+                $isLiked = \App\Models\WikiArticleLike::where('wiki_article_id', $article->id)
+                    ->where('user_id', $user->id)
+                    ->exists();
+            }
+            
             return Inertia::render('Wiki/Show', [
                 'article' => [
                     'id' => $article->id,
@@ -132,6 +144,8 @@ class WikiController extends Controller
                     'tags' => $article->tags ?? [],
                     'category' => $article->category,
                     'views' => $article->views,
+                    'likes_count' => $likesCount,
+                    'is_liked' => $isLiked,
                     'created_at' => $article->created_at,
                     'updated_at' => $article->updated_at,
                 ],
@@ -146,6 +160,8 @@ class WikiController extends Controller
             return Inertia::render('Wiki/Show', [
                 'article' => array_merge($article, [
                     'views' => 0,
+                    'likes_count' => 0,
+                    'is_liked' => false,
                     'created_at' => null,
                     'updated_at' => null,
                 ]),
@@ -197,6 +213,47 @@ class WikiController extends Controller
         return Inertia::render('Wiki/Search', [
             'query' => $query,
             'results' => $results->values()->all(),
+        ]);
+    }
+
+    public function toggleLike(Request $request, string $slug)
+    {
+        $user = $request->user();
+        
+        if (!$user) {
+            return response()->json(['error' => 'Nicht autorisiert'], 401);
+        }
+
+        $article = WikiArticle::where('slug', $slug)->first();
+        
+        if (!$article) {
+            return response()->json(['error' => 'Artikel nicht gefunden'], 404);
+        }
+
+        // Prüfe ob User bereits geliked hat
+        $like = \App\Models\WikiArticleLike::where('wiki_article_id', $article->id)
+            ->where('user_id', $user->id)
+            ->first();
+
+        if ($like) {
+            // Unlike
+            $like->delete();
+            $isLiked = false;
+        } else {
+            // Like
+            \App\Models\WikiArticleLike::create([
+                'wiki_article_id' => $article->id,
+                'user_id' => $user->id,
+            ]);
+            $isLiked = true;
+        }
+
+        // Zähle Likes neu
+        $likesCount = \App\Models\WikiArticleLike::where('wiki_article_id', $article->id)->count();
+
+        return response()->json([
+            'is_liked' => $isLiked,
+            'likes_count' => $likesCount,
         ]);
     }
 }

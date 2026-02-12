@@ -1,10 +1,10 @@
-import WikiChangeRequestUserController from './WikiChangeRequestUserController'
 import Admin from './Admin'
+import WikiChangeRequestUserController from './WikiChangeRequestUserController'
 
 
 const Wiki = {
-    WikiChangeRequestUserController: Object.assign(WikiChangeRequestUserController, WikiChangeRequestUserController),
     Admin: Object.assign(Admin, Admin),
+    WikiChangeRequestUserController: Object.assign(WikiChangeRequestUserController, WikiChangeRequestUserController),
 }
 
 export default Wiki

@@ -86,7 +86,7 @@ index.form = indexForm
 
 /**
 * @see \App\Http\Controllers\WikiController::search
-* @see app/Http/Controllers/WikiController.php:159
+* @see app/Http/Controllers/WikiController.php:175
 * @route '/wiki/search'
 */
 export const search = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -101,7 +101,7 @@ search.definition = {
 
 /**
 * @see \App\Http\Controllers\WikiController::search
-* @see app/Http/Controllers/WikiController.php:159
+* @see app/Http/Controllers/WikiController.php:175
 * @route '/wiki/search'
 */
 search.url = (options?: RouteQueryOptions) => {
@@ -114,7 +114,7 @@ search.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\WikiController::search
-* @see app/Http/Controllers/WikiController.php:159
+* @see app/Http/Controllers/WikiController.php:175
 * @route '/wiki/search'
 */
 search.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -124,7 +124,7 @@ search.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\WikiController::search
-* @see app/Http/Controllers/WikiController.php:159
+* @see app/Http/Controllers/WikiController.php:175
 * @route '/wiki/search'
 */
 search.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -134,7 +134,7 @@ search.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \App\Http\Controllers\WikiController::search
-* @see app/Http/Controllers/WikiController.php:159
+* @see app/Http/Controllers/WikiController.php:175
 * @route '/wiki/search'
 */
 const searchForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -144,7 +144,7 @@ const searchForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => 
 
 /**
 * @see \App\Http\Controllers\WikiController::search
-* @see app/Http/Controllers/WikiController.php:159
+* @see app/Http/Controllers/WikiController.php:175
 * @route '/wiki/search'
 */
 searchForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -154,7 +154,7 @@ searchForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\WikiController::search
-* @see app/Http/Controllers/WikiController.php:159
+* @see app/Http/Controllers/WikiController.php:175
 * @route '/wiki/search'
 */
 searchForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -168,6 +168,82 @@ searchForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => (
 })
 
 search.form = searchForm
+
+/**
+* @see \App\Http\Controllers\WikiController::toggleLike
+* @see app/Http/Controllers/WikiController.php:219
+* @route '/wiki/{slug}/like'
+*/
+export const toggleLike = (args: { slug: string | number } | [slug: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: toggleLike.url(args, options),
+    method: 'post',
+})
+
+toggleLike.definition = {
+    methods: ["post"],
+    url: '/wiki/{slug}/like',
+} satisfies RouteDefinition<["post"]>
+
+/**
+* @see \App\Http\Controllers\WikiController::toggleLike
+* @see app/Http/Controllers/WikiController.php:219
+* @route '/wiki/{slug}/like'
+*/
+toggleLike.url = (args: { slug: string | number } | [slug: string | number ] | string | number, options?: RouteQueryOptions) => {
+    if (typeof args === 'string' || typeof args === 'number') {
+        args = { slug: args }
+    }
+
+
+    if (Array.isArray(args)) {
+        args = {
+            slug: args[0],
+        }
+    }
+
+    args = applyUrlDefaults(args)
+
+
+    const parsedArgs = {
+        slug: args.slug,
+    }
+
+    return toggleLike.definition.url
+            .replace('{slug}', parsedArgs.slug.toString())
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\WikiController::toggleLike
+* @see app/Http/Controllers/WikiController.php:219
+* @route '/wiki/{slug}/like'
+*/
+toggleLike.post = (args: { slug: string | number } | [slug: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: toggleLike.url(args, options),
+    method: 'post',
+})
+
+/**
+* @see \App\Http\Controllers\WikiController::toggleLike
+* @see app/Http/Controllers/WikiController.php:219
+* @route '/wiki/{slug}/like'
+*/
+const toggleLikeForm = (args: { slug: string | number } | [slug: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: toggleLike.url(args, options),
+    method: 'post',
+})
+
+/**
+* @see \App\Http\Controllers\WikiController::toggleLike
+* @see app/Http/Controllers/WikiController.php:219
+* @route '/wiki/{slug}/like'
+*/
+toggleLikeForm.post = (args: { slug: string | number } | [slug: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: toggleLike.url(args, options),
+    method: 'post',
+})
+
+toggleLike.form = toggleLikeForm
 
 /**
 * @see \App\Http\Controllers\WikiController::show
@@ -270,6 +346,6 @@ showForm.head = (args: { slug: string | number } | [slug: string | number ] | st
 
 show.form = showForm
 
-const WikiController = { index, search, show }
+const WikiController = { index, search, toggleLike, show }
 
 export default WikiController

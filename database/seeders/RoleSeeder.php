@@ -28,6 +28,7 @@ class RoleSeeder extends Seeder
                     'admin.roles.create',
                     'admin.roles.edit',
                     'admin.roles.delete',
+                    'wiki.admin',
                 ],
             ]
         );

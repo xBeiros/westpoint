@@ -6,9 +6,10 @@ import {
     DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
 import { logout } from '@/routes';
+import { dashboard } from '@/routes/ucp';
 import type { User } from '@/types';
-import { router, useForm } from '@inertiajs/vue3';
-import { LogOut } from 'lucide-vue-next';
+import { Link, router, useForm } from '@inertiajs/vue3';
+import { LayoutGrid, LogOut } from 'lucide-vue-next';
 
 interface Props {
     user: User;
@@ -34,14 +35,23 @@ defineProps<Props>();
     </DropdownMenuLabel>
     <DropdownMenuSeparator />
     <DropdownMenuItem as-child>
+        <Link
+            :href="dashboard()"
+            class="flex w-full items-center text-left"
+        >
+            <LayoutGrid class="mr-2 h-4 w-4" />
+            Dashboard
+        </Link>
+    </DropdownMenuItem>
+    <DropdownMenuItem as-child>
         <button
-            class="block w-full text-left"
+            class="flex w-full items-center text-left"
             @click="handleLogout"
             data-test="logout-button"
             :disabled="logoutForm.processing"
         >
             <LogOut class="mr-2 h-4 w-4" />
-            Log out
+            Ausloggen
         </button>
     </DropdownMenuItem>
 </template>

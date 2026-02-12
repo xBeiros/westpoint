@@ -115,9 +115,9 @@
 
 <script setup>
 import { Head, Link, router } from '@inertiajs/vue3'
-import { index as adminIndex } from '@/routes/wiki/admin'
+import { index as adminIndex } from '@/routes/ucp/wiki'
 import { show as wikiShow } from '@/routes/wiki'
-import { index as changeRequestsIndex, show as changeRequestShow, approve, reject as rejectRoute } from '@/routes/wiki/admin/change-requests'
+import { index as changeRequestsIndex, show as changeRequestShow, approve, reject as rejectRoute } from '@/routes/ucp/wiki/change-requests'
 import { ref } from 'vue'
 
 defineProps({

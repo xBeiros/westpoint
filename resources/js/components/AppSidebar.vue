@@ -13,6 +13,7 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes/ucp';
+import { index as wikiIndex } from '@/routes/ucp/wiki';
 import { type NavItem } from '@/types';
 import { Link, usePage } from '@inertiajs/vue3';
 import { BookOpen, Home, LayoutGrid, User, Car, Shield, Users, FileText } from 'lucide-vue-next';
@@ -20,7 +21,25 @@ import { computed } from 'vue';
 import AppLogo from './AppLogo.vue';
 
 const page = usePage();
-const userGroup = computed(() => (page.props.auth as any)?.group || 'user');
+const userGroup = computed(() => {
+    const auth = page.props.auth as any;
+    const group = auth?.group || 'user';
+    return group;
+});
+
+const userPermissions = computed(() => {
+    const auth = page.props.auth as any;
+    return auth?.permissions || [];
+});
+
+const hasPermission = (permission: string): boolean => {
+    const permissions = userPermissions.value;
+    return permissions.includes(permission) || permissions.includes('*');
+};
+
+const canAccessWikiAdmin = computed(() => {
+    return userGroup.value === 'wikiadmin' || hasPermission('wiki.admin');
+});
 
 const mainNavItems = computed<NavItem[]>(() => {
     return [
@@ -61,11 +80,11 @@ const adminNavItems = computed<NavItem[]>(() => {
         },
     ];
 
-    // Wiki Admin Link nur für wikiadmin oder admin
-    if (userGroup.value === 'wikiadmin' || userGroup.value === 'admin') {
+    // Wiki Admin Link nur für wikiadmin oder mit wiki.admin Berechtigung
+    if (canAccessWikiAdmin.value) {
         items.push({
-            title: 'Wiki Verwaltung',
-            href: '/wiki/admin',
+            title: 'Wiki',
+            href: wikiIndex.url(),
             icon: FileText,
         });
     }

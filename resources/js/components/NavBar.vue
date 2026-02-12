@@ -87,6 +87,7 @@ import { dashboard } from '@/routes/ucp'
 import { index as rulebookIndex } from '@/routes/rulebook'
 import { index as newsIndex } from '@/routes/news'
 import { index as presentationIndex } from '@/routes/presentation'
+import { index as wikiIndex } from '@/routes/wiki'
 import { faq } from '@/routes'
 import { index as adminNewsIndex } from '@/routes/ucp/admin/news'
 import { getInitials } from '@/composables/useInitials'
@@ -126,7 +127,7 @@ const userInitials = computed(() => {
 
 const navigation = [
     { name: 'Startseite', href: welcome.url(), current: false },
-    //{ name: 'Wiki', href: wikiIndex.url(), current: false },
+    { name: 'Wiki', href: wikiIndex.url(), current: false },
     { name: 'Regelwerk', href: rulebookIndex.url(), current: false },
     { name: 'Neuigkeiten', href: newsIndex.url(), current: false },
     { name: 'Präsentation', href: presentationIndex.url(), current: false },

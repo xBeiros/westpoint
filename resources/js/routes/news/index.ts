@@ -186,7 +186,7 @@ showForm.head = (args: { slug: string | number } | [slug: string | number ] | st
 show.form = showForm
 
 /**
-* @see routes/web.php:84
+* @see routes/web.php:163
 * @route '/news/serverrelease'
 */
 export const serverrelease = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -200,7 +200,7 @@ serverrelease.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see routes/web.php:84
+* @see routes/web.php:163
 * @route '/news/serverrelease'
 */
 serverrelease.url = (options?: RouteQueryOptions) => {
@@ -212,7 +212,7 @@ serverrelease.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see routes/web.php:84
+* @see routes/web.php:163
 * @route '/news/serverrelease'
 */
 serverrelease.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -221,7 +221,7 @@ serverrelease.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see routes/web.php:84
+* @see routes/web.php:163
 * @route '/news/serverrelease'
 */
 serverrelease.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -230,7 +230,7 @@ serverrelease.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => (
 })
 
 /**
-* @see routes/web.php:84
+* @see routes/web.php:163
 * @route '/news/serverrelease'
 */
 const serverreleaseForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -239,7 +239,7 @@ const serverreleaseForm = (options?: RouteQueryOptions): RouteFormDefinition<'ge
 })
 
 /**
-* @see routes/web.php:84
+* @see routes/web.php:163
 * @route '/news/serverrelease'
 */
 serverreleaseForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -248,7 +248,7 @@ serverreleaseForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'
 })
 
 /**
-* @see routes/web.php:84
+* @see routes/web.php:163
 * @route '/news/serverrelease'
 */
 serverreleaseForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({

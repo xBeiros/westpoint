@@ -139,7 +139,7 @@
 
 <script setup>
 import { Head, Link, useForm } from '@inertiajs/vue3'
-import { index as adminIndex, store, update } from '@/routes/wiki/admin'
+import { index as adminIndex, store, update } from '@/routes/ucp/wiki'
 import { ref, computed, watch } from 'vue'
 import RichTextEditor from '@/components/Wiki/RichTextEditor.vue'
 

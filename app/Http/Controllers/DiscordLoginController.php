@@ -14,7 +14,7 @@ class DiscordLoginController extends Controller
     /**
      * Zeige die Discord-Login-Seite
      */
-    public function show()
+    public function show(Request $request)
     {
         $clientId = config('services.discord.client_id') ?? env('DISCORD_CLIENT_ID', '');
 
@@ -23,6 +23,12 @@ class DiscordLoginController extends Controller
                 'error' => 'Discord OAuth ist nicht konfiguriert. Bitte kontaktieren Sie einen Administrator.',
                 'discordAuthUrl' => '#',
             ]);
+        }
+
+        // Speichere return_url in der Session, falls vorhanden
+        $returnUrl = $request->input('return_url') ?? $request->query('return_url');
+        if ($returnUrl) {
+            session(['login_return_url' => $returnUrl]);
         }
 
         // Discord OAuth URL
@@ -258,6 +264,24 @@ class DiscordLoginController extends Controller
 
             // Logge den Benutzer ein
             Auth::login($laravelUser, true); // true = remember me
+
+            // Hole return_url aus der Session, falls vorhanden
+            $returnUrl = session('login_return_url');
+            session()->forget('login_return_url'); // Entferne aus Session nach Verwendung
+
+            // Wenn return_url vorhanden ist, dorthin weiterleiten, sonst Dashboard
+            if ($returnUrl && filter_var($returnUrl, FILTER_VALIDATE_URL)) {
+                // Prüfe, ob die URL zur eigenen Domain gehört (Sicherheit)
+                $parsedUrl = parse_url($returnUrl);
+                $appUrl = parse_url(config('app.url'));
+                if ($parsedUrl && isset($parsedUrl['host']) && 
+                    ($parsedUrl['host'] === $appUrl['host'] || 
+                     $parsedUrl['host'] === 'localhost' || 
+                     $parsedUrl['host'] === '127.0.0.1' ||
+                     str_ends_with($parsedUrl['host'], '.test'))) {
+                    return redirect($returnUrl);
+                }
+            }
 
             return redirect()->intended('/ucp/dashboard');
         } catch (\Exception $e) {

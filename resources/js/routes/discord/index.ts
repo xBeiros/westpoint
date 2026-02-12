@@ -86,7 +86,7 @@ login.form = loginForm
 
 /**
 * @see \App\Http\Controllers\DiscordLoginController::callback
-* @see app/Http/Controllers/DiscordLoginController.php:44
+* @see app/Http/Controllers/DiscordLoginController.php:50
 * @route '/auth/discord/callback'
 */
 export const callback = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -101,7 +101,7 @@ callback.definition = {
 
 /**
 * @see \App\Http\Controllers\DiscordLoginController::callback
-* @see app/Http/Controllers/DiscordLoginController.php:44
+* @see app/Http/Controllers/DiscordLoginController.php:50
 * @route '/auth/discord/callback'
 */
 callback.url = (options?: RouteQueryOptions) => {
@@ -114,7 +114,7 @@ callback.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\DiscordLoginController::callback
-* @see app/Http/Controllers/DiscordLoginController.php:44
+* @see app/Http/Controllers/DiscordLoginController.php:50
 * @route '/auth/discord/callback'
 */
 callback.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -124,7 +124,7 @@ callback.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\DiscordLoginController::callback
-* @see app/Http/Controllers/DiscordLoginController.php:44
+* @see app/Http/Controllers/DiscordLoginController.php:50
 * @route '/auth/discord/callback'
 */
 callback.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -134,7 +134,7 @@ callback.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \App\Http\Controllers\DiscordLoginController::callback
-* @see app/Http/Controllers/DiscordLoginController.php:44
+* @see app/Http/Controllers/DiscordLoginController.php:50
 * @route '/auth/discord/callback'
 */
 const callbackForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -144,7 +144,7 @@ const callbackForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> =
 
 /**
 * @see \App\Http\Controllers\DiscordLoginController::callback
-* @see app/Http/Controllers/DiscordLoginController.php:44
+* @see app/Http/Controllers/DiscordLoginController.php:50
 * @route '/auth/discord/callback'
 */
 callbackForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -154,7 +154,7 @@ callbackForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => 
 
 /**
 * @see \App\Http\Controllers\DiscordLoginController::callback
-* @see app/Http/Controllers/DiscordLoginController.php:44
+* @see app/Http/Controllers/DiscordLoginController.php:50
 * @route '/auth/discord/callback'
 */
 callbackForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({

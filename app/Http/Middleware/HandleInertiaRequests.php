@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use App\Models\Role;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -83,6 +84,22 @@ class HandleInertiaRequests extends Middleware
             }
         }
 
+        // Hole Benutzerberechtigungen
+        $userPermissions = [];
+        if ($user && $userGroup) {
+            try {
+                // Spezielle Gruppe "projektmanagement" hat automatisch alle Berechtigungen
+                if ($userGroup === 'projektmanagement') {
+                    $userPermissions = ['*']; // Wildcard für alle Berechtigungen
+                } else {
+                    $userRole = Role::where('name', $userGroup)->first();
+                    $userPermissions = $userRole ? ($userRole->permissions ?? []) : [];
+                }
+            } catch (\Exception $e) {
+                // Fehler beim Abrufen der Berechtigungen ignorieren
+            }
+        }
+
         return [
             ...parent::share($request),
             'name' => config('app.name'),
@@ -91,6 +108,7 @@ class HandleInertiaRequests extends Middleware
                 'user' => $user,
                 'group' => $userGroup,
                 'player' => $playerData,
+                'permissions' => $userPermissions,
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
         ];
