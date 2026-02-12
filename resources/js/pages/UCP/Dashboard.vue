@@ -109,7 +109,7 @@ const sections = [
 <style scoped>
 @font-face {
     font-family: 'GaramondItalic';
-    src: url('@/assets/fonts/Garamond Italic.ttf') format('truetype');
+    src: url('@/Assets/fonts/Garamond Italic.ttf') format('truetype');
     font-weight: normal;
     font-style: italic;
     font-display: swap;
