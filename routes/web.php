@@ -202,14 +202,6 @@ Route::prefix('wiki')->group(function () {
         Route::put('/{article}', [\App\Http\Controllers\Wiki\Admin\WikiAdminController::class, 'update'])->name('update');
         Route::delete('/{article}', [\App\Http\Controllers\Wiki\Admin\WikiAdminController::class, 'destroy'])->name('destroy');
         Route::post('/{article}/toggle-publish', [\App\Http\Controllers\Wiki\Admin\WikiAdminController::class, 'togglePublish'])->name('toggle-publish');
-        
-        // Change Requests Management
-        Route::prefix('change-requests')->name('change-requests.')->group(function () {
-            Route::get('/', [\App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::class, 'index'])->name('index');
-            Route::get('/{changeRequest}', [\App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::class, 'show'])->name('show');
-            Route::post('/{changeRequest}/approve', [\App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::class, 'approve'])->name('approve');
-            Route::post('/{changeRequest}/reject', [\App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::class, 'reject'])->name('reject');
-        });
     });
     
     // Like-Route MUSS VOR der catch-all Route stehen

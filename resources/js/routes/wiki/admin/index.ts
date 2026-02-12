@@ -1,5 +1,4 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../wayfinder'
-import changeRequests from './change-requests'
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::index
 * @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:14
@@ -338,7 +337,7 @@ edit.form = editForm
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::update
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:212
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:230
 * @route '/wiki/admin/{article}'
 */
 export const update = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -353,7 +352,7 @@ update.definition = {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::update
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:212
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:230
 * @route '/wiki/admin/{article}'
 */
 update.url = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -387,7 +386,7 @@ update.url = (args: { article: number | { id: number } } | [article: number | { 
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::update
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:212
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:230
 * @route '/wiki/admin/{article}'
 */
 update.put = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -397,7 +396,7 @@ update.put = (args: { article: number | { id: number } } | [article: number | { 
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::update
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:212
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:230
 * @route '/wiki/admin/{article}'
 */
 const updateForm = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -412,7 +411,7 @@ const updateForm = (args: { article: number | { id: number } } | [article: numbe
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::update
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:212
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:230
 * @route '/wiki/admin/{article}'
 */
 updateForm.put = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -429,7 +428,7 @@ update.form = updateForm
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::destroy
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:257
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:275
 * @route '/wiki/admin/{article}'
 */
 export const destroy = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -444,7 +443,7 @@ destroy.definition = {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::destroy
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:257
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:275
 * @route '/wiki/admin/{article}'
 */
 destroy.url = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -478,7 +477,7 @@ destroy.url = (args: { article: number | { id: number } } | [article: number | {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::destroy
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:257
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:275
 * @route '/wiki/admin/{article}'
 */
 destroy.delete = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -488,7 +487,7 @@ destroy.delete = (args: { article: number | { id: number } } | [article: number 
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::destroy
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:257
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:275
 * @route '/wiki/admin/{article}'
 */
 const destroyForm = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -503,7 +502,7 @@ const destroyForm = (args: { article: number | { id: number } } | [article: numb
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::destroy
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:257
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:275
 * @route '/wiki/admin/{article}'
 */
 destroyForm.delete = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -520,7 +519,7 @@ destroy.form = destroyForm
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::togglePublish
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:265
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:283
 * @route '/wiki/admin/{article}/toggle-publish'
 */
 export const togglePublish = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -535,7 +534,7 @@ togglePublish.definition = {
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::togglePublish
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:265
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:283
 * @route '/wiki/admin/{article}/toggle-publish'
 */
 togglePublish.url = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -569,7 +568,7 @@ togglePublish.url = (args: { article: number | { id: number } } | [article: numb
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::togglePublish
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:265
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:283
 * @route '/wiki/admin/{article}/toggle-publish'
 */
 togglePublish.post = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -579,7 +578,7 @@ togglePublish.post = (args: { article: number | { id: number } } | [article: num
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::togglePublish
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:265
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:283
 * @route '/wiki/admin/{article}/toggle-publish'
 */
 const togglePublishForm = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -589,7 +588,7 @@ const togglePublishForm = (args: { article: number | { id: number } } | [article
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiAdminController::togglePublish
-* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:265
+* @see app/Http/Controllers/Wiki/Admin/WikiAdminController.php:283
 * @route '/wiki/admin/{article}/toggle-publish'
 */
 togglePublishForm.post = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -609,7 +608,6 @@ const admin = {
     update: Object.assign(update, update),
     destroy: Object.assign(destroy, destroy),
     togglePublish: Object.assign(togglePublish, togglePublish),
-    changeRequests: Object.assign(changeRequests, changeRequests),
 }
 
 export default admin

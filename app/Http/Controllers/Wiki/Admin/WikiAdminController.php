@@ -187,12 +187,30 @@ class WikiAdminController extends Controller
             'order' => $validated['order'] ?? 0,
         ]);
 
-        return redirect()->route('wiki.admin.index')
+        return redirect()->route('ucp.wiki.index')
             ->with('success', 'Wiki-Artikel erfolgreich erstellt.');
     }
 
     public function edit(WikiArticle $article)
     {
+        // Wenn es eine JSON-Anfrage ist (für Modal), gebe JSON zurück
+        if (request()->wantsJson() || request()->expectsJson()) {
+            return response()->json([
+                'article' => [
+                    'id' => $article->id,
+                    'slug' => $article->slug,
+                    'title' => $article->title,
+                    'description' => $article->description,
+                    'content' => $article->content,
+                    'raw_content' => $article->raw_content,
+                    'tags' => $article->tags,
+                    'category' => $article->category,
+                    'published' => $article->published,
+                    'order' => $article->order,
+                ],
+            ]);
+        }
+
         return Inertia::render('Wiki/Admin/Editor', [
             'article' => [
                 'id' => $article->id,
@@ -250,7 +268,7 @@ class WikiAdminController extends Controller
             'order' => $validated['order'] ?? 0,
         ]);
 
-        return redirect()->route('wiki.admin.index')
+        return redirect()->route('ucp.wiki.index')
             ->with('success', 'Wiki-Artikel erfolgreich aktualisiert.');
     }
 
@@ -258,7 +276,7 @@ class WikiAdminController extends Controller
     {
         $article->delete();
 
-        return redirect()->route('wiki.admin.index')
+        return redirect()->route('ucp.wiki.index')
             ->with('success', 'Wiki-Artikel erfolgreich gelöscht.');
     }
 

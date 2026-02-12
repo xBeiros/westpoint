@@ -4,12 +4,12 @@ import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFo
 * @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:15
 * @route '/ucp/wiki/change-requests'
 */
-const indexa50cbac7aebc8b9ec6219b2cb2dc95ce = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: indexa50cbac7aebc8b9ec6219b2cb2dc95ce.url(options),
+export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: index.url(options),
     method: 'get',
 })
 
-indexa50cbac7aebc8b9ec6219b2cb2dc95ce.definition = {
+index.definition = {
     methods: ["get","head"],
     url: '/ucp/wiki/change-requests',
 } satisfies RouteDefinition<["get","head"]>
@@ -19,12 +19,12 @@ indexa50cbac7aebc8b9ec6219b2cb2dc95ce.definition = {
 * @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:15
 * @route '/ucp/wiki/change-requests'
 */
-indexa50cbac7aebc8b9ec6219b2cb2dc95ce.url = (options?: RouteQueryOptions) => {
+index.url = (options?: RouteQueryOptions) => {
 
 
 
 
-    return indexa50cbac7aebc8b9ec6219b2cb2dc95ce.definition.url + queryParams(options)
+    return index.definition.url + queryParams(options)
 }
 
 /**
@@ -32,8 +32,8 @@ indexa50cbac7aebc8b9ec6219b2cb2dc95ce.url = (options?: RouteQueryOptions) => {
 * @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:15
 * @route '/ucp/wiki/change-requests'
 */
-indexa50cbac7aebc8b9ec6219b2cb2dc95ce.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: indexa50cbac7aebc8b9ec6219b2cb2dc95ce.url(options),
+index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: index.url(options),
     method: 'get',
 })
 
@@ -42,8 +42,8 @@ indexa50cbac7aebc8b9ec6219b2cb2dc95ce.get = (options?: RouteQueryOptions): Route
 * @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:15
 * @route '/ucp/wiki/change-requests'
 */
-indexa50cbac7aebc8b9ec6219b2cb2dc95ce.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: indexa50cbac7aebc8b9ec6219b2cb2dc95ce.url(options),
+index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: index.url(options),
     method: 'head',
 })
 
@@ -52,8 +52,8 @@ indexa50cbac7aebc8b9ec6219b2cb2dc95ce.head = (options?: RouteQueryOptions): Rout
 * @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:15
 * @route '/ucp/wiki/change-requests'
 */
-const indexa50cbac7aebc8b9ec6219b2cb2dc95ceForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: indexa50cbac7aebc8b9ec6219b2cb2dc95ce.url(options),
+const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url(options),
     method: 'get',
 })
 
@@ -62,8 +62,8 @@ const indexa50cbac7aebc8b9ec6219b2cb2dc95ceForm = (options?: RouteQueryOptions):
 * @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:15
 * @route '/ucp/wiki/change-requests'
 */
-indexa50cbac7aebc8b9ec6219b2cb2dc95ceForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: indexa50cbac7aebc8b9ec6219b2cb2dc95ce.url(options),
+indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url(options),
     method: 'get',
 })
 
@@ -72,8 +72,8 @@ indexa50cbac7aebc8b9ec6219b2cb2dc95ceForm.get = (options?: RouteQueryOptions): R
 * @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:15
 * @route '/ucp/wiki/change-requests'
 */
-indexa50cbac7aebc8b9ec6219b2cb2dc95ceForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: indexa50cbac7aebc8b9ec6219b2cb2dc95ce.url({
+indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: index.url({
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',
             ...(options?.query ?? options?.mergeQuery ?? {}),
@@ -82,109 +82,19 @@ indexa50cbac7aebc8b9ec6219b2cb2dc95ceForm.head = (options?: RouteQueryOptions): 
     method: 'get',
 })
 
-indexa50cbac7aebc8b9ec6219b2cb2dc95ce.form = indexa50cbac7aebc8b9ec6219b2cb2dc95ceForm
-/**
-* @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::index
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:15
-* @route '/wiki/admin/change-requests'
-*/
-const index857dde84143623fd7669f8810406fcd0 = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: index857dde84143623fd7669f8810406fcd0.url(options),
-    method: 'get',
-})
-
-index857dde84143623fd7669f8810406fcd0.definition = {
-    methods: ["get","head"],
-    url: '/wiki/admin/change-requests',
-} satisfies RouteDefinition<["get","head"]>
-
-/**
-* @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::index
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:15
-* @route '/wiki/admin/change-requests'
-*/
-index857dde84143623fd7669f8810406fcd0.url = (options?: RouteQueryOptions) => {
-
-
-
-
-    return index857dde84143623fd7669f8810406fcd0.definition.url + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::index
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:15
-* @route '/wiki/admin/change-requests'
-*/
-index857dde84143623fd7669f8810406fcd0.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: index857dde84143623fd7669f8810406fcd0.url(options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::index
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:15
-* @route '/wiki/admin/change-requests'
-*/
-index857dde84143623fd7669f8810406fcd0.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: index857dde84143623fd7669f8810406fcd0.url(options),
-    method: 'head',
-})
-
-/**
-* @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::index
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:15
-* @route '/wiki/admin/change-requests'
-*/
-const index857dde84143623fd7669f8810406fcd0Form = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index857dde84143623fd7669f8810406fcd0.url(options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::index
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:15
-* @route '/wiki/admin/change-requests'
-*/
-index857dde84143623fd7669f8810406fcd0Form.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index857dde84143623fd7669f8810406fcd0.url(options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::index
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:15
-* @route '/wiki/admin/change-requests'
-*/
-index857dde84143623fd7669f8810406fcd0Form.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: index857dde84143623fd7669f8810406fcd0.url({
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-index857dde84143623fd7669f8810406fcd0.form = index857dde84143623fd7669f8810406fcd0Form
-
-export const index = {
-    '/ucp/wiki/change-requests': indexa50cbac7aebc8b9ec6219b2cb2dc95ce,
-    '/wiki/admin/change-requests': index857dde84143623fd7669f8810406fcd0,
-}
-
+index.form = indexForm
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::show
 * @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:61
 * @route '/ucp/wiki/change-requests/{changeRequest}'
 */
-const show1c94e820fe69f7a5ff4b9074a245088b = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: show1c94e820fe69f7a5ff4b9074a245088b.url(args, options),
+export const show = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: show.url(args, options),
     method: 'get',
 })
 
-show1c94e820fe69f7a5ff4b9074a245088b.definition = {
+show.definition = {
     methods: ["get","head"],
     url: '/ucp/wiki/change-requests/{changeRequest}',
 } satisfies RouteDefinition<["get","head"]>
@@ -194,7 +104,7 @@ show1c94e820fe69f7a5ff4b9074a245088b.definition = {
 * @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:61
 * @route '/ucp/wiki/change-requests/{changeRequest}'
 */
-show1c94e820fe69f7a5ff4b9074a245088b.url = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+show.url = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { changeRequest: args }
     }
@@ -218,7 +128,7 @@ show1c94e820fe69f7a5ff4b9074a245088b.url = (args: { changeRequest: number | { id
         : args.changeRequest,
     }
 
-    return show1c94e820fe69f7a5ff4b9074a245088b.definition.url
+    return show.definition.url
             .replace('{changeRequest}', parsedArgs.changeRequest.toString())
             .replace(/\/+$/, '') + queryParams(options)
 }
@@ -228,8 +138,8 @@ show1c94e820fe69f7a5ff4b9074a245088b.url = (args: { changeRequest: number | { id
 * @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:61
 * @route '/ucp/wiki/change-requests/{changeRequest}'
 */
-show1c94e820fe69f7a5ff4b9074a245088b.get = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: show1c94e820fe69f7a5ff4b9074a245088b.url(args, options),
+show.get = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: show.url(args, options),
     method: 'get',
 })
 
@@ -238,8 +148,8 @@ show1c94e820fe69f7a5ff4b9074a245088b.get = (args: { changeRequest: number | { id
 * @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:61
 * @route '/ucp/wiki/change-requests/{changeRequest}'
 */
-show1c94e820fe69f7a5ff4b9074a245088b.head = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: show1c94e820fe69f7a5ff4b9074a245088b.url(args, options),
+show.head = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: show.url(args, options),
     method: 'head',
 })
 
@@ -248,8 +158,8 @@ show1c94e820fe69f7a5ff4b9074a245088b.head = (args: { changeRequest: number | { i
 * @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:61
 * @route '/ucp/wiki/change-requests/{changeRequest}'
 */
-const show1c94e820fe69f7a5ff4b9074a245088bForm = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show1c94e820fe69f7a5ff4b9074a245088b.url(args, options),
+const showForm = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: show.url(args, options),
     method: 'get',
 })
 
@@ -258,8 +168,8 @@ const show1c94e820fe69f7a5ff4b9074a245088bForm = (args: { changeRequest: number 
 * @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:61
 * @route '/ucp/wiki/change-requests/{changeRequest}'
 */
-show1c94e820fe69f7a5ff4b9074a245088bForm.get = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show1c94e820fe69f7a5ff4b9074a245088b.url(args, options),
+showForm.get = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: show.url(args, options),
     method: 'get',
 })
 
@@ -268,8 +178,8 @@ show1c94e820fe69f7a5ff4b9074a245088bForm.get = (args: { changeRequest: number | 
 * @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:61
 * @route '/ucp/wiki/change-requests/{changeRequest}'
 */
-show1c94e820fe69f7a5ff4b9074a245088bForm.head = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show1c94e820fe69f7a5ff4b9074a245088b.url(args, {
+showForm.head = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: show.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',
             ...(options?.query ?? options?.mergeQuery ?? {}),
@@ -278,130 +188,19 @@ show1c94e820fe69f7a5ff4b9074a245088bForm.head = (args: { changeRequest: number |
     method: 'get',
 })
 
-show1c94e820fe69f7a5ff4b9074a245088b.form = show1c94e820fe69f7a5ff4b9074a245088bForm
-/**
-* @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::show
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:61
-* @route '/wiki/admin/change-requests/{changeRequest}'
-*/
-const show8e5a5f6ced5ce6aed68b3900d868d95f = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: show8e5a5f6ced5ce6aed68b3900d868d95f.url(args, options),
-    method: 'get',
-})
-
-show8e5a5f6ced5ce6aed68b3900d868d95f.definition = {
-    methods: ["get","head"],
-    url: '/wiki/admin/change-requests/{changeRequest}',
-} satisfies RouteDefinition<["get","head"]>
-
-/**
-* @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::show
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:61
-* @route '/wiki/admin/change-requests/{changeRequest}'
-*/
-show8e5a5f6ced5ce6aed68b3900d868d95f.url = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
-    if (typeof args === 'string' || typeof args === 'number') {
-        args = { changeRequest: args }
-    }
-
-    if (typeof args === 'object' && !Array.isArray(args) && 'id' in args) {
-        args = { changeRequest: args.id }
-    }
-
-    if (Array.isArray(args)) {
-        args = {
-            changeRequest: args[0],
-        }
-    }
-
-    args = applyUrlDefaults(args)
-
-
-    const parsedArgs = {
-        changeRequest: typeof args.changeRequest === 'object'
-        ? args.changeRequest.id
-        : args.changeRequest,
-    }
-
-    return show8e5a5f6ced5ce6aed68b3900d868d95f.definition.url
-            .replace('{changeRequest}', parsedArgs.changeRequest.toString())
-            .replace(/\/+$/, '') + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::show
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:61
-* @route '/wiki/admin/change-requests/{changeRequest}'
-*/
-show8e5a5f6ced5ce6aed68b3900d868d95f.get = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: show8e5a5f6ced5ce6aed68b3900d868d95f.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::show
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:61
-* @route '/wiki/admin/change-requests/{changeRequest}'
-*/
-show8e5a5f6ced5ce6aed68b3900d868d95f.head = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: show8e5a5f6ced5ce6aed68b3900d868d95f.url(args, options),
-    method: 'head',
-})
-
-/**
-* @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::show
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:61
-* @route '/wiki/admin/change-requests/{changeRequest}'
-*/
-const show8e5a5f6ced5ce6aed68b3900d868d95fForm = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show8e5a5f6ced5ce6aed68b3900d868d95f.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::show
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:61
-* @route '/wiki/admin/change-requests/{changeRequest}'
-*/
-show8e5a5f6ced5ce6aed68b3900d868d95fForm.get = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show8e5a5f6ced5ce6aed68b3900d868d95f.url(args, options),
-    method: 'get',
-})
-
-/**
-* @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::show
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:61
-* @route '/wiki/admin/change-requests/{changeRequest}'
-*/
-show8e5a5f6ced5ce6aed68b3900d868d95fForm.head = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: show8e5a5f6ced5ce6aed68b3900d868d95f.url(args, {
-        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-            _method: 'HEAD',
-            ...(options?.query ?? options?.mergeQuery ?? {}),
-        }
-    }),
-    method: 'get',
-})
-
-show8e5a5f6ced5ce6aed68b3900d868d95f.form = show8e5a5f6ced5ce6aed68b3900d868d95fForm
-
-export const show = {
-    '/ucp/wiki/change-requests/{changeRequest}': show1c94e820fe69f7a5ff4b9074a245088b,
-    '/wiki/admin/change-requests/{changeRequest}': show8e5a5f6ced5ce6aed68b3900d868d95f,
-}
-
+show.form = showForm
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::approve
 * @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:109
 * @route '/ucp/wiki/change-requests/{changeRequest}/approve'
 */
-const approvefc02928a77ba4db78b752ac55f0fa1af = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
-    url: approvefc02928a77ba4db78b752ac55f0fa1af.url(args, options),
+export const approve = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: approve.url(args, options),
     method: 'post',
 })
 
-approvefc02928a77ba4db78b752ac55f0fa1af.definition = {
+approve.definition = {
     methods: ["post"],
     url: '/ucp/wiki/change-requests/{changeRequest}/approve',
 } satisfies RouteDefinition<["post"]>
@@ -411,7 +210,7 @@ approvefc02928a77ba4db78b752ac55f0fa1af.definition = {
 * @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:109
 * @route '/ucp/wiki/change-requests/{changeRequest}/approve'
 */
-approvefc02928a77ba4db78b752ac55f0fa1af.url = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+approve.url = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { changeRequest: args }
     }
@@ -435,7 +234,7 @@ approvefc02928a77ba4db78b752ac55f0fa1af.url = (args: { changeRequest: number | {
         : args.changeRequest,
     }
 
-    return approvefc02928a77ba4db78b752ac55f0fa1af.definition.url
+    return approve.definition.url
             .replace('{changeRequest}', parsedArgs.changeRequest.toString())
             .replace(/\/+$/, '') + queryParams(options)
 }
@@ -445,8 +244,8 @@ approvefc02928a77ba4db78b752ac55f0fa1af.url = (args: { changeRequest: number | {
 * @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:109
 * @route '/ucp/wiki/change-requests/{changeRequest}/approve'
 */
-approvefc02928a77ba4db78b752ac55f0fa1af.post = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
-    url: approvefc02928a77ba4db78b752ac55f0fa1af.url(args, options),
+approve.post = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: approve.url(args, options),
     method: 'post',
 })
 
@@ -455,8 +254,8 @@ approvefc02928a77ba4db78b752ac55f0fa1af.post = (args: { changeRequest: number | 
 * @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:109
 * @route '/ucp/wiki/change-requests/{changeRequest}/approve'
 */
-const approvefc02928a77ba4db78b752ac55f0fa1afForm = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: approvefc02928a77ba4db78b752ac55f0fa1af.url(args, options),
+const approveForm = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: approve.url(args, options),
     method: 'post',
 })
 
@@ -465,110 +264,24 @@ const approvefc02928a77ba4db78b752ac55f0fa1afForm = (args: { changeRequest: numb
 * @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:109
 * @route '/ucp/wiki/change-requests/{changeRequest}/approve'
 */
-approvefc02928a77ba4db78b752ac55f0fa1afForm.post = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: approvefc02928a77ba4db78b752ac55f0fa1af.url(args, options),
+approveForm.post = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: approve.url(args, options),
     method: 'post',
 })
 
-approvefc02928a77ba4db78b752ac55f0fa1af.form = approvefc02928a77ba4db78b752ac55f0fa1afForm
-/**
-* @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::approve
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:109
-* @route '/wiki/admin/change-requests/{changeRequest}/approve'
-*/
-const approve061b9913861897591deefdb521012980 = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
-    url: approve061b9913861897591deefdb521012980.url(args, options),
-    method: 'post',
-})
-
-approve061b9913861897591deefdb521012980.definition = {
-    methods: ["post"],
-    url: '/wiki/admin/change-requests/{changeRequest}/approve',
-} satisfies RouteDefinition<["post"]>
-
-/**
-* @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::approve
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:109
-* @route '/wiki/admin/change-requests/{changeRequest}/approve'
-*/
-approve061b9913861897591deefdb521012980.url = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
-    if (typeof args === 'string' || typeof args === 'number') {
-        args = { changeRequest: args }
-    }
-
-    if (typeof args === 'object' && !Array.isArray(args) && 'id' in args) {
-        args = { changeRequest: args.id }
-    }
-
-    if (Array.isArray(args)) {
-        args = {
-            changeRequest: args[0],
-        }
-    }
-
-    args = applyUrlDefaults(args)
-
-
-    const parsedArgs = {
-        changeRequest: typeof args.changeRequest === 'object'
-        ? args.changeRequest.id
-        : args.changeRequest,
-    }
-
-    return approve061b9913861897591deefdb521012980.definition.url
-            .replace('{changeRequest}', parsedArgs.changeRequest.toString())
-            .replace(/\/+$/, '') + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::approve
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:109
-* @route '/wiki/admin/change-requests/{changeRequest}/approve'
-*/
-approve061b9913861897591deefdb521012980.post = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
-    url: approve061b9913861897591deefdb521012980.url(args, options),
-    method: 'post',
-})
-
-/**
-* @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::approve
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:109
-* @route '/wiki/admin/change-requests/{changeRequest}/approve'
-*/
-const approve061b9913861897591deefdb521012980Form = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: approve061b9913861897591deefdb521012980.url(args, options),
-    method: 'post',
-})
-
-/**
-* @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::approve
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:109
-* @route '/wiki/admin/change-requests/{changeRequest}/approve'
-*/
-approve061b9913861897591deefdb521012980Form.post = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: approve061b9913861897591deefdb521012980.url(args, options),
-    method: 'post',
-})
-
-approve061b9913861897591deefdb521012980.form = approve061b9913861897591deefdb521012980Form
-
-export const approve = {
-    '/ucp/wiki/change-requests/{changeRequest}/approve': approvefc02928a77ba4db78b752ac55f0fa1af,
-    '/wiki/admin/change-requests/{changeRequest}/approve': approve061b9913861897591deefdb521012980,
-}
-
+approve.form = approveForm
 
 /**
 * @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::reject
 * @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:191
 * @route '/ucp/wiki/change-requests/{changeRequest}/reject'
 */
-const reject4534abb9366a604b8fd87c1d586d5b0c = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
-    url: reject4534abb9366a604b8fd87c1d586d5b0c.url(args, options),
+export const reject = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: reject.url(args, options),
     method: 'post',
 })
 
-reject4534abb9366a604b8fd87c1d586d5b0c.definition = {
+reject.definition = {
     methods: ["post"],
     url: '/ucp/wiki/change-requests/{changeRequest}/reject',
 } satisfies RouteDefinition<["post"]>
@@ -578,7 +291,7 @@ reject4534abb9366a604b8fd87c1d586d5b0c.definition = {
 * @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:191
 * @route '/ucp/wiki/change-requests/{changeRequest}/reject'
 */
-reject4534abb9366a604b8fd87c1d586d5b0c.url = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+reject.url = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { changeRequest: args }
     }
@@ -602,7 +315,7 @@ reject4534abb9366a604b8fd87c1d586d5b0c.url = (args: { changeRequest: number | { 
         : args.changeRequest,
     }
 
-    return reject4534abb9366a604b8fd87c1d586d5b0c.definition.url
+    return reject.definition.url
             .replace('{changeRequest}', parsedArgs.changeRequest.toString())
             .replace(/\/+$/, '') + queryParams(options)
 }
@@ -612,8 +325,8 @@ reject4534abb9366a604b8fd87c1d586d5b0c.url = (args: { changeRequest: number | { 
 * @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:191
 * @route '/ucp/wiki/change-requests/{changeRequest}/reject'
 */
-reject4534abb9366a604b8fd87c1d586d5b0c.post = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
-    url: reject4534abb9366a604b8fd87c1d586d5b0c.url(args, options),
+reject.post = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: reject.url(args, options),
     method: 'post',
 })
 
@@ -622,8 +335,8 @@ reject4534abb9366a604b8fd87c1d586d5b0c.post = (args: { changeRequest: number | {
 * @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:191
 * @route '/ucp/wiki/change-requests/{changeRequest}/reject'
 */
-const reject4534abb9366a604b8fd87c1d586d5b0cForm = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: reject4534abb9366a604b8fd87c1d586d5b0c.url(args, options),
+const rejectForm = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: reject.url(args, options),
     method: 'post',
 })
 
@@ -632,98 +345,12 @@ const reject4534abb9366a604b8fd87c1d586d5b0cForm = (args: { changeRequest: numbe
 * @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:191
 * @route '/ucp/wiki/change-requests/{changeRequest}/reject'
 */
-reject4534abb9366a604b8fd87c1d586d5b0cForm.post = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: reject4534abb9366a604b8fd87c1d586d5b0c.url(args, options),
+rejectForm.post = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: reject.url(args, options),
     method: 'post',
 })
 
-reject4534abb9366a604b8fd87c1d586d5b0c.form = reject4534abb9366a604b8fd87c1d586d5b0cForm
-/**
-* @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::reject
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:191
-* @route '/wiki/admin/change-requests/{changeRequest}/reject'
-*/
-const reject4abba023fd320974fe2bf11680a77051 = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
-    url: reject4abba023fd320974fe2bf11680a77051.url(args, options),
-    method: 'post',
-})
-
-reject4abba023fd320974fe2bf11680a77051.definition = {
-    methods: ["post"],
-    url: '/wiki/admin/change-requests/{changeRequest}/reject',
-} satisfies RouteDefinition<["post"]>
-
-/**
-* @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::reject
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:191
-* @route '/wiki/admin/change-requests/{changeRequest}/reject'
-*/
-reject4abba023fd320974fe2bf11680a77051.url = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
-    if (typeof args === 'string' || typeof args === 'number') {
-        args = { changeRequest: args }
-    }
-
-    if (typeof args === 'object' && !Array.isArray(args) && 'id' in args) {
-        args = { changeRequest: args.id }
-    }
-
-    if (Array.isArray(args)) {
-        args = {
-            changeRequest: args[0],
-        }
-    }
-
-    args = applyUrlDefaults(args)
-
-
-    const parsedArgs = {
-        changeRequest: typeof args.changeRequest === 'object'
-        ? args.changeRequest.id
-        : args.changeRequest,
-    }
-
-    return reject4abba023fd320974fe2bf11680a77051.definition.url
-            .replace('{changeRequest}', parsedArgs.changeRequest.toString())
-            .replace(/\/+$/, '') + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::reject
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:191
-* @route '/wiki/admin/change-requests/{changeRequest}/reject'
-*/
-reject4abba023fd320974fe2bf11680a77051.post = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
-    url: reject4abba023fd320974fe2bf11680a77051.url(args, options),
-    method: 'post',
-})
-
-/**
-* @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::reject
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:191
-* @route '/wiki/admin/change-requests/{changeRequest}/reject'
-*/
-const reject4abba023fd320974fe2bf11680a77051Form = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: reject4abba023fd320974fe2bf11680a77051.url(args, options),
-    method: 'post',
-})
-
-/**
-* @see \App\Http\Controllers\Wiki\Admin\WikiChangeRequestController::reject
-* @see app/Http/Controllers/Wiki/Admin/WikiChangeRequestController.php:191
-* @route '/wiki/admin/change-requests/{changeRequest}/reject'
-*/
-reject4abba023fd320974fe2bf11680a77051Form.post = (args: { changeRequest: number | { id: number } } | [changeRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: reject4abba023fd320974fe2bf11680a77051.url(args, options),
-    method: 'post',
-})
-
-reject4abba023fd320974fe2bf11680a77051.form = reject4abba023fd320974fe2bf11680a77051Form
-
-export const reject = {
-    '/ucp/wiki/change-requests/{changeRequest}/reject': reject4534abb9366a604b8fd87c1d586d5b0c,
-    '/wiki/admin/change-requests/{changeRequest}/reject': reject4abba023fd320974fe2bf11680a77051,
-}
-
+reject.form = rejectForm
 
 const WikiChangeRequestController = { index, show, approve, reject }
 
