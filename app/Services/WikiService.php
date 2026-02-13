@@ -12,7 +12,25 @@ class WikiService
 
     public function all()
     {
-        $files = File::allFiles(base_path($this->basePath));
+        $path = base_path($this->basePath);
+        
+        // Erstelle das Verzeichnis, falls es nicht existiert
+        if (!File::exists($path)) {
+            File::makeDirectory($path, 0755, true);
+            return collect([]);
+        }
+
+        // Prüfe, ob das Verzeichnis existiert und lesbar ist
+        if (!File::isDirectory($path)) {
+            return collect([]);
+        }
+
+        try {
+            $files = File::allFiles($path);
+        } catch (\Exception $e) {
+            // Wenn das Verzeichnis leer ist oder ein Fehler auftritt, gebe leere Collection zurück
+            return collect([]);
+        }
 
         return collect($files)->map(function ($file) {
             $document = YamlFrontMatter::parseFile($file->getPathname());
