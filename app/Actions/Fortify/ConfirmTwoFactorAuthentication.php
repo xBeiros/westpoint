@@ -50,9 +50,16 @@ class ConfirmTwoFactorAuthentication extends BaseConfirmTwoFactorAuthentication
 
         // Aktualisiere nur den Cache im User-Model für aktuelle Session
         // WICHTIG: Kein save() - Daten werden NICHT in Laravel gespeichert!
-        $user->attributes['two_factor_confirmed_at'] = now();
+        // Setze nur den Cache - die Accessors holen die Werte automatisch
         if ($user->redm2FAData) {
             $user->redm2FAData->two_factor_confirmed_at = now();
+        } else {
+            // Falls Cache noch nicht existiert, erstelle ihn
+            $user->redm2FAData = (object) [
+                'two_factor_secret' => $redmUser->two_factor_secret ?? null,
+                'two_factor_recovery_codes' => $redmUser->two_factor_recovery_codes ?? null,
+                'two_factor_confirmed_at' => now(),
+            ];
         }
 
         TwoFactorAuthenticationConfirmed::dispatch($user);

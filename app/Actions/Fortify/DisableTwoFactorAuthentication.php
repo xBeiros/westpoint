@@ -28,9 +28,7 @@ class DisableTwoFactorAuthentication extends BaseDisableTwoFactorAuthentication
 
         // Aktualisiere nur den Cache im User-Model für aktuelle Session
         // WICHTIG: Kein save() - Daten werden NICHT in Laravel gespeichert!
-        $user->attributes['two_factor_secret'] = null;
-        $user->attributes['two_factor_recovery_codes'] = null;
-        $user->attributes['two_factor_confirmed_at'] = null;
+        // Setze nur den Cache - die Accessors holen die Werte automatisch
         $user->redm2FAData = null;
 
         TwoFactorAuthenticationDisabled::dispatch($user);

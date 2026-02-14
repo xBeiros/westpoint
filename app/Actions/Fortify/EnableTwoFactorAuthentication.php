@@ -48,8 +48,7 @@ class EnableTwoFactorAuthentication extends BaseEnableTwoFactorAuthentication
 
             // Aktualisiere nur den Cache im User-Model für aktuelle Session
             // WICHTIG: Kein save() - Daten werden NICHT in Laravel gespeichert!
-            $user->attributes['two_factor_secret'] = $encryptedSecret;
-            $user->attributes['two_factor_recovery_codes'] = $encryptedRecoveryCodes;
+            // Setze nur den Cache - die Accessors holen die Werte automatisch
             $user->redm2FAData = (object) [
                 'two_factor_secret' => $encryptedSecret,
                 'two_factor_recovery_codes' => $encryptedRecoveryCodes,

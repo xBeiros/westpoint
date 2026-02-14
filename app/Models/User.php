@@ -92,10 +92,7 @@ class User extends Authenticatable
                     ->first();
                 
                 if ($redmData) {
-                    // Setze Attribute direkt (ohne Mutator aufzurufen)
-                    $user->attributes['two_factor_secret'] = $redmData->two_factor_secret;
-                    $user->attributes['two_factor_recovery_codes'] = $redmData->two_factor_recovery_codes;
-                    $user->attributes['two_factor_confirmed_at'] = $redmData->two_factor_confirmed_at;
+                    // Setze nur den Cache - die Accessors holen die Werte automatisch
                     $user->redm2FAData = $redmData;
                 }
             }
@@ -149,31 +146,42 @@ class User extends Authenticatable
 
     /**
      * Überschreibe save(), um 2FA-Daten NUR in RedM zu speichern, NICHT in Laravel
+     * 
+     * HINWEIS: Diese Methode sollte eigentlich nie für 2FA-Daten aufgerufen werden,
+     * da die Fortify Actions direkt in RedM schreiben. Diese Methode ist nur als
+     * Sicherheitsnetz gedacht, falls irgendwo im Code versucht wird, 2FA-Daten
+     * über das Model zu speichern.
      */
     public function save(array $options = [])
     {
-        // Prüfe, ob 2FA-Attribute geändert wurden
+        // Prüfe, ob 2FA-Attribute geändert wurden (ohne direkte Manipulation von $attributes)
         $twoFactorChanged = false;
         $updateData = [];
 
         if ($this->discord_identifier) {
-            if (array_key_exists('two_factor_secret', $this->attributes)) {
-                $updateData['two_factor_secret'] = $this->attributes['two_factor_secret'];
+            // Verwende getOriginal() und getDirty(), um zu prüfen, ob Attribute geändert wurden
+            // Vermeide direkte Manipulation von $attributes für überladene Properties
+            $dirty = $this->getDirty();
+            
+            if (isset($dirty['two_factor_secret'])) {
+                $updateData['two_factor_secret'] = $dirty['two_factor_secret'];
                 $twoFactorChanged = true;
-                // Entferne aus attributes, damit es NICHT in Laravel gespeichert wird
-                unset($this->attributes['two_factor_secret']);
             }
-            if (array_key_exists('two_factor_recovery_codes', $this->attributes)) {
-                $updateData['two_factor_recovery_codes'] = $this->attributes['two_factor_recovery_codes'];
+            if (isset($dirty['two_factor_recovery_codes'])) {
+                $updateData['two_factor_recovery_codes'] = $dirty['two_factor_recovery_codes'];
                 $twoFactorChanged = true;
-                // Entferne aus attributes, damit es NICHT in Laravel gespeichert wird
-                unset($this->attributes['two_factor_recovery_codes']);
             }
-            if (array_key_exists('two_factor_confirmed_at', $this->attributes)) {
-                $updateData['two_factor_confirmed_at'] = $this->attributes['two_factor_confirmed_at'];
+            if (isset($dirty['two_factor_confirmed_at'])) {
+                $updateData['two_factor_confirmed_at'] = $dirty['two_factor_confirmed_at'];
                 $twoFactorChanged = true;
-                // Entferne aus attributes, damit es NICHT in Laravel gespeichert wird
-                unset($this->attributes['two_factor_confirmed_at']);
+            }
+            
+            // Entferne 2FA-Attribute aus den dirty attributes, damit sie NICHT in Laravel gespeichert werden
+            if ($twoFactorChanged) {
+                // Verwende setRawAttributes(), um die Attribute zu entfernen
+                $attributes = $this->getAttributes();
+                unset($attributes['two_factor_secret'], $attributes['two_factor_recovery_codes'], $attributes['two_factor_confirmed_at']);
+                $this->setRawAttributes($attributes);
             }
         }
 
