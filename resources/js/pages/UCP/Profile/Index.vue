@@ -104,20 +104,26 @@ const enable2FAAuth = async () => {
         console.log('Starte 2FA-Aktivierung...');
         
         // Aktiviere 2FA (mit force=true, wenn bereits aktiviert, um neuen QR-Code zu generieren)
-        const enableUrl = enable2FA().url + (props.twoFactorEnabled ? '?force=1' : '');
+        const enableUrl = enable2FA().url;
         console.log('Enable URL:', enableUrl);
         
         const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
         console.log('CSRF Token vorhanden:', !!csrfToken);
         
+        // Erstelle FormData für POST-Request (Laravel erwartet form-data oder x-www-form-urlencoded)
+        const formData = new FormData();
+        if (props.twoFactorEnabled) {
+            formData.append('force', '1');
+        }
+        
         const response = await fetch(enableUrl, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': csrfToken || '',
                 'X-Requested-With': 'XMLHttpRequest',
                 'Accept': 'application/json',
             },
+            body: formData,
             credentials: 'same-origin',
         });
 
@@ -149,6 +155,7 @@ const enable2FAAuth = async () => {
         const [qrResponse, secretResponse] = await Promise.all([
             fetch(qrCodeRoute().url, {
                 headers: {
+                    'X-CSRF-TOKEN': csrfToken || '',
                     'X-Requested-With': 'XMLHttpRequest',
                     'Accept': 'application/json',
                 },
@@ -156,6 +163,7 @@ const enable2FAAuth = async () => {
             }),
             fetch(secretKeyRoute().url, {
                 headers: {
+                    'X-CSRF-TOKEN': csrfToken || '',
                     'X-Requested-With': 'XMLHttpRequest',
                     'Accept': 'application/json',
                 },
