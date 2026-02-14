@@ -37,7 +37,7 @@ class EnableTwoFactorAuthentication extends BaseEnableTwoFactorAuthentication
                 return RecoveryCode::generate();
             })->all()));
 
-            // Speichere in RedM-Datenbank
+            // Speichere NUR in RedM-Datenbank - NICHT in Laravel!
             DB::connection('redm')
                 ->table('users')
                 ->where('discord_identifier', $user->discord_identifier)
@@ -46,11 +46,15 @@ class EnableTwoFactorAuthentication extends BaseEnableTwoFactorAuthentication
                     'two_factor_recovery_codes' => $encryptedRecoveryCodes,
                 ]);
 
-            // Aktualisiere auch Laravel User-Model für aktuelle Session
-            $user->forceFill([
+            // Aktualisiere nur den Cache im User-Model für aktuelle Session
+            // WICHTIG: Kein save() - Daten werden NICHT in Laravel gespeichert!
+            $user->attributes['two_factor_secret'] = $encryptedSecret;
+            $user->attributes['two_factor_recovery_codes'] = $encryptedRecoveryCodes;
+            $user->redm2FAData = (object) [
                 'two_factor_secret' => $encryptedSecret,
                 'two_factor_recovery_codes' => $encryptedRecoveryCodes,
-            ])->save();
+                'two_factor_confirmed_at' => null,
+            ];
 
             TwoFactorAuthenticationEnabled::dispatch($user);
         }

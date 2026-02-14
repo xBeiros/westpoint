@@ -23,7 +23,7 @@ class GenerateNewRecoveryCodes extends BaseGenerateNewRecoveryCodes
             return RecoveryCode::generate();
         })->all()));
 
-        // Speichere in RedM-Datenbank
+        // Speichere NUR in RedM-Datenbank - NICHT in Laravel!
         DB::connection('redm')
             ->table('users')
             ->where('discord_identifier', $user->discord_identifier)
@@ -31,10 +31,12 @@ class GenerateNewRecoveryCodes extends BaseGenerateNewRecoveryCodes
                 'two_factor_recovery_codes' => $encryptedRecoveryCodes,
             ]);
 
-        // Aktualisiere auch Laravel User-Model für aktuelle Session
-        $user->forceFill([
-            'two_factor_recovery_codes' => $encryptedRecoveryCodes,
-        ])->save();
+        // Aktualisiere nur den Cache im User-Model für aktuelle Session
+        // WICHTIG: Kein save() - Daten werden NICHT in Laravel gespeichert!
+        $user->attributes['two_factor_recovery_codes'] = $encryptedRecoveryCodes;
+        if ($user->redm2FAData) {
+            $user->redm2FAData->two_factor_recovery_codes = $encryptedRecoveryCodes;
+        }
 
         RecoveryCodesGenerated::dispatch($user);
     }

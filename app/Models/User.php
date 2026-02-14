@@ -148,7 +148,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Überschreibe save(), um 2FA-Daten in RedM zu speichern
+     * Überschreibe save(), um 2FA-Daten NUR in RedM zu speichern, NICHT in Laravel
      */
     public function save(array $options = [])
     {
@@ -160,21 +160,27 @@ class User extends Authenticatable
             if (array_key_exists('two_factor_secret', $this->attributes)) {
                 $updateData['two_factor_secret'] = $this->attributes['two_factor_secret'];
                 $twoFactorChanged = true;
+                // Entferne aus attributes, damit es NICHT in Laravel gespeichert wird
+                unset($this->attributes['two_factor_secret']);
             }
             if (array_key_exists('two_factor_recovery_codes', $this->attributes)) {
                 $updateData['two_factor_recovery_codes'] = $this->attributes['two_factor_recovery_codes'];
                 $twoFactorChanged = true;
+                // Entferne aus attributes, damit es NICHT in Laravel gespeichert wird
+                unset($this->attributes['two_factor_recovery_codes']);
             }
             if (array_key_exists('two_factor_confirmed_at', $this->attributes)) {
                 $updateData['two_factor_confirmed_at'] = $this->attributes['two_factor_confirmed_at'];
                 $twoFactorChanged = true;
+                // Entferne aus attributes, damit es NICHT in Laravel gespeichert wird
+                unset($this->attributes['two_factor_confirmed_at']);
             }
         }
 
-        // Speichere normale Attribute in Laravel-Datenbank
+        // Speichere normale Attribute in Laravel-Datenbank (OHNE 2FA-Daten)
         $result = parent::save($options);
 
-        // Speichere 2FA-Daten in RedM-Datenbank
+        // Speichere 2FA-Daten NUR in RedM-Datenbank
         if ($twoFactorChanged && !empty($updateData)) {
             DB::connection('redm')
                 ->table('users')

@@ -16,7 +16,7 @@ class DisableTwoFactorAuthentication extends BaseDisableTwoFactorAuthentication
      */
     public function __invoke($user)
     {
-        // Lösche 2FA-Daten in RedM-Datenbank
+        // Lösche 2FA-Daten NUR in RedM-Datenbank - NICHT in Laravel!
         DB::connection('redm')
             ->table('users')
             ->where('discord_identifier', $user->discord_identifier)
@@ -26,12 +26,12 @@ class DisableTwoFactorAuthentication extends BaseDisableTwoFactorAuthentication
                 'two_factor_confirmed_at' => null,
             ]);
 
-        // Aktualisiere auch Laravel User-Model für aktuelle Session
-        $user->forceFill([
-            'two_factor_secret' => null,
-            'two_factor_recovery_codes' => null,
-            'two_factor_confirmed_at' => null,
-        ])->save();
+        // Aktualisiere nur den Cache im User-Model für aktuelle Session
+        // WICHTIG: Kein save() - Daten werden NICHT in Laravel gespeichert!
+        $user->attributes['two_factor_secret'] = null;
+        $user->attributes['two_factor_recovery_codes'] = null;
+        $user->attributes['two_factor_confirmed_at'] = null;
+        $user->redm2FAData = null;
 
         TwoFactorAuthenticationDisabled::dispatch($user);
     }

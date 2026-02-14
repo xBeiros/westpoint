@@ -40,7 +40,7 @@ class ConfirmTwoFactorAuthentication extends BaseConfirmTwoFactorAuthentication
             ])->errorBag('confirmTwoFactorAuthentication');
         }
 
-        // Aktualisiere in RedM-Datenbank
+        // Aktualisiere NUR in RedM-Datenbank - NICHT in Laravel!
         DB::connection('redm')
             ->table('users')
             ->where('discord_identifier', $user->discord_identifier)
@@ -48,10 +48,12 @@ class ConfirmTwoFactorAuthentication extends BaseConfirmTwoFactorAuthentication
                 'two_factor_confirmed_at' => now(),
             ]);
 
-        // Aktualisiere auch Laravel User-Model für aktuelle Session
-        $user->forceFill([
-            'two_factor_confirmed_at' => now(),
-        ])->save();
+        // Aktualisiere nur den Cache im User-Model für aktuelle Session
+        // WICHTIG: Kein save() - Daten werden NICHT in Laravel gespeichert!
+        $user->attributes['two_factor_confirmed_at'] = now();
+        if ($user->redm2FAData) {
+            $user->redm2FAData->two_factor_confirmed_at = now();
+        }
 
         TwoFactorAuthenticationConfirmed::dispatch($user);
     }
