@@ -25,7 +25,7 @@ class ProfileController extends Controller
         }
 
         try {
-            // Hole Spielerdaten aus der RedM-Datenbank
+            // Hole private Benutzerdaten aus der RedM users-Tabelle
             $redmUser = DB::connection('redm')
                 ->table('users')
                 ->where('discord_identifier', $user->discord_identifier)
@@ -33,51 +33,36 @@ class ProfileController extends Controller
 
             if (!$redmUser) {
                 return Inertia::render('UCP/Profile/Index', [
-                    'characters' => [],
-                    'selectedCharacter' => null,
-                    'error' => 'Keine Spielerdaten in der RedM-Datenbank gefunden.',
+                    'userData' => null,
+                    'error' => 'Keine Benutzerdaten in der RedM-Datenbank gefunden.',
                 ]);
             }
 
-            // Hole ALLE Character-Daten für diesen User
-            $characters = DB::connection('redm')
-                ->table('characters')
-                ->where('identifier', $redmUser->identifier)
-                ->orderBy('charidentifier', 'asc')
-                ->get();
+            // Hole private Informationen aus der users-Tabelle
+            $userData = [
+                'firstname' => $redmUser->firstname ?? null,
+                'lastname' => $redmUser->lastname ?? null,
+                'email' => $redmUser->email ?? null,
+                'birthdate' => $redmUser->birthdate ?? null,
+            ];
 
-            if ($characters->isEmpty()) {
-                return Inertia::render('UCP/Profile/Index', [
-                    'characters' => [],
-                    'selectedCharacter' => null,
-                    'error' => 'Keine Charakterdaten in der RedM-Datenbank gefunden.',
-                ]);
-            }
-
-            // Verarbeite alle Charaktere
-            $charactersData = $characters->map(function ($character) {
-                return [
-                    'charidentifier' => $character->charidentifier ?? null,
-                    'firstname' => $character->firstname ?? null,
-                    'lastname' => $character->lastname ?? null,
-                    'email' => $character->email ?? null,
-                    'birthdate' => $character->birthdate ?? null,
-                ];
-            });
-
-            // Wähle den ersten Charakter als Standard
-            $selectedCharacter = $charactersData->first();
+            // Hole 2FA-Status aus RedM-Datenbank
+            $twoFactorSecret = $redmUser->two_factor_secret ?? null;
+            $twoFactorConfirmedAt = $redmUser->two_factor_confirmed_at ?? null;
+            
+            $twoFactorEnabled = !empty($twoFactorSecret);
+            $twoFactorConfirmed = !empty($twoFactorConfirmedAt);
 
             return Inertia::render('UCP/Profile/Index', [
-                'characters' => $charactersData,
-                'selectedCharacter' => $selectedCharacter,
+                'userData' => $userData,
+                'twoFactorEnabled' => $twoFactorEnabled,
+                'twoFactorConfirmed' => $twoFactorConfirmed,
             ]);
         } catch (\Exception $e) {
             Log::error('Fehler beim Laden der Profil-Daten: ' . $e->getMessage());
             
             return Inertia::render('UCP/Profile/Index', [
-                'characters' => [],
-                'selectedCharacter' => null,
+                'userData' => null,
                 'error' => 'Fehler beim Laden der Profil-Daten: ' . $e->getMessage(),
             ]);
         }
@@ -97,7 +82,6 @@ class ProfileController extends Controller
         }
 
         $validated = $request->validate([
-            'charidentifier' => ['required', 'integer'],
             'firstname' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255'],
@@ -105,7 +89,7 @@ class ProfileController extends Controller
         ]);
 
         try {
-            // Hole Spielerdaten aus der RedM-Datenbank
+            // Hole Benutzerdaten aus der RedM-Datenbank
             $redmUser = DB::connection('redm')
                 ->table('users')
                 ->where('discord_identifier', $user->discord_identifier)
@@ -113,27 +97,14 @@ class ProfileController extends Controller
 
             if (!$redmUser) {
                 return back()->withErrors([
-                    'message' => 'Keine Spielerdaten in der RedM-Datenbank gefunden.',
+                    'message' => 'Keine Benutzerdaten in der RedM-Datenbank gefunden.',
                 ]);
             }
 
-            // Prüfe ob der Charakter dem User gehört
-            $character = DB::connection('redm')
-                ->table('characters')
-                ->where('charidentifier', $validated['charidentifier'])
-                ->where('identifier', $redmUser->identifier)
-                ->first();
-
-            if (!$character) {
-                return back()->withErrors([
-                    'message' => 'Charakter nicht gefunden oder gehört nicht zu deinem Account.',
-                ]);
-            }
-
-            // Aktualisiere die Daten in der RedM-Datenbank
+            // Aktualisiere die privaten Daten in der users-Tabelle
             DB::connection('redm')
-                ->table('characters')
-                ->where('charidentifier', $validated['charidentifier'])
+                ->table('users')
+                ->where('discord_identifier', $user->discord_identifier)
                 ->update([
                     'firstname' => $validated['firstname'],
                     'lastname' => $validated['lastname'],

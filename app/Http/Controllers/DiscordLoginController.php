@@ -262,12 +262,30 @@ class DiscordLoginController extends Controller
                 }
             }
 
-            // Logge den Benutzer ein
-            Auth::login($laravelUser, true); // true = remember me
-
             // Hole return_url aus der Session, falls vorhanden
             $returnUrl = session('login_return_url');
-            session()->forget('login_return_url'); // Entferne aus Session nach Verwendung
+            session()->forget('login_return_url');
+
+            // Prüfe, ob 2FA aktiviert ist
+            if ($laravelUser->two_factor_secret && $laravelUser->two_factor_confirmed_at) {
+                // Speichere return_url in Session für nach 2FA-Verifizierung
+                if ($returnUrl) {
+                    session(['two_factor_return_url' => $returnUrl]);
+                }
+                
+                // Speichere User-ID und Remember-Flag in Session für 2FA-Challenge
+                // WICHTIG: Benutzer wird NICHT eingeloggt, nur Session-Daten werden gesetzt
+                session([
+                    'login.id' => $laravelUser->id,
+                    'login.remember' => true, // Remember me
+                ]);
+                
+                // Weiterleitung zur 2FA-Challenge
+                return redirect('/two-factor-challenge');
+            }
+
+            // 2FA ist nicht aktiviert - logge den Benutzer direkt ein
+            Auth::login($laravelUser, true); // true = remember me
 
             // Wenn return_url vorhanden ist, dorthin weiterleiten, sonst Dashboard
             if ($returnUrl && filter_var($returnUrl, FILTER_VALIDATE_URL)) {

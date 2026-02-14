@@ -149,7 +149,7 @@ return [
         Features::emailVerification(),
         Features::twoFactorAuthentication([
             'confirm' => true,
-            'confirmPassword' => true,
+            'confirmPassword' => false, // Deaktiviert, da Discord-Login kein Passwort hat
             // 'window' => 0
         ]),
     ],
