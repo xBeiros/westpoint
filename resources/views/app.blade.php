@@ -8,12 +8,16 @@
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Favicon - Wichtig für Authenticator-Apps -->
-        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon.ico') }}">
-        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon.ico') }}">
-        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
-        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
-        <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('logo.png') }}">
-        <link rel="icon" type="image/png" sizes="512x512" href="{{ asset('logo.png') }}">
+        <!-- Authenticator-Apps holen das Logo von /favicon.ico und /apple-touch-icon.png -->
+        <link rel="icon" type="image/png" href="{{ asset('images/logo_new.png') }}">
+        <link rel="shortcut icon" href="{{ asset('images/logo_new.png') }}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/logo_new.png') }}">
+        <link rel="apple-touch-icon" sizes="192x192" href="{{ asset('images/logo_new.png') }}">
+        <link rel="apple-touch-icon" sizes="512x512" href="{{ asset('images/logo_new.png') }}">
+        <!-- Open Graph für bessere Logo-Erkennung -->
+        <meta property="og:image" content="{{ asset('images/logo_new.png') }}">
+        <meta property="og:image:type" content="image/png">
+        <meta name="twitter:image" content="{{ asset('images/logo_new.png') }}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">

@@ -9,6 +9,25 @@ use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Response;
+
+// Favicon und Icons für Authenticator-Apps
+// Authenticator-Apps holen das Logo von /favicon.ico und /apple-touch-icon.png
+Route::get('/favicon.ico', function () {
+    $path = public_path('images/logo_new.png');
+    if (file_exists($path)) {
+        return Response::file($path, ['Content-Type' => 'image/png']);
+    }
+    return response('', 404);
+});
+
+Route::get('/apple-touch-icon.png', function () {
+    $path = public_path('images/logo_new.png');
+    if (file_exists($path)) {
+        return Response::file($path, ['Content-Type' => 'image/png']);
+    }
+    return response('', 404);
+});
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
