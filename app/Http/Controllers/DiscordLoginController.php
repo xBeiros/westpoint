@@ -139,6 +139,13 @@ class DiscordLoginController extends Controller
                 Log::info('RedM Benutzerabfrage durchgeführt', [
                     'discord_id' => $discordId,
                     'user_found' => $redmUser !== null,
+                    'user_data' => $redmUser ? [
+                        'identifier' => $redmUser->identifier ?? null,
+                        'discord_identifier' => $redmUser->discord_identifier ?? null,
+                        'email' => $redmUser->email ?? null,
+                        'firstname' => $redmUser->firstname ?? null,
+                        'lastname' => $redmUser->lastname ?? null,
+                    ] : null,
                 ]);
             } catch (\Exception $dbException) {
                 Log::error('RedM Datenbankabfrage fehlgeschlagen', [
@@ -236,24 +243,61 @@ class DiscordLoginController extends Controller
             // Erstelle automatisch einen Laravel-User, wenn ein RedM-User existiert
             // Der Laravel-User dient nur als Session-Bridge - alle echten Daten kommen aus RedM
             if (!$laravelUser) {
+                if (!$redmUser) {
+                    Log::warning('Laravel-User kann nicht erstellt werden - RedM-User nicht gefunden', [
+                        'discord_id' => $discordId,
+                    ]);
+                    
+                    return redirect('/auth/discord')->withErrors([
+                        'discord_id' => 'Diese Discord ID wurde nicht in der RedM-Datenbank gefunden.',
+                    ]);
+                }
+                
                 // Hole Name und Email aus RedM, falls vorhanden
                 $name = $redmUser->firstname ?? $redmUser->lastname 
                     ? trim(($redmUser->firstname ?? '') . ' ' . ($redmUser->lastname ?? ''))
                     : 'User';
-                $email = $redmUser->email ?? null;
                 
-                // Erstelle minimalen Laravel-User nur mit discord_identifier
-                // Name und Email sind optional, da alle Daten aus RedM kommen
-                $laravelUser = \App\Models\User::create([
-                    'discord_identifier' => $discordId,
-                    'name' => $name,
-                    'email' => $email,
-                ]);
+                // Email aus RedM oder eindeutigen Dummy-Wert verwenden
+                // Da email unique() ist, müssen wir einen eindeutigen Wert verwenden
+                $email = $redmUser->email ?? "discord_{$discordId}@redm.local";
                 
-                Log::info('Laravel-User automatisch erstellt', [
-                    'discord_id' => $discordId,
-                    'user_id' => $laravelUser->id,
-                ]);
+                // Prüfe, ob Email bereits existiert (falls RedM-Email bereits verwendet wird)
+                $emailExists = \App\Models\User::where('email', $email)->exists();
+                if ($emailExists) {
+                    $email = "discord_{$discordId}@redm.local";
+                }
+                
+                try {
+                    // Erstelle minimalen Laravel-User
+                    // Password ist erforderlich, aber wird nicht verwendet (Discord-Login)
+                    $laravelUser = \App\Models\User::create([
+                        'discord_identifier' => $discordId,
+                        'name' => $name,
+                        'email' => $email,
+                        'password' => bcrypt(uniqid('redm_', true)), // Dummy-Password, wird nie verwendet
+                    ]);
+                    
+                    Log::info('Laravel-User automatisch erstellt', [
+                        'discord_id' => $discordId,
+                        'user_id' => $laravelUser->id,
+                        'email' => $email,
+                    ]);
+                } catch (\Exception $createException) {
+                    Log::error('Fehler beim Erstellen des Laravel-Users', [
+                        'discord_id' => $discordId,
+                        'message' => $createException->getMessage(),
+                        'trace' => $createException->getTraceAsString(),
+                    ]);
+                    
+                    $errorMessage = config('app.debug') 
+                        ? 'Fehler beim Erstellen des Benutzers: ' . $createException->getMessage()
+                        : 'Fehler beim Erstellen des Benutzers. Bitte kontaktieren Sie einen Administrator.';
+                    
+                    return redirect('/auth/discord')->withErrors([
+                        'discord_id' => $errorMessage,
+                    ]);
+                }
             }
 
             // Hole return_url aus der Session, falls vorhanden
