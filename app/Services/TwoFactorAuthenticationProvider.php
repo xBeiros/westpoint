@@ -89,7 +89,7 @@ class TwoFactorAuthenticationProvider implements TwoFactorAuthenticationProvider
 
         // Verwende verifyKeyNewer mit Cache-Unterstützung, um zu verhindern, dass Codes mehrfach verwendet werden
         $key = 'fortify.2fa_codes.'.md5($code);
-        $oldTimestamp = optional($this->cache)->get($key);
+        $oldTimestamp = $this->cache ? $this->cache->get($key) : null;
 
         $timestamp = $this->engine->verifyKeyNewer(
             $secret,
@@ -103,7 +103,14 @@ class TwoFactorAuthenticationProvider implements TwoFactorAuthenticationProvider
             }
 
             // Speichere Timestamp im Cache, um Wiederverwendung zu verhindern
-            optional($this->cache)->put($key, $timestamp, ($this->engine->getWindow() ?: 1) * 60);
+            // Stelle sicher, dass getWindow() einen Integer zurückgibt
+            $window = $this->engine->getWindow();
+            $window = is_int($window) ? $window : 1;
+            $ttl = $window * 60;
+            
+            if ($this->cache) {
+                $this->cache->put($key, $timestamp, $ttl);
+            }
 
             return true;
         }
