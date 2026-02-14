@@ -76,12 +76,6 @@ const isConfirming2FA = ref(false);
 // Sessions State
 const isLoggingOut = ref(false);
 
-// Sessions State
-const isLoggingOut = ref(false);
-
-// Sessions State
-const isLoggingOut = ref(false);
-
 // Lade 2FA-Daten beim Mount, wenn 2FA aktiviert aber nicht bestätigt ist
 onMounted(async () => {
     if (props.twoFactorEnabled && !props.twoFactorConfirmed) {
