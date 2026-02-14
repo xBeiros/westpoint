@@ -197,6 +197,8 @@ class DiscordLoginController extends Controller
             }
 
             // Prüfe, ob ein Laravel-User mit dieser Discord ID existiert
+            // WICHTIG: Wir erstellen KEINEN neuen User automatisch - alles läuft über RedM!
+            // Der Laravel-User muss manuell angelegt werden, falls er noch nicht existiert.
             $laravelUser = null;
             try {
                 $laravelUser = \App\Models\User::where('discord_identifier', $discordId)->first();
@@ -231,35 +233,18 @@ class DiscordLoginController extends Controller
                 }
             }
 
-            // Avatar-Funktionalität deaktiviert - verwende Standard Initialen
-
+            // WICHTIG: Kein User wird automatisch erstellt!
+            // Wenn kein Laravel-User existiert, muss dieser manuell angelegt werden.
+            // Alle echten Daten kommen aus RedM - der Laravel-User dient nur als Session-Bridge.
             if (!$laravelUser) {
-                // Erstelle einen neuen Laravel-User basierend auf RedM-Daten
-                try {
-                    // Hole Character-Name falls vorhanden
-                    $character = DB::connection('redm')
-                        ->table('characters')
-                        ->where('identifier', $redmUser->identifier)
-                        ->where('discordid', $discordId)
-                        ->first();
-                    
-                    $userName = $discordUser['username'] ?? 'Discord User';
-                    if ($character && $character->firstname && $character->lastname) {
-                        $userName = $character->firstname . ' ' . $character->lastname;
-                    }
-                    
-                    $laravelUser = \App\Models\User::create([
-                        'name' => $userName,
-                        'email' => $discordUser['email'] ?? "discord_{$discordId}@westpoint.local",
-                        'password' => bcrypt(str()->random(32)), // Zufälliges Passwort
-                        'discord_identifier' => $discordId,
-                    ]);
-                } catch (\Exception $createException) {
-                    Log::error('Fehler beim Erstellen des Users', [
-                        'message' => $createException->getMessage(),
-                    ]);
-                    throw $createException;
-                }
+                Log::warning('Laravel-User nicht gefunden - Login abgelehnt', [
+                    'discord_id' => $discordId,
+                    'redm_user_exists' => $redmUser !== null,
+                ]);
+                
+                return redirect('/auth/discord')->withErrors([
+                    'discord_id' => 'Ihr Account wurde noch nicht für das Web-Interface aktiviert. Bitte kontaktieren Sie einen Administrator.',
+                ]);
             }
 
             // Hole return_url aus der Session, falls vorhanden
