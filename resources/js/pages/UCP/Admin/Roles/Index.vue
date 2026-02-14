@@ -49,6 +49,7 @@ const formData = ref({
 
 // Verfügbare Berechtigungen
 const availablePermissions = [
+    { id: '*', label: 'Alle Berechtigungen (*)' },
     { id: 'admin.players.view', label: 'Spieler anzeigen' },
     { id: 'admin.players.kick', label: 'Spieler kicken' },
     { id: 'admin.players.ban', label: 'Spieler bannen' },
@@ -171,18 +172,36 @@ const togglePermission = (permissionId: string, checked: boolean | string) => {
     // Erstelle eine neue Array-Referenz für Reaktivität
     const currentPermissions = [...formData.value.permissions];
     
-    if (isChecked) {
-        if (!currentPermissions.includes(permissionId)) {
-            currentPermissions.push(permissionId);
+    if (permissionId === '*') {
+        // Wenn "*" ausgewählt wird, entferne alle anderen Berechtigungen
+        if (isChecked) {
+            formData.value.permissions = ['*'];
+        } else {
+            formData.value.permissions = [];
         }
     } else {
-        const index = currentPermissions.indexOf(permissionId);
-        if (index > -1) {
-            currentPermissions.splice(index, 1);
+        // Wenn eine andere Berechtigung ausgewählt wird und "*" aktiv ist, entferne "*"
+        if (isChecked) {
+            // Entferne "*" wenn vorhanden
+            const wildcardIndex = currentPermissions.indexOf('*');
+            if (wildcardIndex > -1) {
+                currentPermissions.splice(wildcardIndex, 1);
+            }
+            // Füge die neue Berechtigung hinzu
+            if (!currentPermissions.includes(permissionId)) {
+                currentPermissions.push(permissionId);
+            }
+        } else {
+            // Entferne die Berechtigung
+            const index = currentPermissions.indexOf(permissionId);
+            if (index > -1) {
+                currentPermissions.splice(index, 1);
+            }
         }
+        
+        formData.value.permissions = currentPermissions;
     }
     
-    formData.value.permissions = currentPermissions;
     console.log('Current permissions after toggle:', formData.value.permissions);
 };
 
@@ -195,26 +214,40 @@ const togglePermissionDirect = (permissionId: string) => {
     console.log('Toggle Permission Direct:', permissionId);
     console.log('Current permissions before toggle:', [...formData.value.permissions]);
     
-    // Erstelle eine neue Array-Referenz für Reaktivität
-    // Verwende Array.from() für bessere Reaktivität
     const currentPermissions = Array.from(formData.value.permissions);
     const index = currentPermissions.indexOf(permissionId);
     
-    if (index > -1) {
-        // Berechtigung entfernen
-        currentPermissions.splice(index, 1);
-        console.log('Berechtigung entfernt:', permissionId);
+    if (permissionId === '*') {
+        // Wenn "*" ausgewählt wird, entferne alle anderen Berechtigungen
+        if (index > -1) {
+            // "*" entfernen
+            formData.value.permissions = [];
+        } else {
+            // "*" hinzufügen und alle anderen entfernen
+            formData.value.permissions = ['*'];
+        }
     } else {
-        // Berechtigung hinzufügen
-        currentPermissions.push(permissionId);
-        console.log('Berechtigung hinzugefügt:', permissionId);
+        // Wenn eine andere Berechtigung ausgewählt wird
+        if (index > -1) {
+            // Berechtigung entfernen
+            currentPermissions.splice(index, 1);
+            console.log('Berechtigung entfernt:', permissionId);
+        } else {
+            // Entferne "*" wenn vorhanden
+            const wildcardIndex = currentPermissions.indexOf('*');
+            if (wildcardIndex > -1) {
+                currentPermissions.splice(wildcardIndex, 1);
+            }
+            // Berechtigung hinzufügen
+            currentPermissions.push(permissionId);
+            console.log('Berechtigung hinzugefügt:', permissionId);
+        }
+        
+        formData.value = {
+            ...formData.value,
+            permissions: currentPermissions,
+        };
     }
-    
-    // Verwende Object.assign oder direkte Zuweisung für bessere Reaktivität
-    formData.value = {
-        ...formData.value,
-        permissions: currentPermissions,
-    };
     
     console.log('Current permissions after direct toggle:', formData.value.permissions);
     console.log('Permissions count:', formData.value.permissions.length);
@@ -450,7 +483,7 @@ const deleteRole = async (role: any) => {
                                 :key="permission"
                                 class="px-2 py-1 bg-muted rounded text-xs"
                             >
-                                {{ availablePermissions.find(p => p.id === permission)?.label || permission }}
+                                {{ permission === '*' ? 'Alle Berechtigungen (*)' : (availablePermissions.find(p => p.id === permission)?.label || permission) }}
                             </span>
                             <span v-if="!role.permissions || role.permissions.length === 0" class="text-xs text-muted-foreground">
                                 Keine Berechtigungen
