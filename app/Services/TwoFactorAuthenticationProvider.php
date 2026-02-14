@@ -82,19 +82,36 @@ class TwoFactorAuthenticationProvider implements TwoFactorAuthenticationProvider
      */
     public function verify($secret, $code)
     {
-        // Setze Window, falls in Config definiert
-        if (is_int($customWindow = config('fortify-options.two-factor-authentication.window'))) {
+        // Stelle sicher, dass Window immer ein Integer ist
+        $customWindow = config('fortify-options.two-factor-authentication.window');
+        if (is_int($customWindow) && $customWindow > 0) {
             $this->engine->setWindow($customWindow);
+        } else {
+            // Setze Standard-Window auf 1, falls nicht gesetzt
+            $currentWindow = $this->engine->getWindow();
+            if (!is_int($currentWindow) || $currentWindow <= 0) {
+                $this->engine->setWindow(1);
+            }
         }
 
         // Verwende verifyKeyNewer mit Cache-Unterstützung, um zu verhindern, dass Codes mehrfach verwendet werden
         $key = 'fortify.2fa_codes.'.md5($code);
-        $oldTimestamp = $this->cache ? $this->cache->get($key) : null;
+        $oldTimestamp = null;
+        
+        if ($this->cache) {
+            $cachedValue = $this->cache->get($key);
+            // Stelle sicher, dass nur Integer-Werte verwendet werden
+            $oldTimestamp = is_int($cachedValue) ? $cachedValue : null;
+        }
 
+        // Stelle sicher, dass verifyKeyNewer mit korrekten Parametern aufgerufen wird
+        // verifyKeyNewer($secret, $key, $oldTimestamp, $window = null, $timestamp = null)
         $timestamp = $this->engine->verifyKeyNewer(
             $secret,
             $code,
-            $oldTimestamp
+            $oldTimestamp,
+            null, // window - wird intern verwendet
+            null  // timestamp - wird intern verwendet
         );
 
         if ($timestamp !== false) {
@@ -102,10 +119,17 @@ class TwoFactorAuthenticationProvider implements TwoFactorAuthenticationProvider
                 $timestamp = $this->engine->getTimestamp();
             }
 
+            // Stelle sicher, dass timestamp ein Integer ist
+            if (!is_int($timestamp)) {
+                return false;
+            }
+
             // Speichere Timestamp im Cache, um Wiederverwendung zu verhindern
             // Stelle sicher, dass getWindow() einen Integer zurückgibt
             $window = $this->engine->getWindow();
-            $window = is_int($window) ? $window : 1;
+            if (!is_int($window) || $window <= 0) {
+                $window = 1;
+            }
             $ttl = $window * 60;
             
             if ($this->cache) {
