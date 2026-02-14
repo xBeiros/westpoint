@@ -86,7 +86,7 @@ index.form = indexForm
 
 /**
 * @see \App\Http\Controllers\ProfileController::update
-* @see app/Http/Controllers/ProfileController.php:74
+* @see app/Http/Controllers/ProfileController.php:78
 * @route '/ucp/profile'
 */
 export const update = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -101,7 +101,7 @@ update.definition = {
 
 /**
 * @see \App\Http\Controllers\ProfileController::update
-* @see app/Http/Controllers/ProfileController.php:74
+* @see app/Http/Controllers/ProfileController.php:78
 * @route '/ucp/profile'
 */
 update.url = (options?: RouteQueryOptions) => {
@@ -114,7 +114,7 @@ update.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\ProfileController::update
-* @see app/Http/Controllers/ProfileController.php:74
+* @see app/Http/Controllers/ProfileController.php:78
 * @route '/ucp/profile'
 */
 update.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -124,7 +124,7 @@ update.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
 /**
 * @see \App\Http\Controllers\ProfileController::update
-* @see app/Http/Controllers/ProfileController.php:74
+* @see app/Http/Controllers/ProfileController.php:78
 * @route '/ucp/profile'
 */
 const updateForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -134,7 +134,7 @@ const updateForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> =>
 
 /**
 * @see \App\Http\Controllers\ProfileController::update
-* @see app/Http/Controllers/ProfileController.php:74
+* @see app/Http/Controllers/ProfileController.php:78
 * @route '/ucp/profile'
 */
 updateForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -144,6 +144,66 @@ updateForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => 
 
 update.form = updateForm
 
-const ProfileController = { index, update }
+/**
+* @see \App\Http\Controllers\ProfileController::logoutOtherDevices
+* @see app/Http/Controllers/ProfileController.php:205
+* @route '/ucp/profile/logout-other-devices'
+*/
+export const logoutOtherDevices = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: logoutOtherDevices.url(options),
+    method: 'post',
+})
+
+logoutOtherDevices.definition = {
+    methods: ["post"],
+    url: '/ucp/profile/logout-other-devices',
+} satisfies RouteDefinition<["post"]>
+
+/**
+* @see \App\Http\Controllers\ProfileController::logoutOtherDevices
+* @see app/Http/Controllers/ProfileController.php:205
+* @route '/ucp/profile/logout-other-devices'
+*/
+logoutOtherDevices.url = (options?: RouteQueryOptions) => {
+
+
+
+
+    return logoutOtherDevices.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\ProfileController::logoutOtherDevices
+* @see app/Http/Controllers/ProfileController.php:205
+* @route '/ucp/profile/logout-other-devices'
+*/
+logoutOtherDevices.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: logoutOtherDevices.url(options),
+    method: 'post',
+})
+
+/**
+* @see \App\Http\Controllers\ProfileController::logoutOtherDevices
+* @see app/Http/Controllers/ProfileController.php:205
+* @route '/ucp/profile/logout-other-devices'
+*/
+const logoutOtherDevicesForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: logoutOtherDevices.url(options),
+    method: 'post',
+})
+
+/**
+* @see \App\Http\Controllers\ProfileController::logoutOtherDevices
+* @see app/Http/Controllers/ProfileController.php:205
+* @route '/ucp/profile/logout-other-devices'
+*/
+logoutOtherDevicesForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: logoutOtherDevices.url(options),
+    method: 'post',
+})
+
+logoutOtherDevices.form = logoutOtherDevicesForm
+
+const ProfileController = { index, update, logoutOtherDevices }
 
 export default ProfileController

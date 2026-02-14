@@ -16,6 +16,15 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
+interface Session {
+    id: string;
+    ip_address: string;
+    user_agent: string;
+    last_activity: string;
+    last_activity_timestamp: number;
+    is_current_device: boolean;
+}
+
 const props = defineProps<{
     userData: {
         firstname?: string | null;
@@ -25,6 +34,7 @@ const props = defineProps<{
     } | null;
     twoFactorEnabled?: boolean;
     twoFactorConfirmed?: boolean;
+    sessions?: Session[];
     error?: string;
 }>();
 
@@ -62,6 +72,15 @@ const secretKey = ref<string | null>(null);
 const show2FASetup = ref(false);
 const twoFactorCode = ref('');
 const isConfirming2FA = ref(false);
+
+// Sessions State
+const isLoggingOut = ref(false);
+
+// Sessions State
+const isLoggingOut = ref(false);
+
+// Sessions State
+const isLoggingOut = ref(false);
 
 // Lade 2FA-Daten beim Mount, wenn 2FA aktiviert aber nicht bestätigt ist
 onMounted(async () => {
@@ -255,6 +274,61 @@ const confirm2FAAuth = async () => {
         alert('Ein unerwarteter Fehler ist aufgetreten. Bitte öffne die Browser-Konsole für Details.');
     } finally {
         isConfirming2FA.value = false;
+    }
+};
+
+const logoutOtherDevices = async () => {
+    if (!confirm('Möchtest du wirklich alle anderen Sitzungen beenden? Du wirst auf allen anderen Geräten ausgeloggt.')) {
+        return;
+    }
+
+    isLoggingOut.value = true;
+    try {
+        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+        
+        const response = await fetch('/ucp/profile/logout-other-devices', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': csrfToken,
+                'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'application/json',
+            },
+            credentials: 'same-origin',
+        });
+
+        if (response.ok) {
+            // Lade Seite neu, um aktualisierte Sessions anzuzeigen
+            router.reload({ only: ['sessions'] });
+        } else {
+            const error = await response.json().catch(() => ({ message: 'Unbekannter Fehler' }));
+            alert('Fehler beim Beenden der Sitzungen: ' + (error.message || 'Unbekannter Fehler'));
+        }
+    } catch (error) {
+        console.error('Fehler beim Ausloggen von anderen Geräten:', error);
+        alert('Ein unerwarteter Fehler ist aufgetreten.');
+    } finally {
+        isLoggingOut.value = false;
+    }
+};
+
+const formatLastActivity = (lastActivity: string) => {
+    const date = new Date(lastActivity);
+    const now = new Date();
+    const diffMs = now.getTime() - date.getTime();
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
+
+    if (diffMins < 1) {
+        return 'Gerade eben';
+    } else if (diffMins < 60) {
+        return `vor ${diffMins} Minute${diffMins > 1 ? 'n' : ''}`;
+    } else if (diffHours < 24) {
+        return `vor ${diffHours} Stunde${diffHours > 1 ? 'n' : ''}`;
+    } else if (diffDays < 7) {
+        return `vor ${diffDays} Tag${diffDays > 1 ? 'en' : ''}`;
+    } else {
+        return date.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
     }
 };
 
@@ -514,6 +588,59 @@ const disable2FAAuth = async () => {
                             2FA deaktivieren
                         </button>
                     </div>
+                </div>
+
+                <!-- Aktive Sitzungen Section -->
+                <div class="relative overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border bg-card p-6">
+                    <h2 class="text-2xl font-semibold mb-6 flex items-center gap-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                        Aktive Sitzungen
+                    </h2>
+
+                    <p class="text-muted-foreground mb-4 text-sm">
+                        Hier siehst du alle Geräte, auf denen du aktuell eingeloggt bist. Du kannst alle anderen Sitzungen beenden, um deinen Account zu schützen.
+                    </p>
+
+                    <div v-if="props.sessions && props.sessions.length > 0" class="space-y-3 mb-4">
+                        <div
+                            v-for="session in props.sessions"
+                            :key="session.id"
+                            class="flex items-center justify-between p-4 rounded-lg border border-sidebar-border/70 dark:border-sidebar-border bg-background"
+                        >
+                            <div class="flex-1">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="font-medium">{{ session.user_agent }}</span>
+                                    <span
+                                        v-if="session.is_current_device"
+                                        class="px-2 py-0.5 text-xs bg-primary/20 text-primary rounded-full"
+                                    >
+                                        Aktuelles Gerät
+                                    </span>
+                                </div>
+                                <div class="text-sm text-muted-foreground">
+                                    <span>{{ session.ip_address }}</span>
+                                    <span class="mx-2">•</span>
+                                    <span>{{ formatLastActivity(session.last_activity) }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div v-else class="text-muted-foreground text-sm mb-4">
+                        Keine aktiven Sitzungen gefunden.
+                    </div>
+
+                    <button
+                        v-if="props.sessions && props.sessions.filter(s => !s.is_current_device).length > 0"
+                        @click="logoutOtherDevices"
+                        :disabled="isLoggingOut"
+                        class="px-4 py-2 bg-destructive hover:bg-destructive/90 text-destructive-foreground rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        <span v-if="isLoggingOut">Wird ausgeloggt...</span>
+                        <span v-else>Alle anderen Sitzungen beenden</span>
+                    </button>
                 </div>
             </div>
         </div>

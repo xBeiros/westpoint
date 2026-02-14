@@ -123,6 +123,7 @@ Route::middleware(['auth', 'verified'])->prefix('ucp')->name('ucp.')->group(func
     // Profil bearbeiten
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile/logout-other-devices', [ProfileController::class, 'logoutOtherDevices'])->name('profile.logout-other-devices');
     
     // Admin Routes
     Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');

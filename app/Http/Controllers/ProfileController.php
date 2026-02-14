@@ -53,10 +53,14 @@ class ProfileController extends Controller
             $twoFactorEnabled = !empty($twoFactorSecret);
             $twoFactorConfirmed = !empty($twoFactorConfirmedAt);
 
+            // Hole alle aktiven Sessions für diesen User
+            $sessions = $this->getUserSessions($user->id);
+
             return Inertia::render('UCP/Profile/Index', [
                 'userData' => $userData,
                 'twoFactorEnabled' => $twoFactorEnabled,
                 'twoFactorConfirmed' => $twoFactorConfirmed,
+                'sessions' => $sessions,
             ]);
         } catch (\Exception $e) {
             Log::error('Fehler beim Laden der Profil-Daten: ' . $e->getMessage());
@@ -118,6 +122,111 @@ class ProfileController extends Controller
             
             return back()->withErrors([
                 'message' => 'Fehler beim Aktualisieren der Profil-Daten: ' . $e->getMessage(),
+            ]);
+        }
+    }
+
+    /**
+     * Hole alle aktiven Sessions für den User
+     */
+    private function getUserSessions($userId)
+    {
+        try {
+            $currentSessionId = session()->getId();
+            $sessions = DB::table('sessions')
+                ->where('user_id', $userId)
+                ->where('last_activity', '>', now()->subMinutes(config('session.lifetime', 120))->timestamp)
+                ->orderBy('last_activity', 'desc')
+                ->get()
+                ->map(function ($session) use ($currentSessionId) {
+                    return [
+                        'id' => $session->id,
+                        'ip_address' => $session->ip_address ?? 'Unbekannt',
+                        'user_agent' => $this->parseUserAgent($session->user_agent ?? ''),
+                        'last_activity' => date('Y-m-d H:i:s', $session->last_activity),
+                        'last_activity_timestamp' => $session->last_activity,
+                        'is_current_device' => $session->id === $currentSessionId,
+                    ];
+                })
+                ->values();
+
+            return $sessions;
+        } catch (\Exception $e) {
+            Log::error('Fehler beim Laden der Sessions: ' . $e->getMessage());
+            return [];
+        }
+    }
+
+    /**
+     * Parse User Agent String zu lesbarem Format
+     */
+    private function parseUserAgent($userAgent)
+    {
+        if (empty($userAgent)) {
+            return 'Unbekannt';
+        }
+
+        // Versuche Browser und OS zu erkennen
+        $browser = 'Unbekannt';
+        $os = 'Unbekannt';
+
+        // Browser-Erkennung
+        if (strpos($userAgent, 'Chrome') !== false && strpos($userAgent, 'Edg') === false) {
+            $browser = 'Chrome';
+        } elseif (strpos($userAgent, 'Firefox') !== false) {
+            $browser = 'Firefox';
+        } elseif (strpos($userAgent, 'Safari') !== false && strpos($userAgent, 'Chrome') === false) {
+            $browser = 'Safari';
+        } elseif (strpos($userAgent, 'Edg') !== false) {
+            $browser = 'Edge';
+        } elseif (strpos($userAgent, 'Opera') !== false) {
+            $browser = 'Opera';
+        }
+
+        // OS-Erkennung
+        if (strpos($userAgent, 'Windows') !== false) {
+            $os = 'Windows';
+        } elseif (strpos($userAgent, 'Mac') !== false) {
+            $os = 'macOS';
+        } elseif (strpos($userAgent, 'Linux') !== false) {
+            $os = 'Linux';
+        } elseif (strpos($userAgent, 'Android') !== false) {
+            $os = 'Android';
+        } elseif (strpos($userAgent, 'iOS') !== false || strpos($userAgent, 'iPhone') !== false || strpos($userAgent, 'iPad') !== false) {
+            $os = 'iOS';
+        }
+
+        return $browser . ' auf ' . $os;
+    }
+
+    /**
+     * Lösche alle anderen Sessions (ausloggen von allen anderen Geräten)
+     */
+    public function logoutOtherDevices(Request $request)
+    {
+        $user = Auth::user();
+        
+        if (!$user) {
+            return back()->withErrors([
+                'message' => 'Nicht authentifiziert.',
+            ]);
+        }
+
+        try {
+            $currentSessionId = session()->getId();
+            
+            // Lösche alle Sessions außer der aktuellen
+            DB::table('sessions')
+                ->where('user_id', $user->id)
+                ->where('id', '!=', $currentSessionId)
+                ->delete();
+
+            return back()->with('success', 'Alle anderen Sitzungen wurden erfolgreich beendet.');
+        } catch (\Exception $e) {
+            Log::error('Fehler beim Löschen der Sessions: ' . $e->getMessage());
+            
+            return back()->withErrors([
+                'message' => 'Fehler beim Beenden der Sitzungen: ' . $e->getMessage(),
             ]);
         }
     }
