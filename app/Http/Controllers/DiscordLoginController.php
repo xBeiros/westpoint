@@ -83,13 +83,28 @@ class DiscordLoginController extends Controller
                 $redmConnection = DB::connection('redm');
                 $redmPdo = $redmConnection->getPdo();
                 
+                // Verifiziere, welche Datenbank tatsächlich verwendet wird
+                $currentDatabase = $redmConnection->selectOne('SELECT DATABASE() as current_db');
+                $actualDatabase = $currentDatabase->current_db ?? 'unknown';
+                
                 Log::info('RedM Datenbankverbindung erfolgreich', [
                     'host' => config('database.connections.redm.host'),
                     'database' => config('database.connections.redm.database'),
+                    'actual_database' => $actualDatabase,
                     'username' => config('database.connections.redm.username'),
                     'port' => config('database.connections.redm.port'),
                     'driver' => config('database.connections.redm.driver'),
+                    'connection_verified' => $actualDatabase === config('database.connections.redm.database'),
                 ]);
+                
+                // Warnung, wenn die tatsächliche Datenbank nicht übereinstimmt
+                if ($actualDatabase !== config('database.connections.redm.database')) {
+                    Log::warning('RedM Datenbank stimmt nicht überein!', [
+                        'expected' => config('database.connections.redm.database'),
+                        'actual' => $actualDatabase,
+                        'host' => config('database.connections.redm.host'),
+                    ]);
+                }
             } catch (\Exception $connectionException) {
                 Log::error('RedM Datenbankverbindung fehlgeschlagen', [
                     'message' => $connectionException->getMessage(),

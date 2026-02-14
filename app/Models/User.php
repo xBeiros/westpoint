@@ -68,11 +68,38 @@ class User extends Authenticatable
     protected function getRedm2FAData(): ?object
     {
         if ($this->redm2FAData === null && $this->discord_identifier) {
-            $this->redm2FAData = DB::connection('redm')
-                ->table('users')
-                ->where('discord_identifier', $this->discord_identifier)
-                ->select('two_factor_secret', 'two_factor_recovery_codes', 'two_factor_confirmed_at')
-                ->first();
+            try {
+                $redmConnection = DB::connection('redm');
+                
+                // Verifiziere Datenbankverbindung (nur im Debug-Modus)
+                if (config('app.debug')) {
+                    $currentDatabase = $redmConnection->selectOne('SELECT DATABASE() as current_db');
+                    $actualDatabase = $currentDatabase->current_db ?? 'unknown';
+                    $expectedDatabase = config('database.connections.redm.database');
+                    
+                    if ($actualDatabase !== $expectedDatabase) {
+                        \Illuminate\Support\Facades\Log::warning('RedM Datenbank stimmt nicht überein in User Model', [
+                            'expected' => $expectedDatabase,
+                            'actual' => $actualDatabase,
+                            'discord_identifier' => $this->discord_identifier,
+                        ]);
+                    }
+                }
+                
+                $this->redm2FAData = $redmConnection
+                    ->table('users')
+                    ->where('discord_identifier', $this->discord_identifier)
+                    ->select('two_factor_secret', 'two_factor_recovery_codes', 'two_factor_confirmed_at')
+                    ->first();
+            } catch (\Exception $e) {
+                \Illuminate\Support\Facades\Log::error('Fehler beim Laden der RedM 2FA-Daten', [
+                    'discord_identifier' => $this->discord_identifier,
+                    'message' => $e->getMessage(),
+                    'host' => config('database.connections.redm.host'),
+                    'database' => config('database.connections.redm.database'),
+                ]);
+                return null;
+            }
         }
 
         return $this->redm2FAData;
