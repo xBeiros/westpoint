@@ -1,6 +1,6 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../wayfinder'
 /**
-* @see routes/web.php:194
+* @see routes/web.php:197
 * @route '/rulebook'
 */
 export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -14,7 +14,7 @@ index.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see routes/web.php:194
+* @see routes/web.php:197
 * @route '/rulebook'
 */
 index.url = (options?: RouteQueryOptions) => {
@@ -26,7 +26,7 @@ index.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see routes/web.php:194
+* @see routes/web.php:197
 * @route '/rulebook'
 */
 index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -35,7 +35,7 @@ index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see routes/web.php:194
+* @see routes/web.php:197
 * @route '/rulebook'
 */
 index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -44,7 +44,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see routes/web.php:194
+* @see routes/web.php:197
 * @route '/rulebook'
 */
 const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -53,7 +53,7 @@ const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => (
 })
 
 /**
-* @see routes/web.php:194
+* @see routes/web.php:197
 * @route '/rulebook'
 */
 indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -62,7 +62,7 @@ indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 })
 
 /**
-* @see routes/web.php:194
+* @see routes/web.php:197
 * @route '/rulebook'
 */
 indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -78,7 +78,7 @@ indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 index.form = indexForm
 
 /**
-* @see routes/web.php:198
+* @see routes/web.php:201
 * @route '/rulebook/{slug}'
 */
 export const show = (args: { slug: string | number } | [slug: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -92,7 +92,7 @@ show.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see routes/web.php:198
+* @see routes/web.php:201
 * @route '/rulebook/{slug}'
 */
 show.url = (args: { slug: string | number } | [slug: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -120,7 +120,7 @@ show.url = (args: { slug: string | number } | [slug: string | number ] | string 
 }
 
 /**
-* @see routes/web.php:198
+* @see routes/web.php:201
 * @route '/rulebook/{slug}'
 */
 show.get = (args: { slug: string | number } | [slug: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -129,7 +129,7 @@ show.get = (args: { slug: string | number } | [slug: string | number ] | string 
 })
 
 /**
-* @see routes/web.php:198
+* @see routes/web.php:201
 * @route '/rulebook/{slug}'
 */
 show.head = (args: { slug: string | number } | [slug: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -138,7 +138,7 @@ show.head = (args: { slug: string | number } | [slug: string | number ] | string
 })
 
 /**
-* @see routes/web.php:198
+* @see routes/web.php:201
 * @route '/rulebook/{slug}'
 */
 const showForm = (args: { slug: string | number } | [slug: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -147,7 +147,7 @@ const showForm = (args: { slug: string | number } | [slug: string | number ] | s
 })
 
 /**
-* @see routes/web.php:198
+* @see routes/web.php:201
 * @route '/rulebook/{slug}'
 */
 showForm.get = (args: { slug: string | number } | [slug: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -156,7 +156,7 @@ showForm.get = (args: { slug: string | number } | [slug: string | number ] | str
 })
 
 /**
-* @see routes/web.php:198
+* @see routes/web.php:201
 * @route '/rulebook/{slug}'
 */
 showForm.head = (args: { slug: string | number } | [slug: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({

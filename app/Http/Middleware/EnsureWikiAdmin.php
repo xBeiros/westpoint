@@ -47,8 +47,8 @@ class EnsureWikiAdmin
                 return $next($request);
             }
 
-            // Spezielle Gruppe "projektmanagement" hat automatisch alle Berechtigungen
-            if ($userGroup === 'projektmanagement') {
+            // Spezielle Gruppen "projektmanagement" und "projektleitung" haben automatisch alle Berechtigungen
+            if ($userGroup === 'projektmanagement' || $userGroup === 'projektleitung') {
                 return $next($request);
             }
 

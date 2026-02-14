@@ -68,8 +68,8 @@ class RoleController extends Controller
             $userGroup = $player->group ?? 'user';
             $userPermissions = [];
             
-            // Spezielle Gruppe "projektmanagement" hat automatisch alle Berechtigungen
-            if ($userGroup === 'projektmanagement') {
+            // Spezielle Gruppen "projektmanagement" und "projektleitung" haben automatisch alle Berechtigungen
+            if ($userGroup === 'projektmanagement' || $userGroup === 'projektleitung') {
                 $userPermissions = ['*']; // Wildcard für alle Berechtigungen
             } else {
                 $userRole = Role::where('name', $userGroup)->first();
@@ -127,8 +127,8 @@ class RoleController extends Controller
             $userGroup = $player->group ?? 'user';
             $userPermissions = [];
             
-            // Spezielle Gruppe "projektmanagement" hat automatisch alle Berechtigungen
-            if ($userGroup === 'projektmanagement') {
+            // Spezielle Gruppen "projektmanagement" und "projektleitung" haben automatisch alle Berechtigungen
+            if ($userGroup === 'projektmanagement' || $userGroup === 'projektleitung') {
                 $userPermissions = ['*']; // Wildcard für alle Berechtigungen
             } else {
                 $userRole = Role::where('name', $userGroup)->first();
@@ -239,8 +239,8 @@ class RoleController extends Controller
             $userGroup = $player->group ?? 'user';
             $userPermissions = [];
             
-            // Spezielle Gruppe "projektmanagement" hat automatisch alle Berechtigungen
-            if ($userGroup === 'projektmanagement') {
+            // Spezielle Gruppen "projektmanagement" und "projektleitung" haben automatisch alle Berechtigungen
+            if ($userGroup === 'projektmanagement' || $userGroup === 'projektleitung') {
                 $userPermissions = ['*']; // Wildcard für alle Berechtigungen
             } else {
                 $userRole = Role::where('name', $userGroup)->first();
@@ -351,8 +351,8 @@ class RoleController extends Controller
             $userGroup = $player->group ?? 'user';
             $userPermissions = [];
             
-            // Spezielle Gruppe "projektmanagement" hat automatisch alle Berechtigungen
-            if ($userGroup === 'projektmanagement') {
+            // Spezielle Gruppen "projektmanagement" und "projektleitung" haben automatisch alle Berechtigungen
+            if ($userGroup === 'projektmanagement' || $userGroup === 'projektleitung') {
                 $userPermissions = ['*']; // Wildcard für alle Berechtigungen
             } else {
                 $userRole = Role::where('name', $userGroup)->first();

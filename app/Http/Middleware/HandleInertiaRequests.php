@@ -88,8 +88,8 @@ class HandleInertiaRequests extends Middleware
         $userPermissions = [];
         if ($user && $userGroup) {
             try {
-                // Spezielle Gruppe "projektmanagement" hat automatisch alle Berechtigungen
-                if ($userGroup === 'projektmanagement') {
+                // Spezielle Gruppen "projektmanagement" und "projektleitung" haben automatisch alle Berechtigungen
+                if ($userGroup === 'projektmanagement' || $userGroup === 'projektleitung') {
                     $userPermissions = ['*']; // Wildcard für alle Berechtigungen
                 } else {
                     $userRole = Role::where('name', $userGroup)->first();

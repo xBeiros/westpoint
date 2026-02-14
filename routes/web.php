@@ -67,6 +67,9 @@ Route::middleware(['auth', 'verified'])->prefix('ucp')->name('ucp.')->group(func
                     // Prüfe ob wikiadmin oder Berechtigung wiki.admin
                     if ($userGroup === 'wikiadmin') {
                         $canManageWiki = true;
+                    } elseif ($userGroup === 'projektmanagement' || $userGroup === 'projektleitung') {
+                        // Spezielle Gruppen haben automatisch alle Berechtigungen
+                        $canManageWiki = true;
                     } else {
                         $userRole = \App\Models\Role::where('name', $userGroup)->first();
                         if ($userRole && ($userRole->hasPermission('wiki.admin') || $userRole->hasPermission('*'))) {
