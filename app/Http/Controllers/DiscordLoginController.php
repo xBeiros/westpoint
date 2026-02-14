@@ -233,17 +233,26 @@ class DiscordLoginController extends Controller
                 }
             }
 
-            // WICHTIG: Kein User wird automatisch erstellt!
-            // Wenn kein Laravel-User existiert, muss dieser manuell angelegt werden.
-            // Alle echten Daten kommen aus RedM - der Laravel-User dient nur als Session-Bridge.
+            // Erstelle automatisch einen Laravel-User, wenn ein RedM-User existiert
+            // Der Laravel-User dient nur als Session-Bridge - alle echten Daten kommen aus RedM
             if (!$laravelUser) {
-                Log::warning('Laravel-User nicht gefunden - Login abgelehnt', [
-                    'discord_id' => $discordId,
-                    'redm_user_exists' => $redmUser !== null,
+                // Hole Name und Email aus RedM, falls vorhanden
+                $name = $redmUser->firstname ?? $redmUser->lastname 
+                    ? trim(($redmUser->firstname ?? '') . ' ' . ($redmUser->lastname ?? ''))
+                    : 'User';
+                $email = $redmUser->email ?? null;
+                
+                // Erstelle minimalen Laravel-User nur mit discord_identifier
+                // Name und Email sind optional, da alle Daten aus RedM kommen
+                $laravelUser = \App\Models\User::create([
+                    'discord_identifier' => $discordId,
+                    'name' => $name,
+                    'email' => $email,
                 ]);
                 
-                return redirect('/auth/discord')->withErrors([
-                    'discord_id' => 'Ihr Account wurde noch nicht für das Web-Interface aktiviert. Bitte kontaktieren Sie einen Administrator.',
+                Log::info('Laravel-User automatisch erstellt', [
+                    'discord_id' => $discordId,
+                    'user_id' => $laravelUser->id,
                 ]);
             }
 
